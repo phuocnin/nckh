@@ -1,8 +1,11 @@
 Hướng dẫn chạy:
-1 npm i
-2 npm start
-3 open localhost:3000
 
+1 npm i
+
+2 npm start
+
+3 open localhost:3000
+/////////////////////////////////////////////////////////
 -> npm init
 
 -> npm install express
