@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const userRouter = require("./routes/user.router.js");
 const topicRouter = require("./routes/topic.router.js");
+const viewRouter = require("./routes/view.router.js");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
@@ -17,16 +18,10 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.json());
 app.use(cookieParser());
-app.use("/login", (req, res) => {
-  res.status(200).render("login");
-});
-app.use("/", (req, res) => {
-  res.status(200).render("index");
-});
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/topics", topicRouter);
-
+app.use("/", viewRouter);
 app.all("*", (req, res, next) => {
   next(new error(`Can't find url: ${req.originalUrl} on this server!!!`, 400));
 });

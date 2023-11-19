@@ -10310,8 +10310,11 @@ body,
 
 .wrapper .content-wrapper {
   min-height: calc(100vh - calc(3.5rem + 1px) - calc(3.5rem + 1px));
+ 
 }
-
+.content-wrapper {
+  margin: 0 !important;
+}
 .layout-boxed .wrapper {
   box-shadow: 0 0 10 rgba(0, 0, 0, 0.3);
 }

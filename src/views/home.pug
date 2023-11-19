@@ -1,75 +1,71 @@
-//  Info boxes 
-.col-12
-  .card
-    .card-body.      
-      |Chào mừng !
-      
-hr
-.row
-  .col-md-8
-    .card.card-outline.card-success
-      .card-header
-        b Thống kê đề tài
-      .card-body.p-0
-        .table-responsive
-          table.table.m-0.table-hover
-            colgroup
-              col(width="5%")
-              col(width="30%")
-              col(width="35%")
-              col(width="15%")
-              col(width="15%")
-            thead
-              tr
-                th #
-                th Đề tài
-                th Tiến độ
-                th Trạng thái
-                th
-            tbody
-              tr
-                td
-                  // ?php echo $i++ ?
-                td
-                  a.
-                    
-                    |aaa
-                    
-                  br
-                  small.
-                    
-                    
-                td.project_progress
-                  .progress.progress-sm
-                    .progress-bar.bg-green(role="progressbar", aria-valuenow="57", aria-valuemin="0", aria-valuemax="100", style="width: <?php echo $prog ?>%").
-                      
-                      
-                  small.
-                    
-                    |??????????
-                    
-                td.project-state.
-                  
-                  ???????????
-                  
-                td
-                  a.btn.btn-primary.btn-sm(href="./index.php?page=view_project&id=<?php echo $row[\'id\'] ?>")
-                    i.fas.fa-folder.
-                      Xem
+extends index 
 
-  .col-md-4
-    .row
-      .col-12.col-sm-6.col-md-12
-        .small-box.bg-light.shadow-sm.border
-          .inner
-            h3 ?
-            p Tổng đề tài
-          .icon
-            i.fa.fa-layer-group
-      .col-12.col-sm-6.col-md-12
-        .small-box.bg-light.shadow-sm.border
-          .inner
-            h3 ?
-            p Tổng nhiệm vụ
-          .icon
-            i.fa.fa-tasks
+block content
+  //  Info boxes 
+  .col-12
+    .card
+      .card-body.      
+        |Chào mừng !
+        
+  hr
+  .row
+    .col-md-8
+      .card.card-outline.card-success
+        .card-header
+          b Thống kê đề tài
+        .card-body.p-0
+          .table-responsive
+            table.table.m-0.table-hover
+              colgroup
+                col(width="5%")
+                col(width="30%")
+                col(width="35%")
+                col(width="15%")
+                col(width="15%")
+              thead
+                tr
+                  th #
+                  th Đề tài
+                  th Tiến độ
+                  th Trạng thái
+                  th
+
+              
+              tbody
+                each topic in topics
+                  tr
+                    td
+                      |1
+                    td
+                      a= topic.TenDeTai
+                        
+                      br
+                      small. 
+                    td.project_progress
+                        .progress.progress-sm
+                            .progress-bar.bg-green(role="progressbar", aria-valuenow="57", aria-valuemin="0", aria-valuemax="100", style="width: <?php echo $prog ?>%").                     
+                        small
+                            |0%    
+                    td.project-state= topic.TrangThai
+                    td
+                      a.btn.btn-primary.btn-sm(href=`./topic/id=${topic._id}`)
+                        i.fas.fa-folder.
+                          Xem
+                  
+
+    .col-md-4
+      .row
+        .col-12.col-sm-6.col-md-12
+          .small-box.bg-light.shadow-sm.border
+            .inner
+              h3 ?
+              p Tổng đề tài
+            .icon
+              i.fa.fa-layer-group
+        .col-12.col-sm-6.col-md-12
+          .small-box.bg-light.shadow-sm.border
+            .inner
+              h3 ?
+              p Tổng nhiệm vụ
+            .icon
+              i.fa.fa-tasks
