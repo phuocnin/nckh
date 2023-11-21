@@ -1,0 +1,70 @@
+extends index
+
+block content	
+  .col-lg-12
+    .card.card-outline.card-success
+      .card-header
+        .card-tools
+          a.btn.btn-block.btn-sm.btn-default.btn-flat.border-primary(href="./index.php?page=new_user")
+            i.fa.fa-plus
+            | Thêm thành viên mới
+      .card-body
+        table.table.tabe-hover.table-bordered#list
+          thead
+            tr
+              th.text-center #
+              th Tên
+              th Email
+              th Vai trò
+              th Hoạt động
+          tbody
+            tr
+              th.text-center
+                // ? ?
+              td
+                b
+                  // ? ?
+              td
+                b
+                  // ? ?
+              td
+                b
+                  // ? ?
+              td.text-center
+                button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true").
+                    
+                    Action
+                    
+                .dropdown-menu
+                  a.dropdown-item.view_user(href="javascript:void(0)", data-id="<? ?>") Xem
+                  .dropdown-divider
+                  a.dropdown-item(href="./index.php?page=edit_user&id=<??>") Chỉnh sửa
+                  .dropdown-divider
+                  a.dropdown-item.delete_user(href="javascript:void(0)", data-id="<? ?>") Xóa
+  script.
+    $(document).ready(function(){
+      $('#list').dataTable()
+      $('.view_user').click(function(){
+        uni_modal("<i class='fa fa-id-card'></i> User Details","view_user.php?id="+$(this).attr('data-id'))
+      })
+      $('.delete_user').click(function(){
+        _conf("Are you sure to delete this user?","delete_user",[$(this).attr('data-id')])
+      })
+    })
+
+    function delete_user($id){
+      start_load()
+      $.ajax({
+        url:'ajax.php?action=delete_user',
+        method:'POST',
+        data:{id:$id},
+        success:function(resp){
+          if(resp==1){
+            alert_toast("Data successfully deleted",'success')
+            setTimeout(function(){
+              location.reload()
+            },1500)
+          }
+        }
+      })
+    }

@@ -37,6 +37,7 @@ block content
                                     //-         option(value=user.id)= user.name
                                     option
                                     option(value='<?php echo $row["id"] ?>') <?php echo $row["name"] ?>
+                            
                         input(type='hidden', name='manager_id', value='')
                         .col-md-6
                             .form-group
@@ -48,6 +49,15 @@ block content
                             .form-group
                                 label.control-label(for='description') Mô tả
                                 textarea.summernote.form-control(name='description', cols='30', rows='10').
+                    .row 
+                        .col-md-6             
+                            .form-group
+                                label.control-label(for="") Avatar
+                                .custom-file
+                                input(type="file" class="custom-file-input" id="customFile" name="img" onchange="displayImg(this,$(this))")
+                                label.custom-file-label(for="customFile") Chọn file
+                    .row 
+                        .col-md-10            
 
         .card-footer.border-top.border-info
             .d-flex.w-100.justify-content-center.align-items-center
