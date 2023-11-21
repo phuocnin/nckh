@@ -9,13 +9,14 @@ const hideAlert = () => {
   if (el) el.parentElement.removeChild(el);
 };
 
-const login = async (email, password) => {
+const login = async (id, password) => {
   try {
+    console.log(id, password);
     const res = await axios({
       method: "POST",
       url: "/api/v1/users/login",
       data: {
-        email,
+        id,
         password,
       },
     });
@@ -33,9 +34,9 @@ const login = async (email, password) => {
 const loginForm = document.querySelector(".form--login");
 loginForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const email = document.getElementById("email").value;
+  const id = document.getElementById("id").value;
   const password = document.getElementById("password").value;
-  login(email, password);
+  login(id, password);
 });
 
 // exports.logout = async () => {
