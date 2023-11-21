@@ -18,7 +18,15 @@ block content
                     option(value='1') Chưa giải quyết
                     option(value='2') Đang tiến hành
                     option(value='3') Hoàn thành
-    
+            .form-group
+                label.control-label(for="") Chọn file
+                .custom-file
+                  input(type="file" class="custom-file-input" id="customFile" name="img" onchange="displayImg(this,$(this))")
+                  label.custom-file-label(for="customFile") Chọn file
+            hr
+            .col-lg-12.text-right.justify-content-center.d-flex
+                button.btn.btn-primary.mr-2(type="submit") Lưu
+                button.btn.btn-secondary(type="button" onclick="location.href = 'index.php?page=user_list'") Cancel  
     script.
         $(document).ready(function(){
             $('.summernote').summernote({
