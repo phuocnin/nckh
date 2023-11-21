@@ -10,8 +10,8 @@ Router.get("/", async (req, res) => {
 });
 
 Router.get("/topic/:id", async (req, res) => {
-  // const topics = await topicModel.findById(req.params.id);
-  res.status(200).render("view_topic");
+  const topic = await topicModel.findById(req.params.id);
+  res.status(200).render("view_topic", { topic });
 });
 Router.get("/user", async (req, res) => {
   // const topics = await topicModel.findById(req.params.id);

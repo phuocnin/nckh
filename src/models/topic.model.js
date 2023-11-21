@@ -13,6 +13,10 @@ const TopicSchema = mongoose.Schema(
       type: String,
       required: [true, "cần nhập tên đề tài!!!"],
     },
+    MoTa: {
+      type: String,
+      required: [true, "cần nhập mô tả!!!"],
+    },
     GhiChu: String,
     MaNganh: {
       type: String,
