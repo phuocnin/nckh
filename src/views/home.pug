@@ -32,10 +32,11 @@ block content
 
               
               tbody
+              - let i=0
                 each topic in topics
+                  -i++
                   tr
-                    td
-                      |1
+                    td= i 
                     td
                       a= topic.TenDeTai
                         
@@ -48,7 +49,7 @@ block content
                             |0%    
                     td.project-state= topic.TrangThai
                     td
-                      a.btn.btn-primary.btn-sm(href=`./topic/id=${topic._id}`)
+                      a.btn.btn-primary.btn-sm(href=`./topic/${topic._id}`)
                         i.fas.fa-folder.
                           Xem
                   
@@ -58,8 +59,8 @@ block content
         .col-12.col-sm-6.col-md-12
           .small-box.bg-light.shadow-sm.border
             .inner
-              h3 ?
               p Tổng đề tài
+              h1=i
             .icon
               i.fa.fa-layer-group
         .col-12.col-sm-6.col-md-12
