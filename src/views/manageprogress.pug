@@ -25,7 +25,10 @@ block content
                         .form-group
                             label(for='comment') Bình luận/Mô tả tiến độ
                             textarea.summernote.form-control(name='comment', cols='30', rows='10', required)
-                                            
+            hr
+            .col-lg-12.text-right.justify-content-center.d-flex
+                button.btn.btn-primary.mr-2(type="submit") Lưu
+                button.btn.btn-secondary(type="button" onclick="location.href = 'index.php?page=user_list'") Cancel                               
     script.
         $(document).ready(function(){
             $('.summernote').summernote({

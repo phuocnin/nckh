@@ -26,6 +26,10 @@ block content
                     label.custom-file-label(for='customFile') Chọn file
             .form-group.d-flex.justify-content-center
                 img#cimg.img-fluid.img-thumbnail(src='', alt='')
+            hr
+            .col-lg-12.text-right.justify-content-center.d-flex
+                button.btn.btn-primary.mr-2(type="submit") Lưu
+                button.btn.btn-secondary(type="button" onclick="location.href = 'index.php?page=user_list'") Cancel
     style.
         img#cimg {
             height: 15vh;
@@ -33,6 +37,7 @@ block content
             object-fit: cover;
             border-radius: 100% 100%;
         }
+        
     script.
         function displayImg(input, _this) {
             if (input.files && input.files[0]) {

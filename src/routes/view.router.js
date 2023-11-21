@@ -53,5 +53,9 @@ Router.get("/newuser", async (req, res) => {
   // const topics = await topicModel.findById(req.params.id);
   res.status(200).render("new_user");
 });
+Router.get("/userlist", async (req, res) => {
+  // const topics = await topicModel.findById(req.params.id);
+  res.status(200).render("userlist");
+});
 
 module.exports = Router;
