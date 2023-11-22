@@ -21,10 +21,11 @@ Router.get("/user", async (req, res) => {
   // const topics = await topicModel.findById(req.params.id);
   res.status(200).render("view_user");
 });
+7;
 //list đề tài
 Router.get("/topic", async (req, res) => {
-  // const topics = await topicModel.findById(req.params.id);
-  res.status(200).render("project_list");
+  const topics = await topicModel.find();
+  res.status(200).render("project_list", { topics });
 });
 Router.get("/manageprogress", async (req, res) => {
   // const topics = await topicModel.findById(req.params.id);
