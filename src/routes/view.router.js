@@ -6,22 +6,29 @@ Router.get("/login", (req, res) => {
   res.status(200).render("login");
 });
 
-//home
+//home 
+// done href
 Router.get("/", async (req, res) => {
   const topics = await topicModel.find();
   res.status(200).render("home", { topics });
 });
 
+
 //xem đề tài
+
+
 Router.get("/topic/:id", async (req, res) => {
   const topic = await topicModel.findById(req.params.id);
   res.status(200).render("view_topic", { topic });
 });
+//  done  href
 Router.get("/user", async (req, res) => {
   // const topics = await topicModel.findById(req.params.id);
   res.status(200).render("view_user");
 });
 //list đề tài
+// done href
+
 Router.get("/topic", async (req, res) => {
   // const topics = await topicModel.findById(req.params.id);
   res.status(200).render("project_list");
