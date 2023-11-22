@@ -21,29 +21,29 @@ aside.main-sidebar.sidebar-dark-primary.elevation-4
                     ul.nav.nav-treeview
                         if 1
                             li.nav-item
-                                a.nav-link.nav-new_project.tree-item(href='./')
+                                a.nav-link.nav-new_project.tree-item(onclick='window.location.href="/new_topic"')
                                     i.fas.fa-angle-right.nav-icon
                                     p Thêm đề tài
                             li.nav-item
-                                a.nav-link.nav-project_list.tree-item(href='./')
+                                a.nav-link.nav-project_list.tree-item(onclick='window.location.href="/topic"')
                                     i.fas.fa-angle-right.nav-icon
                                     p Xem đề tài
                         if 1            
                             li.nav-item
-                                a.nav-link.nav-new_project.tree-item(href='./')
+                                a.nav-link.nav-new_project.tree-item(href='#')
                                     i.fas.fa-angle-right.nav-icon
                                     p Phân công phản biện
                             li.nav-item
-                                a.nav-link.nav-new_project.tree-item(href='./')
+                                a.nav-link.nav-new_project.tree-item(href='#')
                                     i.fas.fa-angle-right.nav-icon
                                     p Phân công xét duyệt
                         if 1            
                             li.nav-item
-                                a.nav-link.nav-new_project.tree-item(href='./')
+                                a.nav-link.nav-new_project.tree-item(href='#')
                                     i.fas.fa-angle-right.nav-icon
                                     p Phản biện
                             li.nav-item
-                                a.nav-link.nav-new_project.tree-item(href='./')
+                                a.nav-link.nav-new_project.tree-item(href='#')
                                     i.fas.fa-angle-right.nav-icon
                                     p Xét duyệt
                 li.nav-item
@@ -63,10 +63,10 @@ aside.main-sidebar.sidebar-dark-primary.elevation-4
                             i.right.fas.fa-angle-left
                     ul.nav.nav-treeview
                         li.nav-item
-                        a.nav-link.nav-new_user.tree-item(href="./index.php?page=new_user")
+                        a.nav-link.nav-new_user.tree-item(onclick='window.location.href="/newuser"')
                             i.fas.fa-angle-right.nav-icon
                             p Tạo users
                         li.nav-item
-                        a.nav-link.nav-user_list.tree-item(href="./index.php?page=user_list")
+                        a.nav-link.nav-user_list.tree-item(onclick='window.location.href="/userlist"')
                             i.fas.fa-angle-right.nav-icon
                             p Xem users
