@@ -1,21 +1,18 @@
 const express = require("express");
-const topicModel = require("../models/topic.model");
+const topicModel = require("../../models/topic.model");
+const userModel = require("../../models/user.model");
+const topicController = require("../../controllers/topic.controller");
 const Router = express.Router();
 
 Router.get("/login", (req, res) => {
   res.status(200).render("login");
 });
 
-//home 
+//home
 // done href
-Router.get("/", async (req, res) => {
-  const topics = await topicModel.find();
-  res.status(200).render("home", { topics });
-});
-
+Router.get("/", topicController.getTopics);
 
 //xem đề tài
-
 
 Router.get("/topic/:id", async (req, res) => {
   const topic = await topicModel.findById(req.params.id);
@@ -62,8 +59,8 @@ Router.get("/newuser", async (req, res) => {
   res.status(200).render("new_user");
 });
 Router.get("/userlist", async (req, res) => {
-  // const topics = await topicModel.findById(req.params.id);
-  res.status(200).render("userlist");
+  const users = await userModel.find();
+  res.status(200).render("userlist", { users });
 });
 
 module.exports = Router;

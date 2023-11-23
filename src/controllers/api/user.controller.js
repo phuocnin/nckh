@@ -32,6 +32,6 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
-exports.getUsers = getAll(UserModels, "home");
+exports.getUsers = getAll(UserModels);
 exports.getUser = getOne(UserModels);
 exports.updateUser = updateOne(UserModels);

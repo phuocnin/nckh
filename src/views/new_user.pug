@@ -9,16 +9,13 @@ block content
           .row
             .col-md-6.border-right
               .form-group
-                label.control-label(for="") Tên đầu
+                label.control-label(for="") Tên
                 input(type="text" name="firstname" class="form-control form-control-sm" required value="")
-              .form-group
-                label.control-label(for="") Tên cuối
-                input(type="text" name="lastname" class="form-control form-control-sm" required value="")
               .form-group
                 label.control-label(for="") Vai trò người dùng
                 select#type.custom-select.custom-select-sm
-                  option(value="3") Thành viên
-                  option(value="2") Người quản lí dự án
+                  option(value="3") Sinh viên
+                  option(value="2") Giáo viên
                   option(value="1") Admin
                 input(type="hidden" name="type" value="3")
               .form-group
@@ -26,11 +23,10 @@ block content
                 .custom-file
                   input(type="file" class="custom-file-input" id="customFile" name="img" onchange="displayImg(this,$(this))")
                   label.custom-file-label(for="customFile") Chọn file
-              .form-group.d-flex.justify-content-center.align-items-center
-                img#cimg(src="", alt="Avatar" class="img-fluid img-thumbnail")
+              
             .col-md-6
               .form-group
-                label.control-label Email
+                label.control-label Id
                 input(type="email" class="form-control form-control-sm" name="email" required value="")
                 small#msg
               .form-group
@@ -46,7 +42,7 @@ block content
           hr
           .col-lg-12.text-right.justify-content-center.d-flex
             button.btn.btn-primary.mr-2(type="submit") Lưu
-            button.btn.btn-secondary(type="button" onclick="location.href = 'index.php?page=user_list'") Cancel
+            button.btn.btn-secondary(type="button" onclick="location.href = './userlist'") Cancel
   style.
     img#cimg{
       height: 15vh;

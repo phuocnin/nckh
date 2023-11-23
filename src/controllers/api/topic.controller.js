@@ -1,10 +1,10 @@
-const catchAsync = require("../utils/catchAsync");
-const error = require("../utils/error");
-const topicModel = require("../models/topic.model");
+const catchAsync = require("../../utils/catchAsync");
+const error = require("../../utils/error");
+const topicModel = require("../../models/topic.model");
 const factory = require("./factory");
-const filterObj = require("../utils/filterObj");
+const filterObj = require("../../utils/filterObj");
 
-exports.getTopics = factory.getAll(topicModel, "home");
+exports.getTopics = factory.getAll(topicModel);
 exports.getTopic = factory.getOne(topicModel);
 exports.postTopic = factory.createOne(topicModel);
 exports.updateTopic = factory.updateOne(topicModel);
