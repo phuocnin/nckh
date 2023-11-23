@@ -1,9 +1,9 @@
 const express = require("express");
-const topicController = require("../../controllers/api/topic.controller.js");
+const topicController = require("../controllers/api/topic.controller.js");
 const {
   authMiddleware,
   restrictTo,
-} = require("../../controllers/api/auth.controller.js");
+} = require("../controllers/api/auth.controller.js");
 
 const Router = express.Router();
 

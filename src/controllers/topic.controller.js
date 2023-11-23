@@ -4,8 +4,9 @@ const topicModel = require("../models/topic.model");
 const factory = require("./factory");
 const filterObj = require("../utils/filterObj");
 
-exports.getTopics = factory.getAll(topicModel, "home");
-exports.getTopic = factory.getOne(topicModel);
+exports.home = factory.getAll(topicModel, "home");
+exports.getTopics = factory.getAll(topicModel, "project_list");
+exports.getTopic = factory.getOne(topicModel, "view_topic");
 exports.postTopic = factory.createOne(topicModel);
 exports.updateTopic = factory.updateOne(topicModel);
 exports.filterByRole = catchAsync(async (req, res, next) => {

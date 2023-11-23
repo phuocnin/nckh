@@ -9,21 +9,23 @@ const hideAlert = () => {
   if (el) el.parentElement.removeChild(el);
 };
 
-const login = async (id, password) => {
+const newuser = async (id, password, name, role) => {
   try {
     const res = await axios({
       method: "POST",
-      url: "/api/v1/users/login",
+      url: "/api/v1/users/signup",
       data: {
         id,
         password,
+        name,
+        role,
       },
     });
 
     if (res.data.status === "success") {
-      showAlert("success", "Logged in successfully!");
+      showAlert("success", "Signup in successfully!");
       window.setTimeout(() => {
-        location.assign("/");
+        location.assign("/user_list");
       }, 1500);
     }
   } catch (err) {
@@ -31,23 +33,12 @@ const login = async (id, password) => {
     showAlert("error", err.response.data.error);
   }
 };
-const loginForm = document.querySelector(".form--login");
-loginForm.addEventListener("submit", (e) => {
+const userform = document.querySelector(".new-user");
+userfrom.addEventListener("submit", (e) => {
   e.preventDefault();
   const id = document.getElementById("id").value;
   const password = document.getElementById("password").value;
-  login(id, password);
+  const name = document.getElementById("name").value;
+  const role = document.getElementById("role").value;
+  newuser(id, password, name, role);
 });
-
-const logout = async () => {
-  try {
-    const res = await axios({
-      method: "GET",
-      url: "/api/v1/users/logout",
-    });
-    if ((res.data.status = "success")) location.reload(true);
-  } catch (err) {
-    console.log(err.response);
-    showAlert("error", "Error logging out! Try again.");
-  }
-};
