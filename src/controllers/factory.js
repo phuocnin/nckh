@@ -2,49 +2,37 @@ const error = require("../utils/error");
 const catchAsync = require("../utils/catchAsync");
 const Features = require("../utils/Features");
 
-exports.createOne = (model) => {
+exports.createOne = (model, view) => {
   return catchAsync(async (req, res, next) => {
     const data = await model.create(req.body);
     if (!data) return next(new error("No document found with that ID", 404));
-    res.status(200).json({
-      status: "success!!",
-      data: data,
-    });
+    res.status(200).render(view, { data });
   });
 };
-exports.deleteOne = (model) => {
+exports.deleteOne = (model, view) => {
   return catchAsync(async (req, res, next) => {
     const data = await model.findByIdAndDelete(req.params.id);
     if (!data) return next(new error("No document found with that ID", 404));
-    res.status(200).json({
-      status: "success!!",
-      data: null,
-    });
+    res.status(200).render(view, { data });
   });
 };
 
-exports.updateOne = (model) => {
+exports.updateOne = (model, view) => {
   return catchAsync(async (req, res, next) => {
     const data = await model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidator: true,
     });
     if (!data) return next(new error("No document found with that ID", 404));
-    res.status(200).json({
-      status: "success!!",
-      data,
-    });
+    res.status(200).render(view, { data });
   });
 };
 
-exports.getOne = (model) => {
+exports.getOne = (model, view) => {
   return catchAsync(async (req, res, next) => {
     const data = await model.findById(req.params.id);
     if (!data) return next(new error("No document found with that ID", 404));
-    res.status(200).json({
-      status: "success!!",
-      data,
-    });
+    res.status(200).render(view, { data });
   });
 };
 exports.getAll = (model, view) => {

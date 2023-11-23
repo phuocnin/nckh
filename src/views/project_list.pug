@@ -27,7 +27,7 @@ block content
                         th Hoạt động
                         
                     tbody
-                        each topic in topics
+                        each topic in data
                             tr  
                                 th.text-center= topic.TenDeTai
                                 td
@@ -44,9 +44,9 @@ block content
                                     button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true") Hoạt động
                                     
                                     .dropdown-menu
-                                        a.dropdown-item.view_project(href="./index.php?page=view_project&id=<?php echo $row[\'id\'] ?>", data-id="<?php echo $row[\'id\'] ?>") Xem
+                                        a.dropdown-item.view_project(href=`/topic/${topic._id}`) Xem
                                         .dropdown-divider
-                                        a.dropdown-item(href="./index.php?page=edit_project&id=<?php echo $row[\'id\'] ?>") Chỉnh sửa
+                                        a.dropdown-item(href=`./`) Chỉnh sửa
                                         .dropdown-divider
                                         a.dropdown-item.delete_project(href="javascript:void(0)", data-id="<?php echo $row[\'id\'] ?>") Xóa
     style.

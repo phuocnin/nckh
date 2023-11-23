@@ -1,8 +1,8 @@
-const UserModels = require("../../models/user.model");
-const error = require("../../utils/error.js");
-const catchAsync = require("../../utils/catchAsync.js");
-const filterObj = require("../../utils/filterObj.js");
-const Features = require("../../utils/Features.js");
+const UserModels = require("../models/user.model");
+const error = require("../utils/error.js");
+const catchAsync = require("../utils/catchAsync.js");
+const filterObj = require("../utils/filterObj.js");
+const Features = require("../utils/Features.js");
 const { getAll, getOne, updateOne } = require("./factory.js");
 exports.getMe = catchAsync(async (req, res, next) => {
   req.params.id = req.user._id;
@@ -33,5 +33,5 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   });
 });
 exports.getUsers = getAll(UserModels, "home");
-exports.getUser = getOne(UserModels);
+exports.getUser = getOne(UserModels, "view_user");
 exports.updateUser = updateOne(UserModels);
