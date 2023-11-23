@@ -9,50 +9,53 @@ block content
         
   hr
   .row
-    .col-md-8
-      .card.card-outline.card-success
-        .card-header
-          b Thống kê đề tài
-        .card-body.p-0
-          .table-responsive
-            table.table.m-0.table-hover
-              colgroup
-                col(width="5%")
-                col(width="30%")
-                col(width="35%")
-                col(width="15%")
-                col(width="15%")
-              thead
-                tr
-                  th #
-                  th Đề tài
-                  th Tiến độ
-                  th Trạng thái
-                  th
-
-              
-              tbody
-              - let i=0
-                each topic in topics
-                  -i++
+    table.table.tabe-hover.table-bordered#list
+      .col-md-8
+        .card.card-outline.card-success
+        
+        
+          .card-header
+            b Thống kê đề tài
+          .card-body.p-0
+            .table-responsive
+              table.table.m-0.table-hover
+                colgroup
+                  col(width="5%")
+                  col(width="30%")
+                  col(width="35%")
+                  col(width="15%")
+                  col(width="15%")
+                thead
                   tr
-                    td= i 
-                    td
-                      a= topic.TenDeTai
-                        
-                      br
-                      small. 
-                    td.project_progress
-                        .progress.progress-sm
-                            .progress-bar.bg-green(role="progressbar", aria-valuenow="57", aria-valuemin="0", aria-valuemax="100", style="width: <?php echo $prog ?>%").                     
-                        small
-                            |0%    
-                    td.project-state= topic.TrangThai
-                    td
-                      a.btn.btn-primary.btn-sm(href=`./topic/${topic._id}`)
-                        i.fas.fa-folder.
-                          Xem
-                  
+                    th #
+                    th Đề tài
+                    th Tiến độ
+                    th Trạng thái
+                    th
+
+                
+                tbody
+                - let i=0
+                  each topic in data
+                    -i++
+                    tr
+                      td= i 
+                      td
+                        a= topic.TenDeTai
+                          
+                        br
+                        small. 
+                      td.project_progress
+                          .progress.progress-sm
+                              .progress-bar.bg-green(role="progressbar", aria-valuenow="57", aria-valuemin="0", aria-valuemax="100", style="width: <?php echo $prog ?>%").                     
+                          small
+                              |0%    
+                      td.project-state= topic.TrangThai
+                      td
+                        a.btn.btn-primary.btn-sm(href=`./topic/${topic._id}`)
+                          i.fas.fa-folder.
+                            Xem
+                    
 
     .col-md-4
       .row
@@ -70,3 +73,32 @@ block content
               p Tổng nhiệm vụ
             .icon
               i.fa.fa-tasks
+
+
+  script.
+    $(document).ready(function(){
+      $('#list').dataTable()
+      $('.view_user').click(function(){
+        uni_modal("<i class='fa fa-id-card'></i> User Details","view_user.php?id="+$(this).attr('data-id'))
+      })
+      $('.delete_user').click(function(){
+        _conf("Are you sure to delete this user?","delete_user",[$(this).attr('data-id')])
+      })
+    })
+
+    function delete_user($id){
+      start_load()
+      $.ajax({
+        url:'ajax.php?action=delete_user',
+        method:'POST',
+        data:{id:$id},
+        success:function(resp){
+          if(resp==1){
+            alert_toast("Data successfully deleted",'success')
+            setTimeout(function(){
+              location.reload()
+            },1500)
+          }
+        }
+      })
+    }

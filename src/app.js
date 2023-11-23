@@ -1,8 +1,8 @@
 const path = require("path");
 const express = require("express");
-const userRouter = require("./routes/user.router.js");
-const topicRouter = require("./routes/topic.router.js");
-const viewRouter = require("./routes/view.router.js");
+const userRouter = require("./routes/api/user.router.js");
+const topicRouter = require("./routes/api/topic.router.js");
+const viewRouter = require("./routes/view/view.router.js");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 

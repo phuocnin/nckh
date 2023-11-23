@@ -1,9 +1,9 @@
 const express = require("express");
-const topicController = require("../controllers/topic.controller.js");
+const topicController = require("../../controllers/api/topic.controller.js");
 const {
   authMiddleware,
   restrictTo,
-} = require("../controllers/auth.controller.js");
+} = require("../../controllers/api/auth.controller.js");
 
 const Router = express.Router();
 
@@ -12,7 +12,7 @@ Router.route("/")
   .post(authMiddleware, topicController.postTopic);
 
 Router.route("/:id")
-  .get(authMiddleware, topicController.getTopic)
+  .get(authMiddleware)
   .patch(
     authMiddleware,
     topicController.filterByRole,

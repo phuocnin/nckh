@@ -1,6 +1,6 @@
-const error = require("../utils/error");
-const catchAsync = require("../utils/catchAsync");
-const Features = require("../utils/Features");
+const error = require("../../utils/error");
+const catchAsync = require("../../utils/catchAsync");
+const Features = require("../../utils/Features");
 
 exports.createOne = (model) => {
   return catchAsync(async (req, res, next) => {
@@ -47,7 +47,7 @@ exports.getOne = (model) => {
     });
   });
 };
-exports.getAll = (model, view) => {
+exports.getAll = (model) => {
   return catchAsync(async (req, res, next) => {
     const features = new Features(model, req.query)
       .filter()
@@ -56,6 +56,9 @@ exports.getAll = (model, view) => {
       .page();
     const data = await features.query;
     if (!data) return next(new error("No document found with that ID", 404));
-    res.status(200).render(view, { data });
+    res.status(200).json({
+      status: "success!!",
+      data,
+    });
   });
 };
