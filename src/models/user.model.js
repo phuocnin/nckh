@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       unique: true,
+      sparse: true,
       lowercase: true,
       validate: [validator.isEmail, "email không hợp lệ"],
     },

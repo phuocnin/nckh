@@ -5,7 +5,6 @@ const topicRouter = require("./routes/topic.router.js");
 const viewRouter = require("./routes/view.router.js");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-
 const error = require("./utils/error");
 
 const app = express();

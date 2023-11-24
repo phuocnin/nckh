@@ -12,11 +12,11 @@ block content
                 input#name(type="text" name="name" class="form-control form-control-sm" required value="")
               .form-group
                 label.control-label Vai trò người dùng
-                select.custom-select.custom-select-sm
-                  option(value="3") Sinh viên
-                  option(value="2") Giáo viên
-                  option(value="1") Admin
-                input#role(type="hidden" name="role" value="3")
+                select.custom-select.custom-select-sm(id="roleSelect" name="role")
+                  option(value="sinh_vien") Sinh viên
+                  option(value="giang_vien") Giáo viên
+                  option(value="admin") Admin
+                  input#role(type="hidden" name="role" value="sinh_vien")
               .form-group
                 label.control-label Avatar
                 .custom-file
@@ -68,4 +68,10 @@ block content
         reader.readAsDataURL(input.files[0]);
       }
     }
+    $(document).ready(function() {
+    $("#roleSelect").change(function() {
+      // Khi ô select thay đổi, cập nhật giá trị của input #role
+      $("#role").val($(this).val());
+    });
+    });
     
