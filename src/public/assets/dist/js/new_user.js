@@ -1,15 +1,7 @@
-const showAlert = (type, msg, time = 7) => {
-  hideAlert();
-  const markup = `<div class="alert alert--${type}">${msg}</div>`;
-  document.querySelector("body").insertAdjacentHTML("afterbegin", markup);
-  window.setTimeout(hideAlert, time * 1000);
-};
-const hideAlert = () => {
-  const el = document.querySelector(".alert");
-  if (el) el.parentElement.removeChild(el);
-};
+// new_user.js
+import { showAlert, hideAlert } from './showAlert';
 
-const newuser = async (id, password, name, role) => {
+const newUser = async (id, password, name, role) => {
   try {
     const res = await axios({
       method: "POST",
@@ -23,7 +15,7 @@ const newuser = async (id, password, name, role) => {
     });
 
     if (res.data.status === "success") {
-      showAlert("success", "Signup in successfully!");
+      showAlert("success", "Signup successful!");
       window.setTimeout(() => {
         location.assign("/user_list");
       }, 1500);
@@ -33,12 +25,13 @@ const newuser = async (id, password, name, role) => {
     showAlert("error", err.response.data.error);
   }
 };
-const userform = document.querySelector(".new-user");
-userfrom.addEventListener("submit", (e) => {
+
+const userForm = document.querySelector(".new-user");
+userForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const id = document.getElementById("id").value;
   const password = document.getElementById("password").value;
   const name = document.getElementById("name").value;
   const role = document.getElementById("role").value;
-  newuser(id, password, name, role);
+  await newUser(id, password, name, role);
 });

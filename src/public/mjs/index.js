@@ -3,6 +3,7 @@ import "@babel/polyfill";
 import { login, logout } from "./login.js";
 import { showAlert } from "./alerts.js";
 import { newuser } from "./new_user.js";
+import {newtopic} from "./project.js";
 
 // DOM ELEMENTS
 const mapBox = document.getElementById("map");
@@ -12,6 +13,7 @@ const userDataForm = document.querySelector(".form-user-data");
 const userPasswordForm = document.querySelector(".form-user-password");
 const bookBtn = document.getElementById("book-tour");
 const userfrom = document.querySelector(".new-user");
+const projectform=document.querySelector(".newtopic");
 
 if (userfrom) {
   userfrom.addEventListener("submit", (e) => {
@@ -22,6 +24,23 @@ if (userfrom) {
     const role = document.getElementById("role").value;
     newuser(id, password, name, role);
   });
+}
+if (projectform){
+projectform.addEventListener("submit", (e) => {
+
+  e.preventDefault();
+ 
+  const Tendetai = document.getElementById("tendetai").value;
+ // const Trangthai = document.getElementById("trangthai").value;
+  const NgayThucHien = document.getElementById("ngaybatdau").value;
+  const NgayKetThuc = document.getElementById("ngayketthuc").value;
+  const MaNganh = document.getElementById("MaNganh").value;
+  // const Thanhvien = document.getElementById("thanhvien").value;
+  const MoTa = document.getElementById("mota").value;
+  console.log(MoTa)
+
+  newtopic(Tendetai,MaNganh,NgayThucHien,NgayKetThuc,MoTa);
+});
 }
 
 // DELEGATION
@@ -51,6 +70,7 @@ if (userDataForm)
     updateSettings(form, "data");
   });
 
+
 if (userPasswordForm)
   userPasswordForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -69,6 +89,7 @@ if (userPasswordForm)
     document.getElementById("password").value = "";
     document.getElementById("password-confirm").value = "";
   });
+  
 
 if (bookBtn)
   bookBtn.addEventListener("click", (e) => {
@@ -79,3 +100,4 @@ if (bookBtn)
 
 const alertMessage = document.querySelector("body").dataset.alert;
 if (alertMessage) showAlert("success", alertMessage, 20);
+
