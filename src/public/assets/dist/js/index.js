@@ -2,7 +2,7 @@
 import "@babel/polyfill";
 import { login, logout } from "./login";
 //import { updateSettings } from './updateSettings';
-import { showAlert } from "./alerts";
+//import { showAlert } from "./alerts";
 
 // DOM ELEMENTS
 const loginForm = document.querySelector(".form--login");
