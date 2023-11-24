@@ -27,7 +27,13 @@ block content
                 td
                   b= user.email
                 td
-                  b= user.role
+                  if user.role == "sinh_vien"
+                    b sinh viên
+                  else if user.role == "giang_vien"
+                    b giảng viên
+                  else
+                    b= user.role
+                    
                 td.text-center
                   button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true")                    
                     |  Action
