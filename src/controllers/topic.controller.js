@@ -14,6 +14,7 @@ exports.filterByRole = catchAsync(async (req, res, next) => {
     req.body = filterObj(req.body, "GiangVien", "HoiDong");
     next();
   }
+
   if (req.user.role == "sinh_vien" && req.user.DeTai.includes(req.params.id)) {
     req.body = filterObj(
       req.body,

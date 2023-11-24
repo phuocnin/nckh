@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec babel-node src/server.js",
-    "debug": "ndb ./src/server.js"
+    "debug": "ndb ./src/server.js",
+    "watch:js": "parcel watch ./src/public/mjs/index.js --out-dir ./src/public/mjs --out-file bundle.js",
+    "build:js": "parcel watch ./src/public/mjs/index.js --out-dir ./src/public/mjs --out-file bundle.js"
   },
   "author": "",
   "license": "ISC",
@@ -36,6 +38,7 @@
     "@babel/core": "^7.22.19",
     "@babel/node": "^7.22.19",
     "@babel/preset-env": "^7.22.15",
-    "nodemon": "^3.0.1"
+    "nodemon": "^3.0.1",
+    "parcel-bundler": "^1.12.5"
   }
 }
