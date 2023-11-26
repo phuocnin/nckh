@@ -1,0 +1,59 @@
+extends index
+
+block content
+  .col-lg-12
+    .card
+      .card-body
+        form.new-user
+          .row
+            .col-md-12
+              .form-group
+                label.control-label Tên
+                input#name(type="text" name="name" class="form-control form-control-sm" required value="")
+              
+          .row
+            
+            .col-md-12
+              .form-group
+                label.control-label Nội dung thông báo
+                textarea.form-control(name='noi_dung_thong_bao', cols='50', rows='20').
+          hr
+          .col-lg-12.text-right.justify-content-center.d-flex
+            button.btn.btn-primary.mr-2(type="submit") Lưu
+            button.btn.btn-secondary(type="button" onclick="location.href = './userlist'") Cancel
+  style.
+    img#cimg{
+      height: 15vh;
+      width: 15vh;
+      object-fit: cover;
+      border-radius: 100% 100%;
+    }
+  script.
+    $('[name="password"],[name="cpass"]').keyup(function(){
+      var pass = $('[name="password"]').val()
+      var cpass = $('[name="cpass"]').val()
+      if(cpass == '' || pass == ''){
+        $('#pass_match').attr('data-status','')
+      }else{
+        if(cpass == pass){
+          $('#pass_match').attr('data-status','1').html('<i class="text-success">Password Matched.</i>')
+        }else{
+          $('#pass_match').attr('data-status','2').html('<i class="text-danger">Password does not match.</i>')
+        }
+      }
+    })
+    function displayImg(input,_this) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          $('#cimg').attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+    $(document).ready(function() {
+      $("#roleSelect").change(function() {
+        // Khi ô select thay đổi, cập nhật giá trị của input #role
+        $("#role").val($(this).val());
+      });
+    });

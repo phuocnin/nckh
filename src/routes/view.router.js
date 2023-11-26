@@ -50,4 +50,8 @@ Router.get("/managetask", async (req, res) => {
   // const topics = await topicModel.findById(req.params.id);
   res.status(200).render("managetask");
 });
+Router.get("/notify", async (req, res) => {
+  // const topics = await topicModel.findById(req.params.id);
+  res.status(200).render("notify");
+});
 module.exports = Router;
