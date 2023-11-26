@@ -54,4 +54,16 @@ Router.get("/notify", async (req, res) => {
   // const topics = await topicModel.findById(req.params.id);
   res.status(200).render("notify");
 });
+Router.get("/thongbao", async (req, res) => {
+  // const topics = await topicModel.findById(req.params.id);
+  res.status(200).render("thongbao");
+});
+Router.get("/fixuser", async (req, res) => {
+  // const topics = await topicModel.findById(req.params.id);
+  res.status(200).render("fixuser");
+});
+Router.get("/changepass", async (req, res) => {
+  // const topics = await topicModel.findById(req.params.id);
+  res.status(200).render("changepass");
+});
 module.exports = Router;

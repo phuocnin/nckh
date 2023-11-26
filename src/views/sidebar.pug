@@ -70,7 +70,21 @@ aside.main-sidebar.sidebar-dark-primary.elevation-4
                         a.nav-link.nav-user_list.tree-item(onclick='window.location.href="/userlist"')
                             i.fas.fa-angle-right.nav-icon
                             p Xem users
+                        li.nav-item
+                        a.nav-link.nav-user_list.tree-item(onclick='window.location.href="/fixuser"')
+                            i.fas.fa-angle-right.nav-icon
+                            p Sửa user 
                 li.nav-item
-                    a.nav-link.nav-reports(href='./notify')
-                        i.fas.fa-th-list.nav-icon
+                    a.nav-link.nav-edit_user(href='#')
+                        i.nav-icon.fas.fa-bell
                         p Thông báo
+                            i.right.fas.fa-angle-left
+                    ul.nav.nav-treeview
+                        li.nav-item
+                        a.nav-link.nav-new_user.tree-item(onclick='window.location.href="/notify"')
+                            i.fas.fa-angle-right.nav-icon
+                            p Thông báo
+                        li.nav-item
+                        a.nav-link.nav-user_list.tree-item(onclick='window.location.href="/thongbao"')
+                            i.fas.fa-angle-right.nav-icon
+                            p Thông tin thông báo     
