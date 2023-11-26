@@ -3,6 +3,7 @@ const topicModel = require("../models/topic.model");
 const userModel = require("../models/user.model");
 const userController = require("../controllers/user.controller");
 const topicController = require("../controllers/topic.controller");
+const { authMiddleware } = require("../controllers/auth.controller");
 const Router = express.Router();
 
 Router.get("/login", (req, res) => {
@@ -14,7 +15,7 @@ Router.get("/login", (req, res) => {
 Router.get("/", topicController.home);
 
 //xem đề tài
-Router.get("/topic/:id", topicController.getTopic);
+Router.get("/topic/:id", authMiddleware, topicController.getTopic);
 //  done  href
 Router.get("/user/:id", userController.getUser);
 
