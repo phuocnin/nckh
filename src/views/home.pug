@@ -1,102 +1,77 @@
-extends index 
+extends index
 
 block content
-  //  Info boxes 
+  // Info boxes
   .col-12
     .card
-      .card-body.      
-        |Chào mừng !
+      .card-body
+        | Chào mừng !
+
+  .card-body
+    table.table.table-hover.table-condensed#list
+      colgroup
+        col(width="5%")
+        col(width="31%")
+        col(width="32%")
+        col(width="32%")
         
-  hr
-  .row
-    table.table.tabe-hover.table-bordered#list
-      .col-md-8
-        .card.card-outline.card-success         
-          .card-header
-            b Thống kê đề tài
-          .card-body.p-0
-            .table-responsive
-              table.table.m-0.table-hover
-                colgroup
-                  col(width="5%")
-                  col(width="30%")
-                  col(width="35%")
-                  col(width="15%")
-                  col(width="15%")
-                thead
-                  tr
-                    th #
-                    th Đề tài
-                    th Tiến độ
-                    th Trạng thái
-                    th
+      thead
+        tr
+          th.text-center #
+          th.text-center Thông báo
+          th.text-center Ngày đăng
+          th.text-center Hoạt động             
+      tbody
+        each topic in data
+          tr
+            td.text-center= topic.TenDeTai
+            td.text-center
+              p
+                b= topic.TenDeTai
+              p.truncate ????
+            td.text-center
+              b= topic.Ngaydang
+            td.text-center
+              span.badge.badge-secondary ??????
+              button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true") Hoạt động
+                                    
+              .dropdown-menu
+                a.dropdown-item.view_project(href=`/topic/${topic._id}`) Xem
+                .dropdown-divider
+                a.dropdown-item(href=`./`) Chỉnh sửa
+                .dropdown-divider
+                a.dropdown-item.delete_project(href="javascript:void(0)", data-id=topic._id) Xóa
 
-                
-                tbody
-                - let i=0
-                  each topic in data
-                    -i++
-                    tr
-                      td= i 
-                      td
-                        a= topic.TenDeTai
-                          
-                        br
-                        small. 
-                      td.project_progress
-                          .progress.progress-sm
-                              .progress-bar.bg-green(role="progressbar", aria-valuenow="57", aria-valuemin="0", aria-valuemax="100", style="width: <?php echo $prog ?>%").                     
-                          small
-                              |0%    
-                      td.project-state= topic.TrangThai
-                      td
-                        a.btn.btn-primary.btn-sm(href=`./topic/${topic._id}`)
-                          i.fas.fa-folder.
-                            Xem
-                    
-
-    .col-md-4
-      .row
-        .col-12.col-sm-6.col-md-12
-          .small-box.bg-light.shadow-sm.border
-            .inner
-              p Tổng đề tài
-              h1=i
-            .icon
-              i.fa.fa-layer-group
-        .col-12.col-sm-6.col-md-12
-          .small-box.bg-light.shadow-sm.border
-            .inner
-              h3 ?
-              p Tổng nhiệm vụ
-            .icon
-              i.fa.fa-tasks
-
+  style.
+    table p {
+      margin: unset !important;
+    }
+    table td {
+      vertical-align: middle !important;
+    }
 
   script.
     $(document).ready(function(){
-      $('#list').dataTable()
-      $('.view_user').click(function(){
-        uni_modal("<i class='fa fa-id-card'></i> User Details","view_user.php?id="+$(this).attr('data-id'))
-      })
-      $('.delete_user').click(function(){
-        _conf("Are you sure to delete this user?","delete_user",[$(this).attr('data-id')])
-      })
-    })
+      $('#list').dataTable();
 
-    function delete_user($id){
-      start_load()
-      $.ajax({
-        url:'ajax.php?action=delete_user',
-        method:'POST',
-        data:{id:$id},
-        success:function(resp){
-          if(resp==1){
-            alert_toast("Data successfully deleted",'success')
-            setTimeout(function(){
-              location.reload()
-            },1500)
+      $('.delete_project').click(function(){
+        _conf("Are you sure to delete this project?", "delete_project", [$(this).data('id')]);
+      });
+
+      function delete_project(id){
+        start_load();
+        $.ajax({
+          url: 'ajax.php?action=delete_project',
+          method: 'POST',
+          data: {id: id},
+          success: function(resp){
+            if(resp == 1){
+              alert_toast("Data successfully deleted", 'success');
+              setTimeout(function(){
+                location.reload();
+              }, 1500);
+            }
           }
-        }
-      })
-    }
+        });
+      }
+    });
