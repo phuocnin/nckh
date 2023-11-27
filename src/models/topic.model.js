@@ -25,7 +25,13 @@ const TopicSchema = mongoose.Schema(
     KetQua: String,
     TrangThai: {
       type: String,
-      enum: ["chờ phê duyệt", "đang đánh giá", "hoàn thành", "hủy"],
+      enum: [
+        "chờ phê duyệt",
+        "đang thực hiện",
+        "chờ nghiệm thu",
+        "hoàn thành",
+        "hủy",
+      ],
       default: "chờ phê duyệt",
     },
     NhanXet: String,

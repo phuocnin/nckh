@@ -5,8 +5,18 @@ block content
         .row
             .col-md-12
                 .callout.callout-info
+                    td.text-center
+                        button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true").
+                             Action
+                        .dropdown-menu
+                            a.dropdown-item.view_task(href="javascript:void(0)") sửa
+                            .dropdown-divider
+                            a.dropdown-item.edit_task(href="javascript:void(0)") xóa
+                            .dropdown-divider
+                            
                     .col-md-12
                         .row
+                            
                             .col-sm-6
                                 dl
                                     dt
@@ -43,96 +53,38 @@ block content
                         span 
                             b Thành viên nhóm:
                             .card-tools
-                            // button.btn.btn-primary.bg-gradient-primary.btn-sm#manage_team Manage 
                     .card-body                        
                         ul.users-list.clearfix 
                             each ThanhVien in data.ThanhVien                       
                                 li                             
                                     img(src="assets/uploads/<?php echo $row[\'avatar\'] ?>", alt="User Image")
                                     a.users-list-name(href="javascript:void(0)")= ThanhVien
-                         
-            .col-md-8
-                .card.card-outline.card-primary
-                    .card-header
-                        span
-                            b Nhiệm vụ nhóm: ??????????????
-                        .card-tools
-                            button.btn.btn-primary.bg-gradient-primary.btn-sm#new_task(type="button")
-                                i.fa.fa-plus  Nhiệm vụ mới
-                    .card-body.p-0
-                        .table-responsive
-                        table.table.table-condensed.m-0.table-hover
-                            colgroup
-                                col(width="5%")
-                                col(width="25%")
-                                col(width="30%")
-                                col(width="15%")
-                                col(width="15%")
-                            thead
-                                th #
-                                th Nhiệm vụ
-                                th Mô tả
-                                th Trạng thái
-                                th Hoạt động
-                            tbody
-                            tr
-                                td.text-center ???????????
-                                td
-                                    b ?????????
-                                td
-                                    p.truncate ????????
-                                td.
-
-                                td.text-center
-                                    button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true").
-                                        Action
-                                    .dropdown-menu
-                                        a.dropdown-item.view_task(href="javascript:void(0)", data-id="<?php echo $row[\'id\'] ?>", data-task="<?php echo $row[\'task\'] ?>") View
-                                        .dropdown-divider
-
-                                        a.dropdown-item.edit_task(href="javascript:void(0)", data-id="<?php echo $row[\'id\'] ?>", data-task="<?php echo $row[\'task\'] ?>") Edit
-                                        .dropdown-divider
-                                        a.dropdown-item.delete_task(href="javascript:void(0)", data-id="<?php echo $row[\'id\'] ?>") Xóa
-        .row
-            .col-md-12
-                .card
-                    .card-header
-                        b Tiến độ/Hoạt động của Thành viên
-                        .card-tools
-                            button.btn.btn-primary.bg-gradient-primary.btn-sm#new_productivity(type="button")
-                                i.fa.fa-plus
-                                |  Năng suất mới
-                    .card-body
-                        .post
-                            .user-block
-                                span.btn-group.dropleft.float-right
-                                    span.btndropdown-toggle(data-toggle="dropdown", aria-haspopup="true", aria-expanded="false", style="cursor: pointer;")
-                                        i.fa.fa-ellipsis-v
-                                    .dropdown-menu
-                                        a.dropdown-item.manage_progress(href="javascript:void(0)", data-id="<?php echo $row[\'id\'] ?>", data-task="<?php echo $row[\'task\'] ?>") Chỉnh sửat
-                                        .dropdown-divider
-                                        a.dropdown-item.delete_progress(href="javascript:void(0)", data-id="<?php echo $row[\'id\'] ?>") Xóa
-                                img.img-circle.img-bordered-sm(src="assets/uploads/<?php echo $row[\'avatar\'] ?>", alt="user image")
-                                span.username
-                                    a(href="#") ?[ ? ]
-                                span.description
-                                    span.fa.fa-calendar-day
-                                    span
-                                        b ?????
-                                    span.fa.fa-user-clock
-                                    span Start: 
-                                        b ????????????>
-                                    span | 
-                                    span End: 
-                                        b ??????????>
-                        //  /.user-block 
-                        //- div.
-
-                        //-     ??????????
-
-                        //- p
-                        //-     //  <a href="#" class="link-black text-sm"><i class="fas fa-link mr-1"></i> Demo File 1 v2</a> 
-                        //- .post.clearfix
+            if user.role =="admin" & data.TrangThai=="chờ phê duyệt"           
+                .col-md-8
+                    .card.card-outline.card-primary
+                        .card-header
+                            span
+                                if data.TrangThai=="chờ phê duyệt"
+                                    b Xét duyệt đề tài:
+                                else if data.TrangThai=="chờ nghiệm thu"
+                                    b Nghiệm thu đề tài:
+                            td.text-center
+                                if data.TrangThai=="chờ phê duyệt"
+                                    select.custom-select.custom-select-sm(id="roleSelect" name="role")
+                                        option(value="đang thực hiện") Duyệt
+                                        option(value="hủy") Không duyệt
+                                        input#trangthai(type="hidden" name="role" value="Đang thực hiện")
+                                if data.TrangThai=="chờ nghiệm thu"
+                                    select.custom-select.custom-select-sm(id="roleSelect" name="role")
+                                        option(value="hoàn thành") Đạt
+                                        option(value="hủy") Không đạt
+                                        input#trangthai(type="hidden" name="role" value="Đang thực hiện")
+                            .card-tools
+                                button.btn.btn-primary.bg-gradient-primary.btn-sm#new_task(type="button")
+                                    i.fa  Xác nhận
+        iframe(src="https://docs.google.com/viewer?url=http://localhost:3000/file/1.pdf&embedded=true", width="600", height="780", frameborder="0", style="border: none;")
+                    
+        
     style.
         .users-list>li img {
             border-radius: 50%;
