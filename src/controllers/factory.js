@@ -32,7 +32,7 @@ exports.getOne = (model, view) => {
   return catchAsync(async (req, res, next) => {
     const data = await model.findById(req.params.id);
     if (!data) return next(new error("No document found with that ID", 404));
-    res.status(200).render(view, { data });
+    res.status(200).render(view, { data, user: req.user });
   });
 };
 exports.getAll = (model, view) => {
