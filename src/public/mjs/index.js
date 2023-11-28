@@ -3,8 +3,8 @@ import "@babel/polyfill";
 import { login, logout } from "./login.js";
 import { showAlert } from "./alerts.js";
 import { newuser } from "./new_user.js";
-import {newtopic} from "./project.js";
-
+import { newtopic } from "./project.js";
+import { changePass } from "./changePass.js";
 // DOM ELEMENTS
 const mapBox = document.getElementById("map");
 const loginForm = document.querySelector(".form--login");
@@ -13,9 +13,11 @@ const userDataForm = document.querySelector(".form-user-data");
 const userPasswordForm = document.querySelector(".form-user-password");
 const bookBtn = document.getElementById("book-tour");
 const userfrom = document.querySelector(".new-user");
-const projectform=document.querySelector(".newtopic");
+const projectform = document.querySelector(".newtopic");
+const changepass = document.querySelector(".change_pass");
 
 if (userfrom) {
+  console.log("a");
   userfrom.addEventListener("submit", (e) => {
     e.preventDefault();
     const id = document.getElementById("id").value;
@@ -25,22 +27,30 @@ if (userfrom) {
     newuser(id, password, name, role);
   });
 }
-if (projectform){
-projectform.addEventListener("submit", (e) => {
+if (changepass) {
+  console.log("a");
+  changepass.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const password = document.getElementById("oldpassword").value;
+    const newPassword = document.getElementById("password").value;
+    changePass(password, newPassword);
+  });
+}
+if (projectform) {
+  projectform.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  e.preventDefault();
- 
-  const Tendetai = document.getElementById("tendetai").value;
- // const Trangthai = document.getElementById("trangthai").value;
-  const NgayThucHien = document.getElementById("ngaybatdau").value;
-  const NgayKetThuc = document.getElementById("ngayketthuc").value;
-  const MaNganh = document.getElementById("MaNganh").value;
-  // const Thanhvien = document.getElementById("thanhvien").value;
-  const MoTa = document.getElementById("mota").value;
-  console.log(MoTa)
+    const Tendetai = document.getElementById("tendetai").value;
+    // const Trangthai = document.getElementById("trangthai").value;
+    const NgayThucHien = document.getElementById("ngaybatdau").value;
+    const NgayKetThuc = document.getElementById("ngayketthuc").value;
+    const MaNganh = document.getElementById("MaNganh").value;
+    // const Thanhvien = document.getElementById("thanhvien").value;
+    const MoTa = document.getElementById("mota").value;
+    console.log(MoTa);
 
-  newtopic(Tendetai,MaNganh,NgayThucHien,NgayKetThuc,MoTa);
-});
+    newtopic(Tendetai, MaNganh, NgayThucHien, NgayKetThuc, MoTa);
+  });
 }
 
 // DELEGATION
@@ -70,7 +80,6 @@ if (userDataForm)
     updateSettings(form, "data");
   });
 
-
 if (userPasswordForm)
   userPasswordForm.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -89,7 +98,6 @@ if (userPasswordForm)
     document.getElementById("password").value = "";
     document.getElementById("password-confirm").value = "";
   });
-  
 
 if (bookBtn)
   bookBtn.addEventListener("click", (e) => {
@@ -100,4 +108,3 @@ if (bookBtn)
 
 const alertMessage = document.querySelector("body").dataset.alert;
 if (alertMessage) showAlert("success", alertMessage, 20);
-

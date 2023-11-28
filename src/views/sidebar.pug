@@ -2,9 +2,8 @@ aside.main-sidebar.sidebar-dark-primary.elevation-4
     .dropdown
         a.brand-link(href='/')
             h3.text-center.p-0.m-0
-                b(style='font-size:20px') Admin
-            //- h3.text-center.p-0.m-0
-            //-   b(style='font-size:20px') User
+                b(style='font-size:20px')= user
+            
     .sidebar.pb-4.mb-4
         nav.mt-2
             ul.nav.nav-pills.nav-sidebar.flex-column.nav-flat(data-widget='treeview', role='menu', data-accordion='false')
@@ -30,20 +29,20 @@ aside.main-sidebar.sidebar-dark-primary.elevation-4
                                     p Xem đề tài
                         if 1            
                             li.nav-item
-                                a.nav-link.nav-new_project.tree-item(onclick='window.location.href="/topics?TrangThai=chờ phê duyệt"')
+                                a.nav-link.nav-new_project.tree-item(onclick='window.location.href="/topics?TrangThai=phân công nghiệm thu"')
                                     i.fas.fa-angle-right.nav-icon
                                     p Phân công phản biện
                             li.nav-item
-                                a.nav-link.nav-new_project.tree-item(onclick='window.location.href="/topics"')
+                                a.nav-link.nav-new_project.tree-item(onclick='window.location.href="/topics?TrangThai=phân công xét duyệt"')
                                     i.fas.fa-angle-right.nav-icon
                                     p Phân công xét duyệt
                         if 1            
                             li.nav-item
-                                a.nav-link.nav-new_project.tree-item(onclick='window.location.href="/topics"')
+                                a.nav-link.nav-new_project.tree-item(onclick='window.location.href="/topics?TrangThai=đang nghiệm thu"')
                                     i.fas.fa-angle-right.nav-icon
                                     p Phản biện
                             li.nav-item
-                                a.nav-link.nav-new_project.tree-item(onclick='window.location.href="/topics"')
+                                a.nav-link.nav-new_project.tree-item(onclick='window.location.href="/topics?TrangThai=đang xét duyệt"')
                                     i.fas.fa-angle-right.nav-icon
                                     p Xét duyệt
                 li.nav-item
