@@ -26,9 +26,11 @@ const TopicSchema = mongoose.Schema(
     TrangThai: {
       type: String,
       enum: [
-        "chờ phê duyệt",
+        "phân công xét duyệt",
+        "đang xét duyệt",
         "đang thực hiện",
-        "chờ nghiệm thu",
+        "phân công nghiệm thu",
+        "đang nghiệm thu",
         "hoàn thành",
         "hủy",
       ],
