@@ -1,30 +1,33 @@
-//  Navbar 
 nav.main-header.navbar.navbar-expand.navbar-primary.navbar-dark
-  //  Left navbar links 
+  // Left navbar links
   ul.navbar-nav
     li.nav-item
       a.nav-link(data-widget='pushmenu', href='', role='button')
         i.fas.fa-bars 
-    li
+    li.nav-item
       a.nav-link.text-white(href='./', role='button')
         large
           b(style='font-size:22px; line-height: 24px;') Quản lý đề tài khoa học
+
+  // Right navbar links
   ul.navbar-nav.ml-auto
     li.nav-item
       a.nav-link(data-widget='fullscreen', href='#', role='button')
         i.fas.fa-expand-arrows-alt
     li.nav-item.dropdown
-      a.nav-link(data-toggle='dropdown', aria-expanded='true', href='${javascript:void(0)}')
-        span
-          .d-felx.badge-pill
-            span.fa.fa-user.mr-2
-            span
-              b admin
-            span.fa.fa-angle-down.ml-2
+      a.nav-link(data-toggle='dropdown', aria-expanded='true', href='javascript:void(0)')
+        span.d-flex.badge-pill
+          span.fa.fa-user.mr-2
+          span
+            b.admin
+          span.fa.fa-angle-down.ml-2
       .dropdown-menu(aria-labelledby='account_settings', style='left: -2.5em;')
         a.dropdown-item#manage_account(href='javascript:void(0)')
           i.fa.fa-cog
-          |  Quản lí tài khoản
+          | Quản lý tài khoản
         a.dropdown-item(onclick='window.location.href="/login"')
           i.fa.fa-power-off
-          |  Đăng xuất
+          | Đăng xuất
+        a.dropdown-item(onclick='window.location.href="/changepass"')
+          i.fa.fa-key
+          | Đổi mật khẩu
