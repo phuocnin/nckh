@@ -10,37 +10,34 @@ block content
   .card-body
     table.table.table-hover.table-condensed#list
       colgroup
-        col(width="5%")
-        col(width="31%")
-        col(width="32%")
-        col(width="32%")
+        col(width="60%")
+        col(width="10%")
+        col(width="10%")
         
       thead
         tr
-          th.text-center #
           th.text-center Thông báo
           th.text-center Ngày đăng
           th.text-center Hoạt động             
       tbody
-        each topic in data
+        each notify in data
           tr
-            td.text-center= topic.TenDeTai
-            td.text-center
+            td
               p
-                b= topic.TenDeTai
-              p.truncate ????
+                b= notify.ThongBao
+              p.truncate= notify.NoiDung.split(" ").slice(0, 10).join(" ")
             td.text-center
-              b= topic.Ngaydang
+              b= notify.createdAt.toLocaleDateString()
+
             td.text-center
-              span.badge.badge-secondary ??????
               button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true") Hoạt động
                                     
               .dropdown-menu
-                a.dropdown-item.view_project(href=`/topic/${topic._id}`) Xem
+                a.dropdown-item.view_project(href=`/notify/${notify._id}`) Xem
                 .dropdown-divider
                 a.dropdown-item(href=`./`) Chỉnh sửa
                 .dropdown-divider
-                a.dropdown-item.delete_project(href="javascript:void(0)", data-id=topic._id) Xóa
+                a.dropdown-item.delete_project(href="javascript:void(0)", data-id=notify._id) Xóa
 
   style.
     table p {

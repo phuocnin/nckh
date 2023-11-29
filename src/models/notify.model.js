@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema.Types;
 
-const ThongBao = mongoose.Schema(
+const Notify = mongoose.Schema(
   {
     ThongBao: {
       type: String,
@@ -13,11 +13,16 @@ const ThongBao = mongoose.Schema(
     },
     NgayDang: Date,
     file: [],
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+    },
   },
   {
-    collection: "thongbao",
+    collection: "Notify",
     timestamps: true,
   }
 );
-const ThongBaoModels = mongoose.model("thongbao", ThongBao);
-module.exports = ThongBaoModels;
+
+const NotifyModels = mongoose.model("notify", Notify);
+module.exports = NotifyModels;

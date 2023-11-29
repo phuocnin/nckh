@@ -7,7 +7,7 @@ exports.createOne = (model) => {
     const data = await model.create(req.body);
     if (!data) return next(new error("No document found with that ID", 404));
     res.status(200).json({
-      status: "success!!",
+      status: "success",
       data: data,
     });
   });
@@ -17,7 +17,7 @@ exports.deleteOne = (model) => {
     const data = await model.findByIdAndDelete(req.params.id);
     if (!data) return next(new error("No document found with that ID", 404));
     res.status(200).json({
-      status: "success!!",
+      status: "success",
       data: null,
     });
   });
@@ -31,7 +31,7 @@ exports.updateOne = (model) => {
     });
     if (!data) return next(new error("No document found with that ID", 404));
     res.status(200).json({
-      status: "success!!",
+      status: "success",
       data,
     });
   });
@@ -42,7 +42,7 @@ exports.getOne = (model) => {
     const data = await model.findById(req.params.id);
     if (!data) return next(new error("No document found with that ID", 404));
     res.status(200).json({
-      status: "success!!",
+      status: "success",
       data,
     });
   });
@@ -57,7 +57,7 @@ exports.getAll = (model) => {
     const data = await features.query;
     if (!data) return next(new error("No document found with that ID", 404));
     res.status(200).json({
-      status: "success!!",
+      status: "success",
       data,
     });
   });
