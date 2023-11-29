@@ -11,13 +11,6 @@ block content
                             .form-group
                                 label.control-label(for='name') Tên đề tài
                                 input#tendetai.form-control.form-control-sm(type='text', name='name', value='')
-                        //- .col-md-6
-                        //-     .form-group
-                        //-         label(for='status') Trạng thái
-                        //-         select#trangthai.custom-select.custom-select-sm(name='status')
-                        //-             option(value='0') CHưa giải quyết
-                        //-             option(value='3') Tạm dừng
-                        //-             option(value='5') Hoàn thành
                     .row
                         .col-md-6
                             .form-group
@@ -34,8 +27,9 @@ block content
                                 input#MaNganh.form-control.form-control-sm(type='text', name='manager_id', value='')
                         .col-md-6
                             .form-group
-                                label.control-label(for='user_ids') Thành viên nhóm dự án
-                                select.form-control.form-control-sm.select2(multiple, name='user_ids[]')
+                                label.control-label Thành viên nhóm dự án
+                                select#userDropdown.form-control.form-control-sm.select2
+                                    option(value="" disabled selected)
                                     
                     .row
                         .col-md-12
@@ -76,5 +70,25 @@ block content
                         }, 2000);
                     }
                 }
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gọi API để lấy danh sách người dùng bằng Axios
+            axios.get('/api/v1/users')
+            .then(function(response) {
+                // Lấy dữ liệu người dùng từ phản hồi
+                const users = response.data.data;
+                // Đổ dữ liệu vào thanh chọn
+                const userDropdown = document.getElementById('userDropdown');
+                users.forEach(function(user) {
+                const option = document.createElement('option');
+                option.value = user._id;
+                option.text = `${user.name} id:${user.id}`;
+                userDropdown.appendChild(option);
+                });
+            })
+            .catch(function(error) {
+                console.error('Error fetching user data:', error);
             });
         });

@@ -12478,17 +12478,15 @@ var projectform = document.querySelector(".newtopic");
 var changepass = document.querySelector(".change_pass");
 var new_notifyform = document.querySelector(".notify");
 var delete_notify = document.querySelector(".delete_notify");
-if (new_notifyform) {
+if (delete_notify) {
   new_notifyform.addEventListener("submit", function (e) {
     console.log("a");
     e.preventDefault();
     var ThongBao = document.getElementById("data-id").value;
-    console.log(ThongBao);
-    //new_notify(ThongBao, NoiDung);
+    (0, _new_notify.new_notify)(ThongBao, NoiDung);
   });
 }
-
-if (delete_notify) {
+if (new_notifyform) {
   new_notifyform.addEventListener("submit", function (e) {
     e.preventDefault();
     var ThongBao = document.getElementById("thongbao").value;
@@ -12623,7 +12621,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64324" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53596" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
