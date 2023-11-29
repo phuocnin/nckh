@@ -5,6 +5,8 @@ import { showAlert } from "./alerts.js";
 import { newuser } from "./new_user.js";
 import { newtopic } from "./project.js";
 import { changePass } from "./changePass.js";
+import { new_notify } from "./new_notify.js";
+
 // DOM ELEMENTS
 const mapBox = document.getElementById("map");
 const loginForm = document.querySelector(".form--login");
@@ -15,9 +17,26 @@ const bookBtn = document.getElementById("book-tour");
 const userfrom = document.querySelector(".new-user");
 const projectform = document.querySelector(".newtopic");
 const changepass = document.querySelector(".change_pass");
-
+const new_notifyform = document.querySelector(".notify");
+const delete_notify = document.querySelector(".delete_notify");
+if (new_notifyform) {
+  new_notifyform.addEventListener("submit", (e) => {
+    console.log("a");
+    e.preventDefault();
+    const ThongBao = document.getElementById("data-id").value;
+    console.log(ThongBao);
+    //new_notify(ThongBao, NoiDung);
+  });
+}
+if (delete_notify) {
+  new_notifyform.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const ThongBao = document.getElementById("thongbao").value;
+    const NoiDung = document.getElementById("noidung").value;
+    new_notify(ThongBao, NoiDung);
+  });
+}
 if (userfrom) {
-  console.log("a");
   userfrom.addEventListener("submit", (e) => {
     e.preventDefault();
     const id = document.getElementById("id").value;
