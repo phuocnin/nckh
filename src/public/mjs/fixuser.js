@@ -18,7 +18,7 @@ export const changePass = async (name, email,gioitinh,sdt,khoa) => {
     if (res.data.status === "success") {
       showAlert("success", "Signup in successfully!");
       window.setTimeout(() => {
-        location.assign(`./`);
+        location.assign(`/`);
       }, 1500);
     }
   } catch (err) {

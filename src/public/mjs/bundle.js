@@ -12303,7 +12303,7 @@ var changePass = function changePass(_x, _x2, _x3, _x4, _x5) {
           if (res.data.status === "success") {
             (0, _alerts.showAlert)("success", "Signup in successfully!");
             window.setTimeout(function () {
-              location.assign("./");
+              location.assign("/");
             }, 1500);
           }
           _context.next = 11;
