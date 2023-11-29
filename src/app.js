@@ -2,6 +2,7 @@ const path = require("path");
 const express = require("express");
 const userRouter = require("./routes/user.router.js");
 const topicRouter = require("./routes/topic.router.js");
+const notifyRouter = require("./routes/notify.router.js");
 const viewRouter = require("./routes/view.router.js");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
@@ -20,6 +21,7 @@ app.use(cookieParser());
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/topics", topicRouter);
+app.use("/api/v1/notifys", notifyRouter);
 app.use("/", viewRouter);
 app.all("*", (req, res, next) => {
   next(new error(`Can't find url: ${req.originalUrl} on this server!!!`, 400));
