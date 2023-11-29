@@ -20,16 +20,16 @@ const projectform = document.querySelector(".newtopic");
 const changepass = document.querySelector(".change_pass");
 const new_notifyform = document.querySelector(".notify");
 const delete_notify = document.querySelector(".delete_notify");
-if (new_notifyform) {
+if (delete_notify) {
   new_notifyform.addEventListener("submit", (e) => {
     console.log("a");
     e.preventDefault();
     const ThongBao = document.getElementById("data-id").value;
-    console.log(ThongBao);
-    //new_notify(ThongBao, NoiDung);
+
+    new_notify(ThongBao, NoiDung);
   });
 }
-if (delete_notify) {
+if (new_notifyform) {
   new_notifyform.addEventListener("submit", (e) => {
     e.preventDefault();
     const ThongBao = document.getElementById("thongbao").value;
@@ -64,8 +64,8 @@ if (fixuser) {
     const email = document.getElementById("email").value;
     const gioitinh = document.getElementById("gioitinh").value;
     const sdt = document.getElementById("sodienthoai").value;
-    const khoa =document.getElementById("khoa").value;
-    changePass(name, email,gioitinh,sdt,khoa);
+    const khoa = document.getElementById("khoa").value;
+    changePass(name, email, gioitinh, sdt, khoa);
   });
 }
 if (projectform) {

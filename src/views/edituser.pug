@@ -1,0 +1,19 @@
+div#editModal.modal
+    div.modal-dialog
+        div.modal-content
+            span.close(onclick="closeEditModal()") &times;
+            h2=user.name
+            form(class=`edit-form-${user._id}`)
+                label Tên
+                input#editName(type="text" name="editName" class="form-control" required)
+                label Email
+                input#editEmail(name="editEmail" class="form-control" required)        
+                label Số điện thoại
+                input#editSdt(name="editSdt" class="form-control" required)    
+                label Giới tính
+                input#editGioiTinh(type="text" name="editGioiTinh" class="form-control" required)
+                label Khoa
+                input#editKhoa(name="editKhoa" class="form-control" required)   
+                .col-lg-12.text-right.justify-content-center.d-flex
+                    button.btn.btn-primary(type="button" onclick=`saveEditForm('${user._id}')`) Lưu
+                    button.btn.btn-secondary(type="button" onclick="closeEditModal()") Hủy

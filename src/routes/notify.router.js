@@ -12,7 +12,7 @@ Router.route("/")
   .post(authMiddleware, notifyController.postNotify);
 
 Router.route("/:id")
-  .get(authMiddleware)
+  .get(notifyController.getNotify)
   .patch(authMiddleware, notifyController.updateNotify)
   .delete(authMiddleware, restrictTo("admin"), notifyController.deleteNotify);
 module.exports = Router;

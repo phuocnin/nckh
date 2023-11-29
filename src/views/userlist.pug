@@ -21,7 +21,6 @@ block content
             each user in users
               tr
                 th.text-center
-                  // ? ?
                 td
                   b= user.name 
                 td
@@ -33,17 +32,36 @@ block content
                     b giảng viên
                   else
                     b= user.role
-                    
+
                 td.text-center
                   button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true")                    
                     |  Action
-                      
+
                   .dropdown-menu
                     a.dropdown-item.view_user(href=`./user/${user._id}`) Xem
                     .dropdown-divider
-                    a.dropdown-item(href=`./fixuser/${user._id}`) Chỉnh sửa
+                    button.dropdown-item(type="button", onclick=`editUser('${user._id}')`) Chỉnh sửa
                     .dropdown-divider
-                    a.dropdown-item.delete_user(href="javascript:void(0)", data-id="<? ?>") Xóa
+                    button.dropdown-item(type="button", onclick=`deleteNotify('${user._id}')`) Xóa
+              div#editModal.modal
+                div.modal-dialog
+                    div.modal-content
+                      span.close(onclick="closeEditModal()") &times;
+                      h2=user.name
+                      form(class=`edit-form-${user._id}`)
+                          label Tên
+                          input#editName(type="text" name="editName" class="form-control" required)
+                          label Email
+                          input#editEmail(name="editEmail" class="form-control" required)        
+                          label Số điện thoại
+                          input#editSdt(name="editSdt" class="form-control" required)    
+                          label Giới tính
+                          input#editGioiTinh(type="text" name="editGioiTinh" class="form-control" required)
+                          label Khoa
+                          input#editKhoa(name="editKhoa" class="form-control" required)   
+                          .col-lg-12.text-right.justify-content-center.d-flex
+                              button.btn.btn-primary(type="button" onclick=`saveEditForm('${user._id}')`) Lưu
+                              button.btn.btn-secondary(type="button" onclick="closeEditModal()") Hủy
   script.
     $(document).ready(function(){
       $('#list').dataTable()
@@ -55,19 +73,4 @@ block content
       })
     })
 
-    function delete_user($id){
-      start_load()
-      $.ajax({
-        url:'ajax.php?action=delete_user',
-        method:'POST',
-        data:{id:$id},
-        success:function(resp){
-          if(resp==1){
-            alert_toast("Data successfully deleted",'success')
-            setTimeout(function(){
-              location.reload()
-            },1500)
-          }
-        }
-      })
-    }
+

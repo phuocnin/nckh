@@ -18,10 +18,9 @@ Router.get("/", viewController.home);
 Router.get("/topic/:id", authMiddleware, topicController.getTopic);
 //  done  href
 Router.get("/user/:id", userController.getUser);
-
+Router.get("/me", authMiddleware, userController.getMe, userController.getUser);
 //list đề tài
 // done href
-
 Router.get("/topics", topicController.getTopics);
 
 Router.get("/manageusers", async (req, res) => {
@@ -53,11 +52,10 @@ Router.get("/managetask", async (req, res) => {
 Router.get("/notify", async (req, res) => {
   res.status(200).render("notify");
 });
-Router.get("/thongbao", async (req, res) => {
-  res.status(200).render("thongbao");
-});
+Router.get("/notify/:id", viewController.viewNotify);
+Router.get("/editnotify/:id", viewController.editNotify);
 Router.get("/fixuser/:id", async (req, res) => {
-  res.status(200).render("fixuser");
+  res.status(200).render("edituser");
 });
 Router.get("/changepass", authMiddleware, async (req, res) => {
   res.status(200).render("changepass");

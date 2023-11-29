@@ -10,6 +10,8 @@ exports.getTopics = factory.getAll(topicModel, "project_list");
 exports.getTopic = factory.getOne(topicModel, "view_topic");
 exports.postTopic = factory.createOne(topicModel);
 exports.updateTopic = factory.updateOne(topicModel);
+exports.viewNotify = factory.getOne(notifyModel, "view_notify");
+exports.editNotify = factory.getOne(notifyModel, "notify");
 exports.filterByRole = catchAsync(async (req, res, next) => {
   if (req.user.role == "admin") {
     req.body = filterObj(req.body, "GiangVien", "HoiDong");

@@ -11,15 +11,15 @@ block content
                                 dl
                                     dt
                                         b.border-bottom.border-primary Thông báo
-                                    dd Thông báo 
+                                    dd= data.ThongBao
                                     dt
                                         b.border-bottom.border-primary Nội dung
-                                    dd Nội dung thông báo
+                                    dd= data.NoiDung
                             .col-md-6
                                 dl
                                     dt
                                         b.border-bottom.border-primary Ngày bắt đầu
-                                    dd ngày bắt đầu 
+                                    dd= data.createdAt.toLocaleDateString()
                               
                                                            
                                 

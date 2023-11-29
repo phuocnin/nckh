@@ -1,7 +1,6 @@
 extends index
 
 block content
-  // Info boxes
   .col-12
     .card
       .card-body
@@ -13,7 +12,7 @@ block content
         col(width="60%")
         col(width="10%")
         col(width="10%")
-        
+
       thead
         tr
           th.text-center Thông báo
@@ -30,14 +29,30 @@ block content
               b= notify.createdAt.toLocaleDateString()
 
             td.text-center
-              button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true") Hoạt động
-                                    
-              .dropdown-menu
-                a.dropdown-item.view_project(href=`/notify/${notify._id}`) Xem
-                .dropdown-divider
-                a.dropdown-item(href=`./`) Chỉnh sửa
-                .dropdown-divider
-                a.dropdown-item.delete_project(href="javascript:void(0)", data-id=notify._id) Xóa
+
+              form(id=`deleteForm_${notify._id}`, style="display:inline;")
+                button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true") Hoạt động
+                .dropdown-menu
+                  a.dropdown-item.view_project(href=`/notify/${notify._id}`) Xem
+                  .dropdown-divider
+                  button.dropdown-item(type="button", onclick=`editNotify('${notify._id}')`) Chỉnh sửa
+                  .dropdown-divider
+                  button.dropdown-item(type="button", onclick=`deleteNotify('${notify._id}')`) Xóa
+          //- Modal chỉnh sửa
+          div#editModal.modal
+            div.modal-dialog(style="width: 70vw; margin-top: 0vh;")
+              div.modal-content(style="max-height: 80vh; overflow-y: auto;")
+                span.close(onclick="closeEditModal()") &times;
+                h2 Chỉnh sửa thông báo
+                form(class=`edit-form-${notify._id}`)
+                  label Thông báo
+                  input#editThongbao(type="text" name="editThongbao" class="form-control" required)
+                  label Nội dung
+                  textarea#editNoidung(name="editNoidung" class="form-control" required)            
+                
+                  .col-lg-12.text-right.justify-content-center.d-flex
+                      button.btn.btn-primary(type="button" onclick=`saveEditForm('${notify._id}')`) Lưu
+                      button.btn.btn-secondary(type="button" onclick="closeEditModal()") Hủy
 
   style.
     table p {

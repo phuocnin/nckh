@@ -35,29 +35,25 @@ html(lang='en')
     script(src='/assets/plugins/jquery/jquery.min.js')
     //  jQuery UI 1.11.4 
     script(src='/assets/plugins/jquery-ui/jquery-ui.min.js')
+    script(src='/mjs/delete.js')
+    script(src='/mjs/edit.notify.js')
+    script(src='/mjs/edit.user.js')
     //  summernote 
     link(rel='stylesheet', href='/assets/plugins/summernote/summernote-bs4.min.css')
   body.hold-transition.sidebar-mini.layout-fixed.layout-navbar-fixed.layout-footer-fixed 
     .wrapper
       include topbar
       include sidebar
-      //  Content Wrapper. Contains page content 
       .content-wrapper
         .toast#alert_toast(role='alert', aria-live='assertive', aria-atomic='true')
           .toast-body.text-white.
-        #toastsContainerTopRight.toasts-top-right.fixed
-        //  Content Header (Page header) 
+        #toastsContainerTopRight.toasts-top-right.fixed 
         .content-header
           .container-fluid
             .row.mb-2
               .col-sm-6
-                h1.m-0 home 
-              //  /.col 
-              //  /.row 
+                h1.m-0 home  
             hr.border-primary
-          //  /.container-fluid 
-          //  /.content-header 
-        //  Main content 
         section.content            
           .container-fluid
             block content
