@@ -2,7 +2,7 @@ extends index
 
 block content
     .container-fluid
-        form#manage-task(action='ajax.php?action=save_task', method='POST')
+        form.user(action="") 
             input(type='hidden', name='id', value='')
             input(type='hidden', name='project_id', value='')
             .form-group
@@ -27,40 +27,4 @@ block content
                 button.btn.btn-secondary(type="button" onclick="location.href = 'index.php?page=user_list'") Cancel  
 
     script.
-        $(document).ready(function(){
-            // Đổi '.summernote' thành '#description' nếu bạn đang muốn áp dụng Summernote cho trường mô tả.
-            $('#description').summernote({
-                height: 200,
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
-                    ['fontname', ['fontname']],
-                    ['fontsize', ['fontsize']],
-                    ['color', ['color']],
-                    ['para', ['ol', 'ul', 'paragraph', 'height']],
-                    ['table', ['table']],
-                    ['view', ['undo', 'redo', 'fullscreen', 'codeview', 'help']]
-                ]
-            });
-
-            $('#manage-task').submit(function(e){
-                e.preventDefault();
-                start_load();
-                $.ajax({
-                    url: $(this).attr('action'),
-                    data: new FormData($(this)[0]),
-                    cache: false,
-                    contentType: false,
-                    processData: false,
-                    method: 'POST',
-                    success: function(resp){
-                        if(resp == 1){
-                            alert_toast('Data successfully saved', 'success');
-                            setTimeout(function(){
-                                location.reload();
-                            }, 1500);
-                        }
-                    }
-                });
-            });
-        });
+        

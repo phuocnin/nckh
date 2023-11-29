@@ -56,7 +56,7 @@ Router.get("/notify", async (req, res) => {
 Router.get("/thongbao", async (req, res) => {
   res.status(200).render("thongbao");
 });
-Router.get("/fixuser", async (req, res) => {
+Router.get("/fixuser/:id", async (req, res) => {
   res.status(200).render("fixuser");
 });
 Router.get("/changepass", authMiddleware, async (req, res) => {
