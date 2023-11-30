@@ -1,19 +1,19 @@
-div#editModal.modal
+div(id=`editUser-${user._id}`).modal
     div.modal-dialog
         div.modal-content
-            span.close(onclick="closeEditModal()") &times;
-            h2=user.name
+            span.close(onclick="closeEditModalUser()") &times;
+            h2 Chỉnh sửa
             form(class=`edit-form-${user._id}`)
                 label Tên
-                input#editName(type="text" name="editName" class="form-control" required)
+                input(type="text" name="editName" class="form-control" id=`editName-${user._id}`  required)
                 label Email
-                input#editEmail(name="editEmail" class="form-control" required)        
+                input(name="editEmail" class="form-control"  id=`editEmail-${user._id}`  )        
                 label Số điện thoại
-                input#editSdt(name="editSdt" class="form-control" required)    
+                input(name="editSdt" class="form-control"  id=`editSdt-${user._id}`  )    
                 label Giới tính
-                input#editGioiTinh(type="text" name="editGioiTinh" class="form-control" required)
+                input(type="text" name="editGioiTinh" class="form-control"  id=`editGioiTinh-${user._id}` )
                 label Khoa
-                input#editKhoa(name="editKhoa" class="form-control" required)   
+                input(name="editKhoa" class="form-control"  id=`editKhoa-${user._id}` )   
                 .col-lg-12.text-right.justify-content-center.d-flex
-                    button.btn.btn-primary(type="button" onclick=`saveEditForm('${user._id}')`) Lưu
-                    button.btn.btn-secondary(type="button" onclick="closeEditModal()") Hủy
+                    button.btn.btn-primary(type="button" onclick=`saveEditFormUser('${user._id}')`) Lưu
+                    button.btn.btn-secondary(type="button" onclick=`closeEditModalUser('${user._id}')`) Hủy

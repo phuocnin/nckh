@@ -39,20 +39,22 @@ block content
                   .dropdown-divider
                   button.dropdown-item(type="button", onclick=`deleteNotify('${notify._id}')`) Xóa
           //- Modal chỉnh sửa
-          div#editModal.modal
+          div(id=`editNotify-${notify._id}`).modal
             div.modal-dialog(style="width: 70vw; margin-top: 0vh;")
               div.modal-content(style="max-height: 80vh; overflow-y: auto;")
-                span.close(onclick="closeEditModal()") &times;
+                span.close(onclick="closeeditNotify()") &times;
                 h2 Chỉnh sửa thông báo
-                form(class=`edit-form-${notify._id}`)
+                form(id=`edit-form-${notify._id}`)
                   label Thông báo
-                  input#editThongbao(type="text" name="editThongbao" class="form-control" required)
+                  input(type="text" name="editThongbao" class="form-control" id=`editThongbao-${notify._id}` required)
                   label Nội dung
-                  textarea#editNoidung(name="editNoidung" class="form-control" required)            
-                
+                  textarea(name="editNoidung" class="form-control" id=`editNoidung-${notify._id}` required)            
+
                   .col-lg-12.text-right.justify-content-center.d-flex
-                      button.btn.btn-primary(type="button" onclick=`saveEditForm('${notify._id}')`) Lưu
-                      button.btn.btn-secondary(type="button" onclick="closeEditModal()") Hủy
+                    button.btn.btn-primary(type="button" onclick=`saveEditForm('${notify._id}')`) Lưu
+                    button.btn.btn-secondary(type="button" onclick=`closeeditNotify('${notify._id}')`) Hủy
+
+
 
   style.
     table p {
@@ -63,27 +65,6 @@ block content
     }
 
   script.
-    $(document).ready(function(){
-      $('#list').dataTable();
-
-      $('.delete_project').click(function(){
-        _conf("Are you sure to delete this project?", "delete_project", [$(this).data('id')]);
+      $(document).ready(function(){
+        $('#list').dataTable();
       });
-
-      function delete_project(id){
-        start_load();
-        $.ajax({
-          url: 'ajax.php?action=delete_project',
-          method: 'POST',
-          data: {id: id},
-          success: function(resp){
-            if(resp == 1){
-              alert_toast("Data successfully deleted", 'success');
-              setTimeout(function(){
-                location.reload();
-              }, 1500);
-            }
-          }
-        });
-      }
-    });

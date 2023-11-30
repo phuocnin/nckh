@@ -15,29 +15,33 @@ function editNotify(notifyId) {
 
 // Hàm hiển thị modal chỉnh sửa và điền dữ liệu vào biểu mẫu
 function showEditForm(notifyData) {
-  const editThongbaoInput = document.getElementById("editThongbao");
-  const editNoidungTextarea = document.getElementById("editNoidung");
-
+  const editThongbaoInput = document.getElementById(
+    `editThongbao-${notifyData._id}`
+  );
+  const editNoidungTextarea = document.getElementById(
+    `editNoidung-${notifyData._id}`
+  );
   // Điền dữ liệu vào biểu mẫu chỉnh sửa
   editThongbaoInput.value = notifyData.ThongBao;
   editNoidungTextarea.value = notifyData.NoiDung;
-
   // Hiển thị modal chỉnh sửa
-  const editModal = document.getElementById("editModal");
-  editModal.style.display = "block";
+  const editNotify = document.getElementById(`editNotify-${notifyData._id}`);
+  editNotify.style.display = "block";
 }
 
 // Hàm đóng modal chỉnh sửa
-function closeEditModal() {
-  const editModal = document.getElementById("editModal");
-  editModal.style.display = "none";
+function closeeditNotify(notifyId) {
+  const editNotify = document.getElementById(`editNotify-${notifyId}`);
+  editNotify.style.display = "none";
   location.reload();
 }
 
 // Hàm lưu thông báo chỉnh sửa
 function saveEditForm(notifyId) {
-  const editThongbaoInput = document.getElementById("editThongbao");
-  const editNoidungTextarea = document.getElementById("editNoidung");
+  const editThongbaoInput = document.getElementById(`editThongbao-${notifyId}`);
+  const editNoidungTextarea = document.getElementById(
+    `editNoidung-${notifyId}`
+  );
 
   const editedData = {
     ThongBao: editThongbaoInput.value,
@@ -51,7 +55,7 @@ function saveEditForm(notifyId) {
       console.log("Notify updated successfully", response.data);
 
       // Đóng modal và có thể cập nhật lại giao diện hoặc tải lại trang
-      closeEditModal();
+      closeeditNotify(notifyId);
     })
     .catch((error) => {
       console.error("Error updating notify:", error);
