@@ -32,10 +32,13 @@ Router.get("/manageusers", async(req, res) => {
 Router.get("/new_topic", async(req, res) => {
     res.status(200).render("newproject");
 });
-// xem đề tài
-// Router.get("/viewtopic", async(req, res) => {
-//     res.status(200).render("view_topic");
-// });
+// thêm đề tài
+Router.get("/new_council", async(req, res) => {
+    res.status(200).render("new_council");
+});
+
+// wiew pdf
+
 
 Router.get("/newuser", async(req, res) => {
     res.status(200).render("new_user");
