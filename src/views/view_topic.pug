@@ -1,69 +1,137 @@
-extends index
+extends index 
 
 block content
-  .card-body
-    table.table.table-hover.table-condensed#list
-      colgroup
-        col(width="60%")
-        col(width="10%")
-        col(width="10%")
-
-      thead
-        tr
-          th.text-center Thông báo
-          th.text-center Ngày đăng
-          th.text-center Hoạt động             
-      tbody
-        if data && data.length
-          each notify in data
-            tr
-              td
-                p
-                  b= notify.ThongBao
-                p.truncate= notify.NoiDung.split(" ").slice(0, 10).join(" ")
-              td.text-center
-                b= notify.createdAt.toLocaleDateString()
-
-              td.text-center
-
-                form(id=`deleteForm_${notify._id}`, style="display:inline;")
-                  button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true") Hoạt động
-                  .dropdown-menu
-                    a.dropdown-item.view_project(href=`/notify/${notify._id}`) Xem
-                    .dropdown-divider
-                    button.dropdown-item(type="button", onclick=`editNotify('${notify._id}')`) Chỉnh sửa
-                    .dropdown-divider
-                    button.dropdown-item(type="button", onclick=`deleteNotify('${notify._id}')`) Xóa
+    .col-lg-12
+        .row
+            .col-md-12
+                .callout.callout-info
+                    td.text-center
+                        button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true").
+                             Action
+                        .dropdown-menu
+                            a.dropdown-item.view_task(href="javascript:void(0)") sửa
+                            .dropdown-divider
+                            a.dropdown-item.edit_task(href="javascript:void(0)") xóa
+                            .dropdown-divider
+                            
+                    .col-md-12
+                        .row
+                            
+                            .col-sm-6
+                                dl
+                                    dt
+                                        b.border-bottom.border-primary Tên đề tài
+                                    dd= data.TenDeTai
+                                    dt
+                                        b.border-bottom.border-primary Miêu tả
+                                    dd= data.MoTa
+                            .col-md-6
+                                dl
+                                    dt
+                                        b.border-bottom.border-primary Ngày bắt đầu
+                                    dd= data.NgayThucHien
+                                dl
+                                    dt
+                                        b.border-bottom.border-primary Ngày kết thúc
+                                    dd= data.NgayKetThuc
+                                dl
+                                    dt
+                                        b.border-bottom.border-primary Trạng thái
+                                    dd= data.TrangThai                             
+                                dl
+                                    dt
+                                        b.border-bottom.border-primary Quản lí dự án                                    
+                                    dd 
+                                        .d-flex.align-items-center.mt-1                                        
+                                            img.img-circle.img-thumbnail.p-0.shadow-sm.border-info.img-sm.mr-3(src="assets/uploads/<?php echo $manager[\'avatar\'] ?>", alt="Avatar")
+                                            b= data.GiangVien 
             
-            //- Modal chỉnh sửa
-          div(id=`editNotify-${notify._id}`).modal
-            div.modal-dialog(style="width: 70vw; margin-top: 0vh;")
-              div.modal-content(style="max-height: 80vh; overflow-y: auto;")
-                span.close(onclick="closeeditNotify()") &times;
-                h2 Chỉnh sửa thông báo
-                form(id=`edit-form-${notify._id}`)
-                  label Thông báo
-                  input(type="text" name="editThongbao" class="form-control" id=`editThongbao-${notify._id}` required)
-                  label Nội dung
-                  textarea(name="editNoidung" class="form-control" id=`editNoidung-${notify._id}` required)            
+        .row
+            .col-md-4
+                .card.card-outline.card-primary
+                    .card-header
+                        span 
+                            b Thành viên nhóm:
+                            .card-tools
+                    .card-body                        
+                        ul.users-list.clearfix 
+                            each ThanhVien in data.ThanhVien                       
+                                li                             
+                                    img(src="assets/uploads/<?php echo $row[\'avatar\'] ?>", alt="User Image")
+                                    a.users-list-name(href="javascript:void(0)")= ThanhVien
+            if user.role =="admin" & data.TrangThai=="chờ phê duyệt"           
+                .col-md-8
+                    .card.card-outline.card-primary
+                        .card-header
+                            span
+                                if data.TrangThai=="chờ phê duyệt"
+                                    b Xét duyệt đề tài:
+                                else if data.TrangThai=="chờ nghiệm thu"
+                                    b Nghiệm thu đề tài:
+                            td.text-center
+                                if data.TrangThai=="chờ phê duyệt"
+                                    select.custom-select.custom-select-sm(id="roleSelect" name="role")
+                                        option(value="đang thực hiện") Duyệt
+                                        option(value="hủy") Không duyệt
+                                        input#trangthai(type="hidden" name="role" value="Đang thực hiện")
+                                if data.TrangThai=="chờ nghiệm thu"
+                                    select.custom-select.custom-select-sm(id="roleSelect" name="role")
+                                        option(value="hoàn thành") Đạt
+                                        option(value="hủy") Không đạt
+                                        input#trangthai(type="hidden" name="role" value="Đang thực hiện")
+                            .card-tools
+                                button.btn.btn-primary.bg-gradient-primary.btn-sm#new_task(type="button")
+                                    i.fa  Xác nhận
+        iframe(src="https://docs.google.com/viewer?url=http://localhost:3000/file/1.pdf&embedded=true", width="600", height="780", frameborder="0", style="border: none;")
+                    
+        
+    style.
+        .users-list>li img {
+            border-radius: 50%;
+            height: 67px;
+            width: 67px;
+            object-fit: cover;
+        }
+        .users-list>li {
+            width: 33.33% !important
+        }
+        .truncate {
+            -webkit-line-clamp:1 !important;
+        }
 
-                  .col-lg-12.text-right.justify-content-center.d-flex
-                    button.btn.btn-primary(type="button" onclick=`saveEditForm('${notify._id}')`) Lưu
-                    button.btn.btn-secondary(type="button" onclick=`closeeditNotify('${notify._id}')`) Hủy
-        else
-          tr
-            td(colspan="3") No data available
+    script.
+        $('#new_task').click(function(){
+            uni_modal("New Task For <?php echo ucwords($name) ?>","manage_task.php?pid=<?php echo $id ?>","mid-large")
+            })
+            $('.edit_task').click(function(){
+                uni_modal("Edit Task: "+$(this).attr('data-task'),"manage_task.php?pid=<?php echo $id ?>&id="+$(this).attr('data-id'),"mid-large")
+            })
+            $('.view_task').click(function(){
+                uni_modal("Task Details","view_task.php?id="+$(this).attr('data-id'),"mid-large")
+            })
+            $('#new_productivity').click(function(){
+                uni_modal("<i class='fa fa-plus'></i> New Progress","manage_progress.php?pid=<?php echo $id ?>",'large')
+            })
+            $('.manage_progress').click(function(){
+                uni_modal("<i class='fa fa-edit'></i> Edit Progress","manage_progress.php?pid=<?php echo $id ?>&id="+$(this).attr('data-id'),'large')
+            })
+            $('.delete_progress').click(function(){
+            _conf("Are you sure to delete this progress?","delete_progress",[$(this).attr('data-id')])
+            })
+            function delete_progress($id){
+                start_load()
+                $.ajax({
+                    url:'ajax.php?action=delete_progress',
+                    method:'POST',
+                    data:{id:$id},
+                    success:function(resp){
+                        if(resp==1){
+                            alert_toast("Data successfully deleted",'success')
+                            setTimeout(function(){
+                                location.reload()
+                            },1500)
 
-
-  style.
-    table p {
-      margin: unset !important;
-    }
-    table td {
-      vertical-align: middle !important;
-    }
-
-  script.
-      $(document).ready(function(){
-        $('#list').dataTable();
-      });
+                        }
+                    }
+                })
+            }
