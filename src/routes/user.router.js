@@ -10,13 +10,13 @@ Router.use(authcontroller.authMiddleware);
 Router.route("/logout").get(authcontroller.logout);
 Router.route("/updatePassword").patch(authcontroller.updatePassword);
 Router.route("/me")
-  .get(usercontroller.getMe, usercontroller.getUser)
-  .patch(usercontroller.updateMe, usercontroller.updateUser)
-  .delete(usercontroller.deleteMe);
+    .get(usercontroller.getMe, usercontroller.getUser)
+    .patch(usercontroller.updateMe, usercontroller.updateUser)
+    .delete(usercontroller.deleteMe);
 
 Router.route("/").get(usercontroller.getUsers);
 Router.route("/:id")
-  .get(usercontroller.getUser)
-  .patch(usercontroller.updateUser);
+    .get(usercontroller.getUser)
+    .patch(usercontroller.updateUser);
 
 module.exports = Router;
