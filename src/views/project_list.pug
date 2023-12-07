@@ -29,17 +29,18 @@ block content
                     tbody
                         each topic in data
                             tr  
-                                th.text-center= topic.TenDeTai
+                                th.text-center 1
                                 td
                                     p
                                         b= topic.TenDeTai
-                                    p.truncate ???????????
                                 td
-                                    b start_date
+                                    -if(topic.NgayThucHien)
+                                        b= topic.NgayThucHien.toLocaleDateString()
                                 td
-                                    b end_date'
+                                    -if(topic.NgayKetThuc)
+                                        b= topic.NgayKetThuc.toLocaleDateString()
                                 td.text-center
-                                    span.badge.badge-secondary ?????????
+                                    span.badge.badge-secondary= topic.TrangThai
                                 td.text-center
                                     button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true") Hoạt động
                                     

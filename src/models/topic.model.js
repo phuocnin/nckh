@@ -34,7 +34,7 @@ const TopicSchema = mongoose.Schema(
         "hoàn thành",
         "hủy",
       ],
-      default: "chờ phê duyệt",
+      default: "phân công xét duyệt",
     },
     NhanXet: String,
     KinhPhi: Number,
