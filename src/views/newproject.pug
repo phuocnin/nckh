@@ -54,27 +54,7 @@ block content
                             button.btn.btn-flat.bg-gradient-primary.mx-2(type='submit') Save
                             button.btn.btn-flat.bg-gradient-secondary.mx-2(type='button', onclick="location.href='index.php?page=project_list'") Cancel
     script.
-        $('#manage-project').submit(function(e){
-            e.preventDefault();
-            start_load();
-            $.ajax({
-                url: $(this).attr('action'),
-                data: new FormData($(this)[0]),
-                cache: false,
-                contentType: false,
-                processData: false,
-                method: 'POST',
-                success:function(resp){
-                    if(resp == 1){
-                        alert_toast('Data successfully saved', 'success');
-                        setTimeout(function(){
-                            location.href = 'index.php?page=project_list';
-                        }, 2000);
-                    }
-                }
-            });
-        });
-        
+            
         document.addEventListener('DOMContentLoaded', function() {
             // Gọi API để lấy danh sách người dùng bằng Axios
             axios.get('/api/v1/users')
