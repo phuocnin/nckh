@@ -62,18 +62,7 @@ block content
                             //-     li                             
                             //-         img(src="assets/uploads/<?php echo $row[\'avatar\'] ?>", alt="User Image")
                             //-         a.users-list-name(href="javascript:void(0)")= ThanhVien
-                            li                             
-                                a.users-list-name ThanhVien
-                            li                             
-                                a.users-list-name ThanhVien
-                            li                             
-                                a.users-list-name ThanhVien
-                            li                             
-                                a.users-list-name ThanhVien
-                            li                             
-                                a.users-list-name ThanhVien
-                            li                             
-                                a.users-list-name ThanhVien
+                      
             if user.role =="admin" & data.TrangThai=="chờ phê duyệt"           
                 .col-md-8
                     .card.card-outline.card-primary
@@ -115,7 +104,10 @@ block content
                             .card-tools
                                 button.btn.btn-primary.bg-gradient-primary.btn-sm#new_task(type="button")
                                     i.fa  Xác nhận
-    div#pdf-container
+    iframe(
+      src="https://docs.google.com/gview?url=https://drive.google.com/file/d/17vMotMK5LiwEqJIMzNaHlOWqJ7P4YAfZ/view?usp=sharing&embedded=true"
+      style="width: 600px; height: 780px"
+    )
         
     style.
         .users-list>li img {
@@ -132,19 +124,19 @@ block content
         }
 
 
-    script.
-      document.addEventListener("DOMContentLoaded", function() {
-        var iframe = document.createElement("iframe");
-        iframe.src = "http://localhost:3000/file/1.pdf";
-        iframe.width = "600";
-        iframe.height = "780";
-        iframe.frameBorder = "0";
-        iframe.style.border = "none";
-        iframe.loading = "lazy";
+    //- script.
+    //-   document.addEventListener("DOMContentLoaded", function() {
+    //-     var iframe = document.createElement("iframe");
+    //-     iframe.src = "http://localhost:3000/file/1.pdf";
+    //-     iframe.width = "600";
+    //-     iframe.height = "780";
+    //-     iframe.frameBorder = "0";
+    //-     iframe.style.border = "none";
+    //-     iframe.loading = "lazy";
         
-        // Thay thế #pdf-container bằng ID hoặc class phù hợp trên trang của bạn
-        document.getElementById("pdf-container").appendChild(iframe);
-      });
+    //-     // Thay thế #pdf-container bằng ID hoặc class phù hợp trên trang của bạn
+    //-     document.getElementById("pdf-container").appendChild(iframe);
+    //-   });
     
     script.
 
