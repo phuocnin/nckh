@@ -59,6 +59,10 @@ Router.get("/managetask", async(req, res) => {
 Router.get("/notify", async(req, res) => {
     res.status(200).render("notify");
 });
+Router.get("/chat", async (req, res) => {
+    
+    res.status(200).render("chat");
+});
 Router.get("/notify/:id", viewController.viewNotify);
 Router.get("/editnotify/:id", viewController.editNotify);
 Router.get("/fixuser/:id", async(req, res) => {

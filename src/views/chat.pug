@@ -1,0 +1,270 @@
+extends index
+
+block content
+  meta(charset="utf-8")
+ 
+ 
+  style.
+    
+    * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+    
+          body {
+            font: 16px Helvetica, Arial;
+            background-color: #f4f4f4;
+          }
+    
+          ul {
+            list-style-type: none;
+            padding: 5px 10px;
+          }
+    
+          li {
+            overflow-wrap: break-word;
+            word-break: break-word;
+          }
+    
+          #user_list,
+          #room_list {
+            margin: 10px;
+            padding: 10px;
+            border: 2px solid black;
+            background-color: #fff;
+            border-radius: 5px;
+          }
+    
+          #user_list div,
+          #room_list div {
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: #f0f0f0;
+            border-radius: 3px;
+          }
+    
+          .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+          }
+    
+          .chat_box,
+          .private_box {
+            margin: 10px;
+            padding: 10px;
+            border: 2px solid deepskyblue;
+            background-color: #fff;
+            border-radius: 5px;
+            width: calc(33.33% - 20px);
+          }
+    
+          .private_container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+          }
+    
+          .chat_form,
+          .private_form {
+            background: #000;
+            padding: 3px;
+            margin-top: 10px;
+            width: 100%;
+            display: flex;
+          }
+    
+          .chat_form input,
+          .private_form input {
+            border: 0;
+            padding: 10px;
+            width: 70%;
+            margin-right: 0.5%;
+            border-radius: 3px 0 0 3px;
+          }
+    
+          .chat_form button,
+          .private_form button {
+            width: 29%;
+            background: rgb(16, 48, 141);
+            border: none;
+            padding: 10px;
+            color: #fff;
+            border-radius: 0 3px 3px 0;
+            cursor: pointer;
+          }
+    
+          .chat_form button:hover,
+          .private_form button:hover {
+            background-color: #0e3c8d;
+          }
+    
+          .username {
+            color: deepskyblue;
+          }
+          .task_bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 15px;
+          }
+          
+         
+  #room_list
+    b Phòng
+    #room
+    form#room_form(action)
+      input#room_name(type="text", name="message", placeholder="Nhập tên phòng", autocomplete="off")
+      button Tạo phòng
+  
+  .container
+    .chat_box#main_box
+      strong Hộp nhắn tin 
+      ul#main_msg
+      form.chat_form#main_msg_form(action)
+        input#main_m(type="text", name="message", autocomplete="off")
+        button Gửi
+  .private_container
+  script(src="http://localhost:3030/socket.io/socket.io.js")
+  script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js")
+  script.
+    
+    $(function () {
+            // connect to socket.io
+            const socket = io("http://localhost:3030");
+    
+            let clientId = localStorage.getItem("clientId");
+            let tokenClient = localStorage.getItem("tokenClient");
+            console.log(clientId);
+            socket.emit("send clientId", clientId);
+            socket.on("login aganst",()=>{
+              alert("login aganst")
+              window.location.href = "/";
+            })
+            socket.on("user connect", (connectClient, roomList, user) => {
+              updateRoomList(roomList);
+              updateUserList(user);
+              $("#main_msg").append(
+                `<li> ${connectClient.username} connected to the chat room</li>`
+              );
+            });
+            socket.on("reconnect", (connectClient, roomList) => {
+              console.log("reconnect");
+              connectClient.room.forEach((roomId) =>
+                createChatBox(roomId, roomList[roomId])
+              );
+            });
+    
+            socket.on("user disconnect", (clientName) => {
+              $("#main_msg").append(
+                `<li> ${clientName} disconnected from the chat room </li>`
+              );
+            });
+            socket.on("new room", (data) => {
+              createChatBox(data.newRoomId, data.newRoomName);
+              $(`#${data.newRoomId}_msg`).append(
+                `<li><em> ${data.clientName} </em> created ${data.newRoomName}!</li>`
+              );
+            });
+    
+            socket.on("create room error", (clientName, err) => {
+              $("#main_msg").append(
+                `<li><em> ${clientName} </em> cannot created a new room!. ${err}</li>`
+              );
+            });
+            socket.on("join room", (data) => {
+              createChatBox(data.roomId, data.roomName);
+              $(`#${data.roomId}_msg`).append(
+                `<li><em> ${data.clientName} </em> vào phòng  ${data.roomName}!</li>`
+              );
+            });
+    
+            socket.on("join room error", (err) => {
+              $("#main_msg").append(`<li><strong> ${err} </strong></li>`);
+            });
+    
+            socket.on("left room", (data) => {
+              $(`#${data.roomId}_box`).remove();
+              $(`#main_msg`).append(
+                `<li><em> ${data.clientName} </em> leaved ${data.roomName}!</li>`
+              );
+            });
+            socket.on("leave room error", (err) => {
+              $("#main_msg").append(`<li><strong> ${err} </strong></li>`);
+            });
+            socket.on("deleted room", (roomId, roomName, roomList) => {
+              $(`#${roomId}_box`).remove();
+              updateRoomList(roomList);
+              $("#main_msg").append(`<li><em> ${roomName} </em> is deleted !</li>`);
+            });
+    
+            socket.on("delete room error", (err) => {
+              $("#main_msg").append(`<li><strong> ${err} </strong></li>`);
+            });
+            socket.on("update room", (roomList) => {
+              updateRoomList(roomList);
+            });
+            socket.on("chat message", (data) => {
+              console.log(data);
+              insertMsg(data.roomId, data.username, data.message);
+            });
+            socket.on(
+              "create private chat",
+              (roomId, roomName, senderName, receiverName) => {
+                if ($(`#${roomId}_box`).length === 0) {
+                  createPrivateChat(roomId, roomName);
+                  $(`#${roomId}_msg`).append(
+                    `<li><em> ${senderName} </em> wants to send a private msg to ${receiverName}!</li>`
+                  );
+                }
+              }
+            );
+    
+            socket.on("private message", (data) => {
+              if ($(`#${data.roomId}_box`).length === 0) {
+                createPrivateChat(data.roomId, data.roomName);
+              }
+              insertMsg(data.roomId, data.username, data.message);
+            });
+            });
+            $("#room_form").submit(() => {
+              let roomName = $("#room_name").val();
+              //let chatter = $('#name').val();
+              socket.emit("create room", roomName, clientId);
+              $("#room_name").val("");
+              return false; 
+            });
+            $("#main_msg_form").submit(() => {
+              let message = $("#main_m").val();
+              socket.emit("chat message", {
+                roomId: "main",
+                message: message,
+              });
+              insertMsg("main", "Me", message);
+              $("#main_m").val("").focus();
+              return false; 
+          en a new room is created -> create a new chat box div
+            const createChatBox = (roomId, roomName) => {
+              $(".container").append(
+                `<div id=${roomId}_box class="chat_box"> <strong> ${roomName} </strong> <ul id="${roomId}_msg"></ul> <form class="chat_form" id = "${roomId}_msg_form" action="">
+                <input type="text" name="message" id="${roomId}_m" autocomplete="off" /><button>Send</button></form> </div>`
+              );
+              $(`#${roomId}_msg_form`).submit(() => {
+                let message = $(`#${roomId}_m`).val();
+                socket.emit("chat message", {
+                  roomId: roomId,
+                  message: message,
+                });
+                insertMsg(roomId, "Me", message);
+                $(`#${roomId}_m`).val("").focus();
+                return false; 
+              });
+            };
+          
+            const insertMsg = (roomId, username, message) => {
+              $(`#${roomId}_msg`).append(
+                `<li><strong class="username">${username}</strong> : ${message}</li>`
+              );
+            };
+          });
+    
