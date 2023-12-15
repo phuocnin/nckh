@@ -43,12 +43,10 @@ const TopicSchema = mongoose.Schema(
       type: ObjectId,
       ref: "userModel",
     },
-    HoiDong: [
-      {
-        type: ObjectId,
-        ref: "userModel",
-      },
-    ],
+    HoiDong: {
+      type: ObjectId,
+      ref: "userModel",
+    },
     NgayThucHien: Date,
     NgayKetThuc: Date,
     file: [],

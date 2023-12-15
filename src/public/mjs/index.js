@@ -71,17 +71,19 @@ if (fixuser) {
 if (projectform) {
   projectform.addEventListener("submit", (e) => {
     e.preventDefault();
-
     const Tendetai = document.getElementById("tendetai").value;
-    // const Trangthai = document.getElementById("trangthai").value;
     const NgayThucHien = document.getElementById("ngaybatdau").value;
     const NgayKetThuc = document.getElementById("ngayketthuc").value;
     const MaNganh = document.getElementById("MaNganh").value;
-    // const Thanhvien = document.getElementById("thanhvien").value;
-    const MoTa = document.getElementById("mota").value;
-    console.log(MoTa);
+    const ThanhvienElement = document.getElementById("thanhvien");
+    const Thanhvien = Array.from(ThanhvienElement.selectedOptions).map(
+      (option) => option.value
+    );
 
-    newtopic(Tendetai, MaNganh, NgayThucHien, NgayKetThuc, MoTa);
+    console.log(Thanhvien);
+    const MoTa = document.getElementById("mota").value;
+
+    newtopic(Tendetai, MaNganh, NgayThucHien, NgayKetThuc, MoTa, Thanhvien);
   });
 }
 

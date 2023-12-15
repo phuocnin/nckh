@@ -11,17 +11,21 @@ block content
                 
                     .form-group
                         label.control-label Chủ tịch
-                        select#userDropdown.form-control.form-control-sm.select2
+                        select#userDropdown1.form-control.form-control-sm.select2
                             option(value="" disabled selected)
-
 
                     .form-group
                         label.control-label.control-label-1 Thư ký
-                        select#userDropdown.form-control.form-control-sm.select2
+                        select#userDropdown2.form-control.form-control-sm.select2
                             option(value="" disabled selected)
-                    .form-group.form-group-1
-                        label.control-label.control-label-1 Thư ký
-                        select#userDropdown.form-control.form-control-sm.select2
+                    .form-group
+                        label.control-label.control-label-1 Uỷ viên 1
+                        select#userDropdown3.form-control.form-control-sm.select2
+                            option(value="" disabled selected)
+
+                    .form-group
+                        label.control-label.control-label-1 Uỷ viên 2
+                        select#userDropdown4.form-control.form-control-sm.select2
                             option(value="" disabled selected)
                                                                 
             .row 
@@ -30,7 +34,7 @@ block content
             .card-footer.border-top.border-info
                 .d-flex.w-100.justify-content-center.align-items-center
                     button.btn.btn-flat.bg-gradient-primary.mx-2(type='submit') Save
-                    button.btn.btn-flat.bg-gradient-secondary.mx-2(type='button', onclick="location.href='index.php?page=project_list'") Cancel
+                    button.btn.btn-flat.bg-gradient-secondary.mx-2(type='button', onclick="location.href='/councillist'") Cancel
     style.
         .box-council {
            margin-top: 100px;
@@ -45,3 +49,27 @@ block content
             display: none;
         }
         
+    script.
+            
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gọi API để lấy danh sách người dùng bằng Axios
+            axios.get('/api/v1/users')
+            .then(function(response) {
+                // Lấy dữ liệu người dùng từ phản hồi
+                const users = response.data.data;
+                // Đổ dữ liệu vào thanh chọn
+                const userDropdowns = document.querySelectorAll('.form-group select[id^="userDropdown"]');
+                users.forEach(function(user) {
+                
+                const option = document.createElement('option');
+                option.value = user._id;
+                option.text = `${user.name} \n\nid:${user.id}`;
+                userDropdowns.forEach(function(userDropdown) {
+                    userDropdown.appendChild(option.cloneNode(true));
+                });
+                });
+            })
+            .catch(function(error) {
+                console.error('Error fetching user data:', error);
+            });
+        });
