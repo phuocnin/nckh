@@ -46,32 +46,42 @@ block content
       border-radius: 100% 100%;
     }
   script.
-    $('[name="password"],[name="cpass"]').keyup(function(){
-      var pass = $('[name="password"]').val()
-      var cpass = $('[name="cpass"]').val()
-      if(cpass == '' ||pass == ''){
-        $('#pass_match').attr('data-status','')
-      }else{
-        if(cpass == pass){
-          $('#pass_match').attr('data-status','1').html('<i class="text-success">Password Matched.</i>')
-        }else{
-          $('#pass_match').attr('data-status','2').html('<i class="text-danger">Password does not match.</i>')
-        }
-      }
-    })
-    function displayImg(input,_this) {
-      if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function (e) {
-          $('#cimg').attr('src', e.target.result);
-        }
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
     $(document).ready(function() {
-    $("#roleSelect").change(function() {
-      // Khi ô select thay đổi, cập nhật giá trị của input #role
-      $("#role").val($(this).val());
+      $("#roleSelect").change(function() {
+        // Khi ô select thay đổi, cập nhật giá trị của input #role
+        $("#role").val($(this).val());
+      });
+
+      $('[name="password"],[name="cpass"]').keyup(function() {
+        var pass = $('[name="password"]').val();
+        var cpass = $('[name="cpass"]').val();
+
+        if (cpass == '' || pass == '') {
+          $('#pass_match').attr('data-status', '');
+        } else {
+          if (cpass == pass) {
+            $('#pass_match').attr('data-status', '1').html('<i class="text-success">Khớp mật khẩu.</i>');
+          } else {
+            $('#pass_match').attr('data-status', '2').html('<i class="text-danger">Mật khẩu không khớp.</i>');
+          }
+        }
+
+        // Kiểm tra độ dài mật khẩu
+        if (pass.length < 6) {
+          $('#pass_length').html('<i class="text-danger">Mật khẩu phải có ít nhất 6 ký tự.</i>');
+        } else {
+          $('#pass_length').html('');
+        }
+      });
+
+      // Kiểm tra thêm trước khi gửi biểu mẫu
+      $('.new-user').submit(function() {
+        var pass = $('[name="password"]').val();
+
+        // Kiểm tra độ dài mật khẩu trước khi gửi biểu mẫu
+        if (pass.length < 6) {
+          alert('Mật khẩu phải có ít nhất 6 ký tự.');
+          return false; // Ngăn chặn gửi biểu mẫu
+        }
+      });
     });
-    });
-    
