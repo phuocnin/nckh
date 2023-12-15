@@ -1,18 +1,24 @@
-
 import axios from "axios";
 import { showAlert } from "./alerts.js";
-export const newtopic = async (TenDeTai,MaNganh,NgayThucHien,NgayKetThuc,MoTa) => {
+export const newtopic = async (
+  TenDeTai,
+  MaNganh,
+  NgayThucHien,
+  NgayKetThuc,
+  MoTa,
+  ThanhVien
+) => {
   try {
     const res = await axios({
       method: "POST",
       url: "/api/v1/topics",
       data: {
-       TenDeTai,
-       MaNganh,
-       NgayThucHien,
-       NgayKetThuc,
-       MoTa
-      
+        TenDeTai,
+        MaNganh,
+        NgayThucHien,
+        NgayKetThuc,
+        MoTa,
+        ThanhVien,
       },
     });
 
@@ -27,5 +33,3 @@ export const newtopic = async (TenDeTai,MaNganh,NgayThucHien,NgayKetThuc,MoTa) =
     showAlert("error", err.response.data.error);
   }
 };
-
-

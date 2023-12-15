@@ -1,0 +1,46 @@
+extends index
+
+block content	
+  .col-lg-12
+    .card.card-outline.card-success
+      .card-header
+        .card-tools
+          a.btn.btn-block.btn-sm.btn-default.btn-flat.border-primary(href="./new_council")
+            i.fa.fa-plus
+            | Thêm hội đồng
+      .card-body
+        table.table.tabe-hover.table-bordered#list
+          thead
+            tr
+              th.text-center #
+              th Tên hội đồng
+              th Chủ tich
+              th Hoạt động
+          tbody
+            each council in councils
+              tr
+                th.text-center
+                td
+                  b= council.TenHoiDong 
+                td
+                  b= council.ChuTich
+                td.text-center
+                  button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true")                    
+                    |  Action
+                  .dropdown-menu
+                    a.dropdown-item.view_user(href=`./council/${council._id}`) Xem
+                    .dropdown-divider
+                    button.dropdown-item(type="button", onclick=`editUser('${council._id}')`) Chỉnh sửa
+                    .dropdown-divider
+                    button.dropdown-item(type="button", onclick=`deleteNotify('${council._id}')`) Xóa
+              
+              include edituser                
+  script.
+    $(document).ready(function(){
+      $('#list').dataTable()
+      $('.view_user').click(function(){
+        uni_modal("<i class='fa fa-id-card'></i> User Details","view_user.php?id="+$(this).attr('data-id'))
+      })
+    })
+
+
