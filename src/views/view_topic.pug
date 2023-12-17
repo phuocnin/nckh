@@ -58,10 +58,10 @@ block content
                             .card-tools
                     .card-body                        
                         ul.users-list.clearfix 
-                            //- each ThanhVien in data.ThanhVien                       
-                            //-     li                             
-                            //-         img(src="assets/uploads/<?php echo $row[\'avatar\'] ?>", alt="User Image")
-                            //-         a.users-list-name(href="javascript:void(0)")= ThanhVien
+                            each ThanhVien in data.ThanhVien                       
+                                li                             
+                                    img(src="assets/uploads/<?php echo $row[\'avatar\'] ?>", alt="User Image")
+                                    a.users-list-name(href="javascript:void(0)")= ThanhVien
                       
             if user.role =="admin" & data.TrangThai=="chờ phê duyệt"           
                 .col-md-8
