@@ -1,29 +1,16 @@
 import axios from "axios";
 import { showAlert } from "./alerts.js";
-export const newtopic = async (
-  TenDeTai,
-  MaNganh,
-  NgayThucHien,
-  NgayKetThuc,
-  MoTa,
-  ThanhVien
-) => {
+
+export const newtopic = async (formData) => {
   try {
     const res = await axios({
       method: "POST",
       url: "/api/v1/topics",
-      data: {
-        TenDeTai,
-        MaNganh,
-        NgayThucHien,
-        NgayKetThuc,
-        MoTa,
-        ThanhVien,
-      },
+      data: formData,
     });
 
     if (res.data.status === "success") {
-      showAlert("success", "Signup in successfully!");
+      showAlert("success", "tạo đề tài thành công!");
       window.setTimeout(() => {
         location.assign("/topics");
       }, 1500);
