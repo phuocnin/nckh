@@ -40,7 +40,10 @@ block content
                                     -if(topic.NgayKetThuc)
                                         b= topic.NgayKetThuc.toLocaleDateString()
                                 td.text-center
-                                    span.badge.badge-secondary= topic.TrangThai
+                                    -if(topic.NgayKetThuc && new Date(topic.NgayKetThuc).getTime() < new Date().getTime())
+                                        span.badge.badge-secondary.class-color Quá hạn
+                                    -else
+                                        span.badge.badge-secondary= topic.TrangThai
                                 td.text-center
                                     button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true") Hoạt động
                                     

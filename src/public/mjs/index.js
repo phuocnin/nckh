@@ -69,19 +69,30 @@ if (fixuser) {
 if (projectform) {
   projectform.addEventListener("submit", (e) => {
     e.preventDefault();
-    const Tendetai = document.getElementById("tendetai").value;
-    const NgayThucHien = document.getElementById("ngaybatdau").value;
-    const NgayKetThuc = document.getElementById("ngayketthuc").value;
-    const MaNganh = document.getElementById("MaNganh").value;
+    const formData = new FormData();
+    formData.append("TenDeTai", document.getElementById("tendetai").value);
+    formData.append(
+      "NgayThucHien",
+      document.getElementById("ngaybatdau").value
+    );
+    formData.append(
+      "NgayKetThuc",
+      document.getElementById("ngayketthuc").value
+    );
+    formData.append("MaNganh", document.getElementById("MaNganh").value);
+    const files = document.getElementById("file_de_tai");
+    if (files.files.length > 0) {
+      formData.append("files", files.files[0]);
+    }
     const ThanhvienElement = document.getElementById("thanhvien");
     const Thanhvien = Array.from(ThanhvienElement.selectedOptions).map(
       (option) => option.value
     );
+    formData.append("Thanhvien", Thanhvien);
 
-    console.log(Thanhvien);
-    const MoTa = document.getElementById("mota").value;
+    formData.append("MoTa", document.getElementById("mota").value);
 
-    newtopic(Tendetai, MaNganh, NgayThucHien, NgayKetThuc, MoTa, Thanhvien);
+    newtopic(formData);
   });
 }
 

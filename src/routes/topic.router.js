@@ -9,7 +9,7 @@ const Router = express.Router();
 
 Router.route("/")
   .get(topicController.getTopics)
-  .post(authMiddleware, topicController.postTopic);
+  .post(authMiddleware, topicController.uploadFiles, topicController.postTopic);
 
 Router.route("/:id")
   .get(authMiddleware)
