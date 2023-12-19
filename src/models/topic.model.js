@@ -6,7 +6,7 @@ const TopicSchema = mongoose.Schema(
     ThanhVien: [
       {
         type: ObjectId,
-        ref: "userModel",
+        ref: "users",
       },
     ],
     TenDeTai: {
@@ -41,11 +41,11 @@ const TopicSchema = mongoose.Schema(
     Diem: Number,
     GiangVien: {
       type: ObjectId,
-      ref: "userModel",
+      ref: "users",
     },
     HoiDong: {
       type: ObjectId,
-      ref: "userModel",
+      ref: "HoiDong",
     },
     NgayThucHien: Date,
     NgayKetThuc: Date,
@@ -56,5 +56,5 @@ const TopicSchema = mongoose.Schema(
     timestamps: true,
   }
 );
-const ReseachModels = mongoose.model("topicModel", TopicSchema);
+const ReseachModels = mongoose.model("topics", TopicSchema);
 module.exports = ReseachModels;

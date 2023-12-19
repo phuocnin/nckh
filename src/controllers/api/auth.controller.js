@@ -41,7 +41,13 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.createUser = catchAsync(async (req, res, next) => {
   const user = await userModels.create(req.body);
-  createSendToken(user, 200, req, res);
+  user.password = undefined;
+  res.status(200).json({
+    status: "success",
+    data: {
+      user,
+    },
+  });
 });
 
 exports.logout = (req, res) => {

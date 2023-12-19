@@ -38,6 +38,7 @@ html(lang='en')
     script(src='/mjs/delete.js')
     script(src='/mjs/edit.notify.js')
     script(src='/mjs/edit.user.js')
+    script(src='/mjs/new_council.js')
     //  summernote 
     link(rel='stylesheet', href='/assets/plugins/summernote/summernote-bs4.min.css')
   body.hold-transition.sidebar-mini.layout-fixed.layout-navbar-fixed.layout-footer-fixed 
@@ -52,7 +53,16 @@ html(lang='en')
           .container-fluid
             .row.mb-2
               .col-sm-6
-                h1.m-0 home!!!  
+                - let role = user.role
+                if role == 'sinh_vien'
+                  - role= 'Sinh viên'
+                else if role == 'giang_vien'
+                  - role= 'Giảng viên'
+                else if role == 'admin'
+                  - role= 'Admin'
+                else
+                  - role = "Xin chào"
+                h1.m-0= role
             hr.border-primary
         section.content            
           .container-fluid

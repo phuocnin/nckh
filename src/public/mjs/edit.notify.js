@@ -53,7 +53,6 @@ function saveEditForm(notifyId) {
     .patch(`/api/v1/notifys/${notifyId}`, editedData)
     .then((response) => {
       console.log("Notify updated successfully", response.data);
-
       // Đóng modal và có thể cập nhật lại giao diện hoặc tải lại trang
       closeeditNotify(notifyId);
     })

@@ -9,23 +9,21 @@ const HoiDong = mongoose.Schema(
     },
     ChuTich: {
       type: ObjectId,
-      ref: "userModel",
+      ref: "users",
       required: [true, "cần nhập chủ tịch"],
     },
     Thuky: {
       type: ObjectId,
-      ref: "userModel",
+      ref: "users",
       required: [true, "cần nhập thư ký"],
     },
     UyVien1: {
       type: ObjectId,
-      ref: "userModel",
-      required: [true, "cần nhập ủy viên 1"],
+      ref: "users",
     },
     UyVien2: {
       type: ObjectId,
-      ref: "userModel",
-      required: [true, "cần nhập ủa viên 2"],
+      ref: "users",
     },
   },
   {

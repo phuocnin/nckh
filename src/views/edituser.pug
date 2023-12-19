@@ -14,6 +14,10 @@ div(id=`editUser-${user._id}`).modal
                 input(type="text" name="editGioiTinh" class="form-control"  id=`editGioiTinh-${user._id}` )
                 label Khoa
                 input(name="editKhoa" class="form-control"  id=`editKhoa-${user._id}` )   
+                label.control-label Avatar
+                .custom-file
+                  input(type="file" class="custom-file-input" id=`photo-${user._id}` name=`photo-${user._id}` )
+                  label.custom-file-label(for=`photo-${user._id}`) Chọn file
                 .col-lg-12.text-right.justify-content-center.d-flex
                     button.btn.btn-primary(type="button" onclick=`saveEditFormUser('${user._id}')`) Lưu
                     button.btn.btn-secondary(type="button" onclick=`closeEditModalUser('${user._id}')`) Hủy

@@ -34,6 +34,10 @@ const userSchema = new mongoose.Schema(
     sdt: String,
     khoa: String,
     trinhdo: String,
+    avatar: {
+      type: String,
+      default: "default.jpg",
+    },
     password: {
       type: String,
       required: [true, "cần mật khẩu"],
@@ -46,7 +50,7 @@ const userSchema = new mongoose.Schema(
     DeTai: [
       {
         type: ObjectId,
-        ref: "topicModel",
+        ref: "topics",
       },
     ],
     resetToken: String,
@@ -77,5 +81,5 @@ userSchema.methods.checkjwtExpires = function (jwtIat) {
 userSchema.methods.checkPassword = async function (inputPassword) {
   return await bcrypt.compare(inputPassword, this.password);
 };
-const UserModels = mongoose.model("usermodels", userSchema);
+const UserModels = mongoose.model("users", userSchema);
 module.exports = UserModels;

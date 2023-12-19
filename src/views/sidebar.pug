@@ -18,16 +18,21 @@ aside.main-sidebar.sidebar-dark-primary.elevation-4
                         p Đề tài
                             i.right.fas.fa-angle-left
                     ul.nav.nav-treeview
-                        if 1
+                        li.nav-item
+                                a.nav-link.nav-project_list.tree-item(onclick='window.location.href="/topics"')
+                                    i.fas.fa-angle-right.nav-icon
+                                    p Xem đề tài  
+                        if user.role == 'sinh_vien'
                             li.nav-item
                                 a.nav-link.nav-new_project.tree-item(onclick='window.location.href="/new_topic"')
                                     i.fas.fa-angle-right.nav-icon
                                     p Thêm đề tài
                             li.nav-item
-                                a.nav-link.nav-project_list.tree-item(onclick='window.location.href="/topics?"')
+                                a.nav-link.nav-project_list.tree-item(onclick=`window.location.href="/my_topics?ThanhVien=${user._id}"`)
                                     i.fas.fa-angle-right.nav-icon
-                                    p Xem đề tài
-                        if 1            
+                                    p Đề tài của tôi
+                        if user.role == "admin" 
+                                      
                             li.nav-item
                                 a.nav-link.nav-new_project.tree-item(onclick='window.location.href="/topics?TrangThai=phân công nghiệm thu"')
                                     i.fas.fa-angle-right.nav-icon
@@ -36,7 +41,7 @@ aside.main-sidebar.sidebar-dark-primary.elevation-4
                                 a.nav-link.nav-new_project.tree-item(onclick='window.location.href="/topics?TrangThai=phân công xét duyệt"')
                                     i.fas.fa-angle-right.nav-icon
                                     p Phân công xét duyệt
-                        if 1            
+                        if user.role == "giang_vien"            
                             li.nav-item
                                 a.nav-link.nav-new_project.tree-item(onclick='window.location.href="/topics?TrangThai=đang nghiệm thu"')
                                     i.fas.fa-angle-right.nav-icon
@@ -45,38 +50,33 @@ aside.main-sidebar.sidebar-dark-primary.elevation-4
                                 a.nav-link.nav-new_project.tree-item(onclick='window.location.href="/topics?TrangThai=đang xét duyệt"')
                                     i.fas.fa-angle-right.nav-icon
                                     p Xét duyệt
-                li.nav-item
-                    a.nav-link.nav-task_list(href='./task_list')
-                        i.fas.fa-tasks.nav-icon
-                        p Task
-                li.nav-item
-                    a.nav-link.nav-reports(href='./councillist')
-                        i.fas.fa-th-list.nav-icon
-                        p Hội đồng
+
+                if user.role == "admin"
+                    li.nav-item
+                        a.nav-link.nav-reports(href='/councillist')
+                            i.fas.fa-th-list.nav-icon
+                            p Hội đồng
 
             
-                li.nav-item
-                    a.nav-link.nav-edit_user(href='#')
-                        i.nav-icon.fas.fa-users
-                        p user
-                            i.right.fas.fa-angle-left
-                    ul.nav.nav-treeview
-                        li.nav-item
-                        a.nav-link.nav-new_user.tree-item(onclick='window.location.href="/newuser"')
-                            i.fas.fa-angle-right.nav-icon
-                            p Tạo users
-                        li.nav-item
-                        a.nav-link.nav-user_list.tree-item(onclick='window.location.href="/userlist"')
-                            i.fas.fa-angle-right.nav-icon
-                            p Xem users
-                        li.nav-item
-                        a.nav-link.nav-user_list.tree-item(onclick='window.location.href="/fixuser"')
-                            i.fas.fa-angle-right.nav-icon
-                            p Sửa user 
-                li.nav-item
-                    a.nav-link.nav-task_list(href='/notify')
-                        i.nav-icon.fas.fa-bell
-                        p Thông báo
+                    li.nav-item
+                        a.nav-link.nav-edit_user(href='#')
+                            i.nav-icon.fas.fa-users
+                            p user
+                                i.right.fas.fa-angle-left
+                        ul.nav.nav-treeview
+                            li.nav-item
+                            a.nav-link.nav-new_user.tree-item(onclick='window.location.href="/newuser"')
+                                i.fas.fa-angle-right.nav-icon
+                                p Tạo users
+                            li.nav-item
+                            a.nav-link.nav-user_list.tree-item(onclick='window.location.href="/userlist"')
+                                i.fas.fa-angle-right.nav-icon
+                                p Xem users
+
+                    li.nav-item
+                        a.nav-link.nav-task_list(href='/notify')
+                            i.nav-icon.fas.fa-bell
+                            p Thông báo
                 li.nav-item
                     a.nav-link.nav-task_list(href='/chat')
                         i.nav-icon.fas.fa-comment
