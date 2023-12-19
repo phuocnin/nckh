@@ -2,18 +2,12 @@ extends index
 
 
 block content
+    
     .col-lg-12
         .row
             .col-md-12
                 .callout.callout-info
-                    td.text-center
-                        button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true").
-                             Action
-                        .dropdown-menu
-                            a.dropdown-item.view_task(href="javascript:void(0)") sửa
-                            .dropdown-divider
-                            a.dropdown-item.edit_task(href="javascript:void(0)") xóa
-                            .dropdown-divider
+                    
                             
                     .col-md-12
                         .row
@@ -26,7 +20,16 @@ block content
                                     dt
                                         b.border-bottom.border-primary Miêu tả
                                     dd= data.MoTa
+                                    if data.NhanXet 
+                                        dt
+                                            b.border-bottom.border-primary Nhận xét
+                                        dd= data.NhanXet
                             .col-md-6
+                                if data.TrangThai=="Hoàn thành"
+                                    dl
+                                        dt
+                                            b.border-bottom.border-primary Điểm
+                                        dd= data.Diem
                                 dl
                                     dt
                                         b.border-bottom.border-primary Ngày bắt đầu
@@ -41,53 +44,71 @@ block content
                                     dt
                                         b.border-bottom.border-primary Trạng thái
                                     dd= data.TrangThai                             
-                                dl
-                                    dt
-                                        b.border-bottom.border-primary Quản lí dự án                                    
-                                    dd 
-                                        .d-flex.align-items-center.mt-1                                        
-                                            img.img-circle.img-thumbnail.p-0.shadow-sm.border-info.img-sm.mr-3(src="assets/uploads/<?php echo $manager[\'avatar\'] ?>", alt="Avatar")
-                                            b= data.GiangVien 
-            
+                                
+                        .col-lg-12.text-right.justify-content-center.d-flex
+                            button.btn.btn-primary.mr-2(type="button", id='showFile') Xem báo cáo
+                            if user.role =="giang_vien" & data.TrangThai=="đang nghiệm thu"
+                                button.btn.btn-primary.mr-2(type="button", id="showFormButton") Nghiệm thu
+                            td.text-center
+                                button.btn.btn-default.btn-sm.btn-flat.border-info.wave-effect.text-info.dropdown-toggle(type="button", data-toggle="dropdown", aria-expanded="true").
+                                    Action
+                                .dropdown-menu
+                                    a.dropdown-item.view_task(href="javascript:void(0)") sửa
+                                    .dropdown-divider
+                                    a.dropdown-item.edit_task(href="javascript:void(0)") xóa
+                                    .dropdown-divider
         .row
             .col-md-4
                 .card.card-outline(style="min-height:129.67px").card-primary
+                    .card-header
+                        dt
+                            b.border-bottom.border-primary Quản lí dự án                                    
+                        dd 
+                            .d-flex.align-items-center.mt-1                                        
+                                img.img-circle.img-thumbnail.p-0.shadow-sm.border-info.img-sm.mr-3(src="assets/uploads/<?php echo $manager[\'avatar\'] ?>", alt="Avatar")
+                                b= data.GiangVien 
                     .card-header
                         span 
                             b Thành viên nhóm:
                             .card-tools
                     .card-body                        
-                        ul.users-list.clearfix 
+                        ul.clearfix 
                             each ThanhVien in data.ThanhVien                       
-                                li                             
-                                    img(src="assets/uploads/<?php echo $row[\'avatar\'] ?>", alt="User Image")
-                                    a.users-list-name(href="javascript:void(0)")= ThanhVien
+                                li= ThanhVien.name
                       
-            if user.role =="admin" & data.TrangThai=="chờ phê duyệt"           
+            if user.role =="giang_vien" & data.TrangThai=="đang xét duyệt"           
                 .col-md-8
                     .card.card-outline.card-primary
                         .card-header
                             span
-                                if data.TrangThai=="chờ phê duyệt"
-                                    b Xét duyệt đề tài:
-                                else if data.TrangThai=="chờ nghiệm thu"
-                                    b Nghiệm thu đề tài:
+                                b Xét duyệt đề tài:
+                         
                             td.text-center
-                                if data.TrangThai=="chờ phê duyệt"
-                                    select.custom-select.custom-select-sm(id="roleSelect" name="role")
+                                if data.TrangThai=="đang xét duyệt"
+                                    select.custom-select.custom-select-sm(id="select_trangthai" name="trangthai")
                                         option(value="đang thực hiện") Duyệt
                                         option(value="hủy") Không duyệt
-                                        input#trangthai(type="hidden" name="role" value="Đang thực hiện")
-                                if data.TrangThai=="chờ nghiệm thu"
-                                    select.custom-select.custom-select-sm(id="roleSelect" name="role")
-                                        option(value="hoàn thành") Đạt
-                                        option(value="hủy") Không đạt
-                                        input#trangthai(type="hidden" name="role" value="Đang thực hiện")
+                                    input#trangthai(type="hidden" name="role")
+                                
                             .card-tools
-                                button.btn.btn-primary.bg-gradient-primary.btn-sm#new_task(type="button")
+                                button.btn.btn-primary.bg-gradient-primary.btn-sm(type="button",onclick=`duyet_topic('${data._id}')`)
                                     i.fa  Xác nhận
-
-            if user.role =="admin" & data.TrangThai=="phân công xét duyệt"           
+            if data.TrangThai=="Đang thực hiện"           
+                .col-md-8
+                    .card.card-outline.card-primary
+                        .card-header
+                            span
+                                
+                                b Nộp đề tài:
+                                
+                            td.text-center
+                                .custom-file
+                                    input(type="file" class="custom-file-input" id=`file_de_tai` name=`file_de_tai` )
+                                    label.custom-file-label(for=`file_de_tai`) Chọn file
+                            .card-tools
+                                button.btn.btn-primary.bg-gradient-primary.btn-sm(type="button",onclick=`nop_de_tai('${data._id}')`)
+                                    i.fa  Xác nhận
+            if user.role =="admin" & (data.TrangThai=="phân công xét duyệt" || data.TrangThai=="phân công nghiệm thu")           
                 .col-md-8
                     .card.card-outline.card-primary
                         .card-header    
@@ -96,20 +117,31 @@ block content
                                         label.control-label 
                                             if data.TrangThai=="phân công xét duyệt"
                                                 b Phân công xét duyệt:
-                                            else if data.TrangThai=="chờ nghiệm thu"
+                                            else if data.TrangThai=="phân công nghiệm thu"
                                                 b Phân công nghiệm thu:
-                                        select#userDropdown.form-control.form-control-sm.select2
+                                        select#councilDropdown.form-control.form-control-sm.select2
                                             option(value="" disabled selected)
 
                             .card-tools
-                                button.btn.btn-primary.bg-gradient-primary.btn-sm#new_task(type="button")
+                                button.btn.btn-primary.bg-gradient-primary.btn-sm(type="button",onclick=`up_council('${data._id}','${data.TrangThai}')`)
                                     i.fa  Xác nhận
-    iframe(
-      src="https://docs.google.com/gview?url=https://drive.google.com/file/d/17vMotMK5LiwEqJIMzNaHlOWqJ7P4YAfZ/view?usp=sharing&embedded=true"
-      style="width: 600px; height: 780px"
-    )
+            if data.TrangThai=="đang nghiệm thu"
+                .col-md-8
+                    .card.card-outline.card-primary
+                        #myForm(style="display: none;")
+                            include form.pug
+                        #file_form(style="display: none;")
+                            //- iframe(
+                            //-     src="https://docs.google.com/viewer?url=https://nckh-nin.azurewebsites.net/file/1.pdf" + "&embedded=true",
+                            //-     style="width: 600px; height: 780px"
+                            //- )
+    
         
     style.
+        .center-button {
+        margin: 0 10px;
+        text-align: center;
+        }
         .users-list>li img {
             border-radius: 50%;
             height: 67px;
@@ -122,57 +154,120 @@ block content
         .truncate {
             -webkit-line-clamp:1 !important;
         }
-
-
-    //- script.
-    //-   document.addEventListener("DOMContentLoaded", function() {
-    //-     var iframe = document.createElement("iframe");
-    //-     iframe.src = "http://localhost:3000/file/1.pdf";
-    //-     iframe.width = "600";
-    //-     iframe.height = "780";
-    //-     iframe.frameBorder = "0";
-    //-     iframe.style.border = "none";
-    //-     iframe.loading = "lazy";
-        
-    //-     // Thay thế #pdf-container bằng ID hoặc class phù hợp trên trang của bạn
-    //-     document.getElementById("pdf-container").appendChild(iframe);
-    //-   });
-    
     script.
+        
+        var data = !{JSON.stringify(data)};
+        if(data.TrangThai=="đang xét duyệt"){
+            document.getElementById('select_trangthai').addEventListener('change', function() {
+        document.getElementById('trangthai').value = this.value;
+        });
+        }
+        if( data.TrangThai=="đang nghiệm thu"){
+            document.getElementById('showFormButton').addEventListener('click', function() {
+                const display = document.getElementById('myForm').style.display;
+                if(display == 'block')
+                    document.getElementById('myForm').style.display = 'none';
+                else{
+                    document.getElementById('myForm').style.display = 'block';
+                    document.getElementById('file_form').style.display = 'none';
+                }
+        });}
+        document.getElementById('showFile').addEventListener('click', function() {
+
+            document.getElementById('myForm').style.display = 'none';
+            document.getElementById('file_form').style.display = 'block';
+        });
+        function nop_de_tai(topic) {
+        const files = document.getElementById(`file_de_tai`);
+        const formData = new FormData();
+        if (files.files[0]) {
+            formData.append("files", files.files[0]);
+            formData.append("TrangThai", "phân công nghiệm thu");
+        } 
+        else {
+            alert("Chưa chọn file")
+            return;
+        }
+        
+        // Gửi yêu cầu PUT/PATCH để cập nhật
+        axios
+            .patch(`/api/v1/topics/${topic}`, formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+            },
+            })
+            .then((response) => {
+                console.log("topic updated successfully", response.data);
+                alert("Thành công")
+                window.location.href = `/topic/${topic}`;
+            })
+            .catch((error) => {
+                alert("Thất bại")
+                console.error("Error updating topic:", error);
+            });
+        }
 
 
-        $('#new_task').click(function(){
-            uni_modal("New Task For <?php echo ucwords($name) ?>","manage_task.php?pid=<?php echo $id ?>","mid-large")
-            })
-            $('.edit_task').click(function(){
-                uni_modal("Edit Task: "+$(this).attr('data-task'),"manage_task.php?pid=<?php echo $id ?>&id="+$(this).attr('data-id'),"mid-large")
-            })
-            $('.view_task').click(function(){
-                uni_modal("Task Details","view_task.php?id="+$(this).attr('data-id'),"mid-large")
-            })
-            $('#new_productivity').click(function(){
-                uni_modal("<i class='fa fa-plus'></i> New Progress","manage_progress.php?pid=<?php echo $id ?>",'large')
-            })
-            $('.manage_progress').click(function(){
-                uni_modal("<i class='fa fa-edit'></i> Edit Progress","manage_progress.php?pid=<?php echo $id ?>&id="+$(this).attr('data-id'),'large')
-            })
-            $('.delete_progress').click(function(){
-            _conf("Are you sure to delete this progress?","delete_progress",[$(this).attr('data-id')])
-            })
-            function delete_progress($id){
-                start_load()
-                $.ajax({
-                    url:'ajax.php?action=delete_progress',
-                    method:'POST',
-                    data:{id:$id},
-                    success:function(resp){
-                        if(resp==1){
-                            alert_toast("Data successfully deleted",'success')
-                            setTimeout(function(){
-                                location.reload()
-                            },1500)
-
-                        }
+        function up_council(topic,TrangThai) {
+                    const council = document.getElementById(`councilDropdown`);
+                    if(TrangThai=="phân công xét duyệt"){
+                        TrangThai="đang xét duyệt"
                     }
-                })
-            }
+
+                    else if(TrangThai=="phân công nghiệm thu"){
+                        TrangThai="đang nghiệm thu"
+                    }
+                    const editedData = {
+                        HoiDong: council.value,
+                        TrangThai: TrangThai};
+
+                    // Gửi yêu cầu PUT/PATCH để cập nhật thông báo
+                    axios
+                        .patch(`/api/v1/topics/${topic}`, editedData)
+                        .then((response) => {
+                        console.log("Notify updated successfully", response.data);
+                        alert("Phân công thành công")
+                        window.location.href = "/topics";
+                        })
+                        .catch((error) => {
+                        console.error("Error updating notify:", error);
+                        });
+                    }
+        function duyet_topic(topic) {
+                    const TrangThai = document.getElementById(`trangthai`);
+                    const editedData = {
+                        TrangThai: TrangThai.value};
+                    axios
+                        .patch(`/api/v1/topics/${topic}`, editedData)
+                        .then((response) => {
+                        console.log("Notify updated successfully", response.data);
+                        alert("Thành công")
+                        window.location.href = "/topics";
+                        })
+                        .catch((error) => {
+                        alert("Thất bại")
+                        console.error("Error updating notify:", error);
+                        });
+                    }
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gọi API để lấy danh sách người dùng bằng Axios
+            axios.get('/api/v1/councils')
+            .then(function(response) {
+                // Lấy dữ liệu người dùng từ phản hồi
+                const councils = response.data.data;
+                // Đổ dữ liệu vào thanh chọn
+                const councilDropdowns = document.querySelectorAll('select[id^="councilDropdown"]');
+                councils.forEach(function(council) {
+                
+                const option = document.createElement('option');
+                option.value = council._id;
+                option.text = `${council.TenHoiDong} `;
+                councilDropdowns.forEach(function(councilDropdown) {
+                    councilDropdown.appendChild(option.cloneNode(true));
+                });
+                });
+            })
+            .catch(function(error) {
+                console.error('Error fetching council data:', error);
+            });
+        });

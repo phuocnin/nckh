@@ -10,7 +10,7 @@ const Router = express.Router();
 Router.get("/login", (req, res) => {
   res.status(200).render("login");
 });
-
+Router.use(authMiddleware);
 //home
 // done href
 Router.get("/", viewController.home);
@@ -23,7 +23,7 @@ Router.get("/me", authMiddleware, userController.getMe, userController.getUser);
 //list đề tài
 // done href
 Router.get("/topics", topicController.getTopics);
-
+Router.get("/my_topics", authMiddleware, topicController.getTopics);
 Router.get("/manageusers", async (req, res) => {
   // const topics = await topicModel.findById(req.params.id);
   res.status(200).render("manageusers");
@@ -48,7 +48,7 @@ Router.get("/userlist", async (req, res) => {
   res.status(200).render("userlist", { users });
 });
 Router.get("/councillist", async (req, res) => {
-  const councils = await councilModel.find();
+  const councils = await councilModel.find().populate("ChuTich");
   res.status(200).render("council_list", { councils });
 });
 Router.get("/report", async (req, res) => {

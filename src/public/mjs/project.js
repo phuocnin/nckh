@@ -25,7 +25,7 @@ export const newtopic = async (
     if (res.data.status === "success") {
       showAlert("success", "Signup in successfully!");
       window.setTimeout(() => {
-        location.assign("/userlist");
+        location.assign("/topics");
       }, 1500);
     }
   } catch (err) {

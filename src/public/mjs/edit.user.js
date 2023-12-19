@@ -46,17 +46,25 @@ function saveEditFormUser(userId) {
   const editSdt = document.getElementById(`editSdt-${userId}`);
   const editGioiTinh = document.getElementById(`editGioiTinh-${userId}`);
   const editKhoa = document.getElementById(`editKhoa-${userId}`);
-  const editedData = {
-    name: editName.value,
-    email: editEmail.value,
-    sdt: editSdt.value,
-    gioitinh: editGioiTinh.value,
-    khoa: editKhoa.value,
-  };
+  const file = document.getElementById(`photo-${userId}`);
+
+  const formData = new FormData();
+  formData.append("name", editName.value);
+  formData.append("email", editEmail.value);
+  formData.append("sdt", editSdt.value);
+  formData.append("gioitinh", editGioiTinh.value);
+  formData.append("khoa", editKhoa.value);
+  if (file.files[0]) {
+    formData.append("avatar", file.files[0]);
+  }
 
   // Gửi yêu cầu PUT/PATCH để cập nhật
   axios
-    .patch(`/api/v1/users/${userId}`, editedData)
+    .patch(`/api/v1/users/${userId}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
     .then((response) => {
       console.log("user updated successfully", response.data);
       closeEditModalUser(userId);

@@ -16,6 +16,7 @@ Router.route("/:id")
   .patch(
     authMiddleware,
     topicController.filterByRole,
+    topicController.uploadFiles,
     topicController.updateTopic
   )
   .delete(authMiddleware, restrictTo("admin"), topicController.deleteTopic);
