@@ -1,0 +1,142 @@
+<span class="heading">Topic Rating</span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star checked"></span>
+<span class="fa fa-star"></span>
+<hr style="border:3px solid #f1f1f1">
+
+<div class="row">
+  <div class="side">
+    <div>Name topic</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar bar-5">x%</div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>100%</div>
+  </div>
+  <div class="side">
+    <div>Name topic</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar bar-4">x%</div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>100%</div>
+  </div>
+  <div class="side">
+    <div>Name topic</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar bar-3">x%</div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>100%</div>
+  </div>
+  <div class="side">
+    <div>Name topic</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar bar-2">x%</div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>100%</div>
+  </div>
+  <div class="side">
+    <div>Name topic</div>
+  </div>
+  <div class="middle">
+    <div class="bar-container">
+      <div class="bar bar-1">x% </div>
+    </div>
+  </div>
+  <div class="side right">
+    <div>100%</div>
+  </div>
+</div>
+
+    style.
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial;
+            margin: 0 auto; 
+            max-width: 1000px; 
+            padding: 20px;
+            dislay: flex;
+            //- background-color: #b4b4b4;
+        }
+
+        .bar {
+            color: #000;
+        }
+        .heading {
+            font-size: 50px;
+            margin-right: 25px;
+        }
+
+        .fa {
+        font-size: 40px;
+        }
+
+        .checked {
+        color: orange;
+        }
+
+    
+        .side {
+        float: left;
+        width: 15%;
+        margin-top: 10px;
+        }
+
+        .middle {
+        float: left;
+        width: 70%;
+        margin-top: 10px;
+        }
+
+        .right {
+        text-align: right;
+        }
+
+        .row:after {
+        content: "";
+        display: table;
+        clear: both;
+        }
+
+        .bar-container {
+        width: 100%;
+        background-color: #f1f1f1;
+        text-align: center;
+        color: white;
+        }
+
+        .bar-5 {width: 60%; height: 18px; background-color: #04AA6D;}
+        .bar-4 {width: 30%; height: 18px; background-color: #2196F3;}
+        .bar-3 {width: 10%; height: 18px; background-color: #00bcd4;}
+        .bar-2 {width: 4%; height: 18px; background-color: #ff9800;}
+        .bar-1 {width: 15%; height: 18px; background-color: #f44336;}
+
+       
+        @media (max-width: 400px) {
+        .side, .middle {
+            width: 100%;
+        }
+        .right {
+            display: none;
+        }
+
+
+        
