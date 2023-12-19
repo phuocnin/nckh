@@ -38,6 +38,11 @@ Router.get("/new_council", async (req, res) => {
   res.status(200).render("new_council");
 });
 
+// thêm đề tài
+Router.get("/rating", async (req, res) => {
+  res.status(200).render("rating");
+});
+
 // wiew pdf
 
 Router.get("/newuser", async (req, res) => {
