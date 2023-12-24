@@ -40,12 +40,11 @@ html(lang='en')
 body.hold-transition.login-page.bg-black
   .login-box
     .login-logo
-      a.text-white(href="#")
+      a.text-white(href="#") 
         b Quản lý đề tài khoa học
-    //login-logo 
     .card
       .card-body.login-card-body
-        form.form--login
+        form.form--login(method="POST")
           .input-group.mb-3
             input#id.form-control(type="id", name="email", required, placeholder="id")
             .input-group-append
@@ -64,6 +63,11 @@ body.hold-transition.login-page.bg-black
                   Ghi nhớ tài khoản
             .col-4
               button.btn.btn-primary.btn-block(style="font-size: 16px; width:110px", type="submit") Đăng nhập
+          .row.mt-3
+            .col-12.text-right
+            
+              button.btn.btn-secondary.btn-block(style="font-size: 16px; width:110px", type="button", onclick="location.href='/quenmk'") Quên mật khẩu?
+
 
 
     //  SweetAlert2 

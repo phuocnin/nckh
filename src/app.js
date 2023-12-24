@@ -7,6 +7,7 @@ const viewRouter = require("./routes/view.router.js");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const error = require("./utils/error");
+const councilRouter= require("./routes/council.router.js");
 
 const app = express();
 
@@ -18,7 +19,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(express.json());
 app.use(cookieParser());
-
+app.use("/api/v1/council", councilRouter);
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/topics", topicRouter);
 app.use("/api/v1/notifys", notifyRouter);
@@ -26,5 +27,6 @@ app.use("/", viewRouter);
 app.all("*", (req, res, next) => {
   next(new error(`Can't find url: ${req.originalUrl} on this server!!!`, 400));
 });
+
 
 module.exports = app;

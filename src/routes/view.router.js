@@ -10,6 +10,12 @@ const Router = express.Router();
 Router.get("/login", (req, res) => {
   res.status(200).render("login");
 });
+Router.get("/quenmk", (req, res) => {
+  res.status(200).render("quenmk");
+});
+Router.get("/xacnhan", (req, res) => {
+  res.status(200).render("xacnhan");
+});
 
 //home
 // done href
@@ -74,4 +80,5 @@ Router.get("/fixuser/:id", async (req, res) => {
 Router.get("/changepass", authMiddleware, async (req, res) => {
   res.status(200).render("changepass");
 });
+
 module.exports = Router;
