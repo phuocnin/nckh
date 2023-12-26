@@ -50,7 +50,7 @@ const userSchema = new mongoose.Schema(
     DeTai: [
       {
         type: ObjectId,
-        ref: "topics",
+        ref: "Topic",
       },
     ],
     resetToken: String,
@@ -58,7 +58,7 @@ const userSchema = new mongoose.Schema(
     jwtExpires: Date,
   },
   {
-    collection: "user",
+    collection: "User",
     timestamps: true,
   }
 );
@@ -81,5 +81,5 @@ userSchema.methods.checkjwtExpires = function (jwtIat) {
 userSchema.methods.checkPassword = async function (inputPassword) {
   return await bcrypt.compare(inputPassword, this.password);
 };
-const UserModels = mongoose.model("users", userSchema);
+const UserModels = mongoose.model("User", userSchema);
 module.exports = UserModels;

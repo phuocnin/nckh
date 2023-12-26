@@ -87,8 +87,8 @@ block content
                             b.border-bottom.border-primary Quản lí dự án                                    
                         dd 
                             .d-flex.align-items-center.mt-1                                        
-                                img.img-circle.img-thumbnail.p-0.shadow-sm.border-info.img-sm.mr-3(src="assets/uploads/<?php echo $manager[\'avatar\'] ?>", alt="Avatar")
-                                b= data.GiangVien 
+                                img.img-circle.img-thumbnail.p-0.shadow-sm.border-info.img-sm.mr-3(src=`/img/users/${data.GiangVien.avatar}`, alt="Avatar")
+                                b= data.GiangVien.name 
                     .card-header
                         span 
                             b Thành viên nhóm:

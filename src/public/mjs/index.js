@@ -79,6 +79,7 @@ if (projectform) {
       "NgayKetThuc",
       document.getElementById("ngayketthuc").value
     );
+    formData.append("GiangVien", document.getElementById("giangvien").value);
     formData.append("MaNganh", document.getElementById("MaNganh").value);
     const files = document.getElementById("file_de_tai");
     if (files.files.length > 0) {
@@ -88,7 +89,9 @@ if (projectform) {
     const Thanhvien = Array.from(ThanhvienElement.selectedOptions).map(
       (option) => option.value
     );
-    formData.append("Thanhvien", Thanhvien);
+    Thanhvien.forEach((item) => {
+      formData.append("ThanhVien", item);
+    });
 
     formData.append("MoTa", document.getElementById("mota").value);
 

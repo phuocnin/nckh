@@ -18,9 +18,7 @@ exports.authMiddleware = catchAsync(async (req, res, next) => {
   }
 
   if (!token) {
-    return next(
-      new error("You are not logged in! Please log in to get access.", 401)
-    );
+    return next();
   }
 
   // 2) Verification token
@@ -30,14 +28,12 @@ exports.authMiddleware = catchAsync(async (req, res, next) => {
   // 3) Check user
   const currentUser = await userModels.findById(decoded.id);
   if (!currentUser) {
-    return next(
-      new error("The user belonging to this token does no longer exist.", 401)
-    );
+    return next();
   }
 
   // 4) Check if tokenExpires
   if (currentUser.checkjwtExpires(decoded.iat)) {
-    return next(new error(" Please log in again.", 401));
+    return next();
   }
 
   // GRANT ACCESS TO PROTECTED ROUTE

@@ -24,5 +24,5 @@ const Notify = mongoose.Schema(
   }
 );
 
-const NotifyModels = mongoose.model("notify", Notify);
+const NotifyModels = mongoose.model("Notify", Notify);
 module.exports = NotifyModels;

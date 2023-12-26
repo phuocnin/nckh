@@ -1,37 +1,38 @@
 const express = require("express");
 const userModel = require("../models/user.model");
 const councilModel = require("../models/council.model");
-const userController = require("../controllers/user.controller");
-const topicController = require("../controllers/topic.controller");
 const viewController = require("../controllers/view.controller");
 const { authMiddleware } = require("../controllers/auth.controller");
 const Router = express.Router();
 
+//login
 Router.get("/login", (req, res) => {
   res.status(200).render("login");
 });
+Router.get("/quenmk", (req, res) => {
+  res.status(200).render("quenmk");
+});
+Router.get("/xacnhan", (req, res) => {
+  res.status(200).render("xacnhan");
+});
 Router.use(authMiddleware);
+
 //home
-// done href
 Router.get("/", viewController.home);
 
 //xem đề tài
-Router.get("/topic/:id", authMiddleware, topicController.getTopic);
-//  done  href
-Router.get("/user/:id", userController.getUser);
-Router.get("/me", authMiddleware, userController.getMe, userController.getUser);
+Router.get("/topic/:id", authMiddleware, viewController.getTopic);
+
+//Xem user
+Router.get("/users/:id", viewController.getUser);
+Router.get("/me", authMiddleware, viewController.getMe, viewController.getUser);
 //list đề tài
-// done href
-Router.get("/topics", topicController.getTopics);
-Router.get("/my_topics", authMiddleware, topicController.getTopics);
-Router.get("/manageusers", async (req, res) => {
-  // const topics = await topicModel.findById(req.params.id);
-  res.status(200).render("manageusers");
-});
+Router.get("/topics", viewController.getTopics);
+Router.get("/my_topics", authMiddleware, viewController.getTopics);
 
 // thêm đề tài
 Router.get("/new_topic", async (req, res) => {
-  res.status(200).render("newproject");
+  res.status(200).render("new_topic");
 });
 // thêm hội đồng
 Router.get("/new_council", async (req, res) => {
@@ -39,18 +40,16 @@ Router.get("/new_council", async (req, res) => {
 });
 
 // thêm đề tài
-Router.get("/rating", async (req, res) => {
-  res.status(200).render("rating");
-});
+Router.get("/rating", viewController.getRating);
 
 // wiew pdf
 
 Router.get("/newuser", async (req, res) => {
   res.status(200).render("new_user");
 });
-Router.get("/userlist", async (req, res) => {
+Router.get("/users", async (req, res) => {
   const users = await userModel.find();
-  res.status(200).render("userlist", { users });
+  res.status(200).render("user_list", { users });
 });
 Router.get("/councillist", async (req, res) => {
   const councils = await councilModel.find().populate("ChuTich");

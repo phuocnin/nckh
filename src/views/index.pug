@@ -1,5 +1,6 @@
 html(lang='en')
   head
+    
     meta(name='google-site-verification', content='QpKVM2m0UKlXKl31fGuUzO4XKHt0KhLsWNMCokxBlyE')
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width,initial-scale=1')
@@ -44,34 +45,39 @@ html(lang='en')
     <!--Start of Fchat.vn-->
     <script type="text/javascript" src="https://cdn.fchat.vn/assets/embed/webchat.js?id=6581a0ac9467ff188950ff33" async="async"></script>
     <!--End of Fchat.vn-->
-  body.hold-transition.sidebar-mini.layout-fixed.layout-navbar-fixed.layout-footer-fixed 
-    .wrapper
-      include topbar
-      include sidebar
+  body.hold-transition.sidebar-mini.layout-fixed.layout-navbar-fixed.layout-footer-fixed
 
-      .content-wrapper
-        .toast#alert_toast(role='alert', aria-live='assertive', aria-atomic='true')
-          .toast-body.text-white.
-        #toastsContainerTopRight.toasts-top-right.fixed 
-        .content-header
-          .container-fluid
-            .row.mb-2
-              .col-sm-6
-                - let role = user.role
-                if role == 'sinh_vien'
-                  - role= 'Sinh viên'
-                else if role == 'giang_vien'
-                  - role= 'Giảng viên'
-                else if role == 'admin'
-                  - role= 'Admin'
-                else
-                  - role = "Xin chào"
-                h1.m-0= role
-            hr.border-primary
-        section.content            
-          .container-fluid
-            block content
-              h1 content
+    if !user 
+      script.
+        window.location.assign("/login") ;
+    else
+      .wrapper
+        include topbar
+        include sidebar
+
+        .content-wrapper
+          .toast#alert_toast(role='alert', aria-live='assertive', aria-atomic='true')
+            .toast-body.text-white.
+          #toastsContainerTopRight.toasts-top-right.fixed 
+          .content-header
+            .container-fluid
+              .row.mb-2
+                .col-sm-6
+                  - let role = user.role
+                  if role == 'sinh_vien'
+                    - role= 'Sinh viên'
+                  else if role == 'giang_vien'
+                    - role= 'Giảng viên'
+                  else if role == 'admin'
+                    - role= 'Admin'
+                  else
+                    - role = "Xin chào"
+                  h1.m-0= role
+              hr.border-primary
+          section.content            
+            .container-fluid
+              block content
+                h1 content
 
 style.
   .class-color {

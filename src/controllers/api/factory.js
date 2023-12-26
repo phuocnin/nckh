@@ -12,10 +12,11 @@ exports.createOne = (model) => {
     });
   });
 };
-exports.deleteOne = (model) => {
+exports.deleteOne = (model, checkUser) => {
   return catchAsync(async (req, res, next) => {
     const data = await model.findByIdAndDelete(req.params.id);
     if (!data) return next(new error("No document found with that ID", 404));
+
     res.status(200).json({
       status: "success",
       data: null,
@@ -23,13 +24,20 @@ exports.deleteOne = (model) => {
   });
 };
 
-exports.updateOne = (model) => {
+exports.updateOne = (model, checkUser) => {
   return catchAsync(async (req, res, next) => {
     const data = await model.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidator: true,
     });
     if (!data) return next(new error("No document found with that ID", 404));
+    if (checkUser) {
+      if (!data.participants.includes(req.user._id)) {
+        return next(
+          new error("You are not allowed to update this document", 401)
+        );
+      }
+    }
     res.status(200).json({
       status: "success",
       data,
@@ -37,10 +45,17 @@ exports.updateOne = (model) => {
   });
 };
 
-exports.getOne = (model) => {
+exports.getOne = (model, checkUser) => {
   return catchAsync(async (req, res, next) => {
     const data = await model.findById(req.params.id);
     if (!data) return next(new error("No document found with that ID", 404));
+    if (checkUser) {
+      if (!data.participants.includes(req.user._id)) {
+        return next(
+          new error("You are not allowed to view this document", 401)
+        );
+      }
+    }
     res.status(200).json({
       status: "success",
       data,

@@ -17,7 +17,7 @@ export const newuser = async (id, password, name, role) => {
     if (res.data.status === "success") {
       showAlert("success", "Signup in successfully!");
       window.setTimeout(() => {
-        location.assign("/userlist");
+        location.assign("/users");
       }, 1500);
     }
   } catch (err) {
