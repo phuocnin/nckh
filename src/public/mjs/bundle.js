@@ -12081,7 +12081,7 @@ var newuser = function newuser(_x, _x2, _x3, _x4) {
           if (res.data.status === "success") {
             (0, _alerts.showAlert)("success", "Signup in successfully!");
             window.setTimeout(function () {
-              location.assign("/userlist");
+              location.assign("/users");
             }, 1500);
           }
           _context.next = 11;
@@ -12524,6 +12524,7 @@ if (projectform) {
     formData.append("TenDeTai", document.getElementById("tendetai").value);
     formData.append("NgayThucHien", document.getElementById("ngaybatdau").value);
     formData.append("NgayKetThuc", document.getElementById("ngayketthuc").value);
+    formData.append("GiangVien", document.getElementById("giangvien").value);
     formData.append("MaNganh", document.getElementById("MaNganh").value);
     var files = document.getElementById("file_de_tai");
     if (files.files.length > 0) {
@@ -12533,7 +12534,9 @@ if (projectform) {
     var Thanhvien = Array.from(ThanhvienElement.selectedOptions).map(function (option) {
       return option.value;
     });
-    formData.append("Thanhvien", Thanhvien);
+    Thanhvien.forEach(function (item) {
+      formData.append("ThanhVien", item);
+    });
     formData.append("MoTa", document.getElementById("mota").value);
     (0, _project.newtopic)(formData);
   });
@@ -12609,7 +12612,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57982" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55035" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];

@@ -11,7 +11,9 @@ div(id=`editUser-${user._id}`).modal
                 label Số điện thoại
                 input(name="editSdt" class="form-control"  id=`editSdt-${user._id}`  )    
                 label Giới tính
-                input(type="text" name="editGioiTinh" class="form-control"  id=`editGioiTinh-${user._id}` )
+                select(name="editGioiTinh", class="form-control", id=`editGioiTinh-${user._id}`)
+                    option(value="true") Nam
+                    option(value="false") Nữ
                 label Khoa
                 input(name="editKhoa" class="form-control"  id=`editKhoa-${user._id}` )   
                 label.control-label Avatar

@@ -11,6 +11,7 @@ const multerStorage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const ext = file.mimetype.split("/")[1];
+    req.body.avatar = `${req.user.id}-${Date.now()}.${ext}`;
     cb(null, `${req.user.id}-${Date.now()}.${ext}`);
   },
 }); // lưu ảnh vào thư mục public/img/users

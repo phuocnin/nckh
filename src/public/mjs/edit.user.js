@@ -21,11 +21,11 @@ function showEditFormUser(userData) {
   const editGioiTinh = document.getElementById(`editGioiTinh-${userData._id}`);
   const editKhoa = document.getElementById(`editKhoa-${userData._id}`);
   // Điền dữ liệu vào biểu mẫu chỉnh sửa
-  editName.value = userData.name;
-  editEmail.value = userData.email;
-  editSdt.value = userData.sdt;
-  editGioiTinh.value = userData.gioitinh;
-  editKhoa.value = userData.khoa;
+  if (userData.name) editName.value = userData.name;
+  if (userData.email) editEmail.value = userData.email;
+  if (userData.sdt) editSdt.value = userData.sdt;
+  if (userData.gioitinh != undefined) editGioiTinh.value = userData.gioitinh;
+  if (userData.khoa) editKhoa.value = userData.khoa;
 
   // Hiển thị modal chỉnh sửa
   const editModal = document.getElementById(`editUser-${userData._id}`);

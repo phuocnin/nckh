@@ -1,0 +1,15 @@
+extends index
+
+block content
+  .container.mt-5
+    .row.justify-content-center
+      .col-md-6
+        .card
+          .card-header
+            h4 Quên Mật Khẩu
+          .card-body
+            form(action="/forgot-password", method="post")
+              .form-group
+                label(for="email") Email
+                input#email.form-control(type="email", name="email", required)
+              button.btn.btn-primary(type="submit") Gửi Yêu Cầu

@@ -17,12 +17,26 @@ block content
                     dl
                     dt Mail
                     dd= data.email
+                    dl 
+                    dt Số điện thoại
+                    dd= data.sdt
+                    dl 
+                    dt Giới tính
+                    if data.gioi_tinh
+                        dd Nam
+                    else
+                        dd Nữ
                     if data.role=="sinh_vien" & data.DeTai.length>0 
                         dl
                         dt Tổng đề tài
                         dd= data.DeTai.length
+
     .modal-footer.display.p-0.m-0
-        button.btn.btn-secondary(href='./') Đóng
+                
+        if me
+            button.btn.btn-primary(type="button", onclick=`editUser('${user._id}')`) Chỉnh sửa
+            include edituser   
+        a.btn.btn-secondary(href='./') Đóng
     style.
         #uni_modal .modal-footer{
                 display: none

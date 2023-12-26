@@ -1,5 +1,5 @@
 // new_user.js
-import { showAlert, hideAlert } from './showAlert';
+import { showAlert, hideAlert } from "./showAlert";
 
 const newUser = async (id, password, name, role) => {
   try {
@@ -17,7 +17,7 @@ const newUser = async (id, password, name, role) => {
     if (res.data.status === "success") {
       showAlert("success", "Signup successful!");
       window.setTimeout(() => {
-        location.assign("/user_list");
+        location.assign("/users");
       }, 1500);
     }
   } catch (err) {
