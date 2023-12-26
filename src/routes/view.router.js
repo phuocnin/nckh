@@ -70,6 +70,10 @@ Router.get("/notify", async (req, res) => {
 Router.get("/chat", async (req, res) => {
   res.status(200).render("chat");
 });
+Router.get("/chat1", async (req, res) => {
+  res.status(200).render("chat-web-app-ui-kit");
+});
+
 Router.get("/notify/:id", viewController.viewNotify);
 Router.get("/editnotify/:id", viewController.editNotify);
 Router.get("/fixuser/:id", async (req, res) => {
