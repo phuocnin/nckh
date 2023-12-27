@@ -2,16 +2,19 @@ extends index
 
 block content
   head
-    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css')
+    <link rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+    <link rel='stylesheet', href='/public/styles/style.css'>
 
   .container.mt-5
     .row
       .col-md-4
+        .input-group.mb-3
+          input.form-control(type='text', placeholder='Tìm kiếm người dùng...')
+          .input-group-append
+            button.btn.btn-outline-secondary(type='button')
+              i.fas.fa-search
         .list-group#userList
-          //- Giả sử đây là mảng các người dùng
-          - var userList = [{name: 'Người Dùng 1', id: 1}, {name: 'Người Dùng 2', id: 2}, {name: 'Người Dùng 3', id: 3}]
-          
-          //- Lặp qua mảng để tạo các mục danh sách người dùng
+          - var userList = [{name: 'Phước', id: 1}, {name: 'Thanh', id: 2}, {name: 'Phuong', id: 3}]
           each user in userList
             a.list-group-item.list-group-item-action(href=`#chat-${user.id}`)= user.name
 
@@ -20,14 +23,15 @@ block content
           .card-header
             .user-info.d-flex.align-items-center.justify-content-between
               .d-flex.align-items-center
-                img(src='path_to_avatar.jpg', alt='Avatar')
-                .name.ml-3 Tên Người Dùng
+                img(src='path_to_avatar.jpg', alt='Avatar').mr-3
+                span Tên Người Dùng
               .attachment-icons
                 i.fas.fa-phone(alt='Gọi điện', title='Gọi điện')
+
           .card-body#chatWindow
             .chat-messages
               // Nội dung các tin nhắn sẽ được hiển thị ở đây
-              
+
           .card-footer
             form#messageForm.d-flex
               input.form-control(type='text', placeholder='Type a message...', name='message')
@@ -36,4 +40,5 @@ block content
               button.btn.btn-outline-secondary(type='button')
                 i.fas.fa-paperclip
               button.btn.btn-primary(type='submit') Gửi
-  script(src='public/mjs/page/chat.js')
+
+  script(src='/public/mjs/chat.js')
