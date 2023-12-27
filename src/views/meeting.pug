@@ -1,0 +1,37 @@
+extends index
+
+block content
+    head
+        title Zoom Meeting Interface
+        <link rel='stylesheet', href='styles/stylemeet.css'>
+    body
+        header.zoom-header
+        // Thêm nút thoát cuộc họp (End Meeting)
+        button.end-meeting End Meeting
+
+        main.zoom-main
+        section.video-section
+            // Thêm khu vực hiển thị video
+            div.video-display
+            // Giả sử có một video mặc định
+            img(src="placeholder-video.jpg" alt="Video placeholder")
+
+        aside.chat-section
+            // Thêm khu vực chat
+            ul.chat-messages
+            // Messages sẽ được thêm vào đây
+            form.chat-form
+            input(type="text" placeholder="Type message here...")
+            button.send-message Send
+
+        footer.zoom-footer
+        // Thêm các nút điều khiển âm thanh và video
+        button.audio-control Mute
+        button.video-control Stop Video
+        // Thêm nút chia sẻ màn hình
+        button.share-screen Share Screen
+        // Thêm các nút điều khiển khác nếu cần
+        button.participants Participants
+        button.chat Chat
+        button.record Record
+        // Có thể thêm nút Reactions, More, ...
