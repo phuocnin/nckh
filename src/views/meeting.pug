@@ -13,7 +13,7 @@ block content
         main.zoom-main
             section.video-section
                 div.video-display
-                    img(src="placeholder-video.jpg", alt="Video placeholder")
+                    video(class="video-placeholder" autoplay playsinline muted)
 
             aside.chat-section
                 ul.chat-messages
@@ -47,7 +47,8 @@ block content
 
                 navigator.mediaDevices.getUserMedia({ video: true, audio: true })
                     .then(stream => {
-                        document.querySelector('.video-display').srcObject = stream;
+                        const videoElement = document.querySelector('.video-placeholder');
+                        videoElement.srcObject = stream;
                     })
                     .catch(err => {
                         console.error('Lỗi khi truy cập camera và microphone:', err);
