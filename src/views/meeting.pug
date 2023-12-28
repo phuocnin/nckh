@@ -2,36 +2,81 @@ extends index
 
 block content
     head
+        meta(charset="UTF-8")
         title Zoom Meeting Interface
-        <link rel='stylesheet', href='styles/stylemeet.css'>
+        link(rel="stylesheet", href="styles/stylemeet.css")
+
     body
         header.zoom-header
-        // Thêm nút thoát cuộc họp (End Meeting)
-        button.end-meeting End Meeting
+            button.end-meeting End Meeting
 
         main.zoom-main
-        section.video-section
-            // Thêm khu vực hiển thị video
-            div.video-display
-            // Giả sử có một video mặc định
-            img(src="placeholder-video.jpg" alt="Video placeholder")
+            section.video-section
+                div.video-display
+                    img(src="placeholder-video.jpg", alt="Video placeholder")
 
-        aside.chat-section
-            // Thêm khu vực chat
-            ul.chat-messages
-            // Messages sẽ được thêm vào đây
-            form.chat-form
-            input(type="text" placeholder="Type message here...")
-            button.send-message Send
+            aside.chat-section
+                ul.chat-messages
+                form.chat-form
+                    input(type="text", placeholder="Type message here...")
+                    button.send-message(type="submit") Send
 
         footer.zoom-footer
-        // Thêm các nút điều khiển âm thanh và video
-        button.audio-control Mute
-        button.video-control Stop Video
-        // Thêm nút chia sẻ màn hình
-        button.share-screen Share Screen
-        // Thêm các nút điều khiển khác nếu cần
-        button.participants Participants
-        button.chat Chat
-        button.record Record
-        // Có thể thêm nút Reactions, More, ...
+            button.audio-control Mute
+            button.video-control Stop Video
+            button.share-screen Share Screen
+            button.participants Participants
+            button.chat Chat
+            button.record Record
+            button.create-group Tạo Nhóm
+
+        script.
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelector('.end-meeting').addEventListener('click', function() {
+                    alert('Cuộc họp đã kết thúc');
+                });
+
+                document.querySelector('.audio-control').addEventListener('click', function() {
+                    alert('Âm thanh đã được tắt/mở');
+                });
+
+                document.querySelector('.video-control').addEventListener('click', function() {
+                    alert('Video đã được tắt/mở');
+                });
+
+                navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+                    .then(stream => {
+                        document.querySelector('.video-display').srcObject = stream;
+                    })
+                    .catch(err => {
+                        console.error('Lỗi khi truy cập camera và microphone:', err);
+                    });
+
+                document.querySelector('.chat-form').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    let message = document.querySelector('.chat-form input').value;
+                    document.querySelector('.chat-messages').innerHTML += `<li>${message}</li>`;
+                    document.querySelector('.chat-form input').value = '';
+                });
+
+                document.querySelector('.share-screen').addEventListener('click', function() {
+                    navigator.mediaDevices.getDisplayMedia({ video: true })
+                        .then(stream => {
+                            // Thêm logic xử lý stream chia sẻ màn hình
+                        })
+                        .catch(err => {
+                            console.error('Lỗi khi chia sẻ màn hình:', err);
+                        });
+                });
+
+                document.querySelector('.record').addEventListener('click', function() {
+                    alert('Ghi âm bắt đầu/dừng');
+                    // Thêm logic ghi âm tại đây
+                });
+
+                document.querySelector('.create-group').addEventListener('click', function() {
+                    const groupCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+                    alert(`Mã nhóm của bạn là: ${groupCode}`);
+                    // Thêm logic xử lý mã nhóm
+                });
+            });
