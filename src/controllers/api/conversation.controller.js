@@ -1,6 +1,7 @@
 const catchAsync = require("../../utils/catchAsync");
 const error = require("../../utils/error");
 const conversationModel = require("../../models/conversation.model");
+const messageModel = require("../../models/message.model");
 const factory = require("./factory");
 
 exports.addUserIdToQuery = catchAsync(async (req, res, next) => {
@@ -42,7 +43,7 @@ exports.deleteConversation = catchAsync(async (req, res, next) => {
     isGroup: true,
   });
   if (!data) return next(new error("No document found with that ID", 404));
-  const deleteMessage = await conversationModel.deleteMany({
+  const deleteMessage = await messageModel.deleteMany({
     conversation: req.params.id,
   });
   res.status(200).json({
