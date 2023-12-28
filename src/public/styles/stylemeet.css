@@ -1,0 +1,172 @@
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+    display: flex;
+    flex-direction: column;
+    height: 100vh; 
+}
+
+
+.zoom-header {
+    background: #2D8CFF;
+    padding: 10px;
+    color: white;
+    text-align: right;
+}
+
+
+button {
+    padding: 5px 15px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
+.end-meeting {
+    background: #ff4d4d;
+    color: white;
+}
+
+.audio-control, .video-control {
+    background: #fff;
+    color: #333;
+}
+
+.share-screen {
+    background: #00b300;
+    color: white;
+}
+
+
+.zoom-main {
+    flex: 1; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+.video-section {
+    width: 80%; 
+    margin: auto; 
+}
+
+.video-display img {
+    width: 100%;
+    border-radius: 5px;
+    display: block; 
+}
+
+
+.chat-section {
+    position: fixed; 
+    right: 0; 
+    top: 0; 
+    bottom: 0; 
+    width: 300px;
+    border-left: 1px solid #ccc;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.1); 
+}
+
+.chat-messages {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    flex-grow: 1; 
+}
+
+
+.chat-form {
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%; 
+    display: flex;
+    padding: 10px;
+    box-sizing: border-box; 
+}
+
+.chat-form input {
+    flex-grow: 1;
+    padding: 5px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.chat-form button {
+    background: #2D8CFF;
+    color: white;
+}
+
+
+.chat-form input {
+    flex-grow: 1;
+    padding: 5px;
+    margin-right: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.chat-form button {
+    background: #2D8CFF;
+    color: white;
+}
+
+/* Kiểu cho footer */
+.zoom-footer {
+    background: #333;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    position: absolute; 
+    left: 50%; 
+    bottom: 10px; 
+    transform: translateX(-50%); 
+    gap: 10px; 
+}
+
+/* Kiểu cho các nút footer */
+.zoom-footer button {
+    background: none;
+    color: white;
+    margin: 0 10px; 
+}
+
+
+@media (max-width: 768px) {
+    .zoom-main {
+        flex-direction: column;
+    }
+
+    .video-section {
+        width: 95%; 
+    }
+
+    .zoom-footer {
+        width: 95%; 
+        margin-top: 10px; 
+        position: static; 
+        transform: none; 
+        left: auto; 
+        bottom: auto;
+    }
+
+    .chat-section {
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        height: 50vh; /* Đặt chiều cao của chat section là nửa màn hình */
+    }
+}
