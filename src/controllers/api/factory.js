@@ -32,7 +32,10 @@ exports.updateOne = (model, checkUser) => {
     });
     if (!data) return next(new error("No document found with that ID", 404));
     if (checkUser) {
-      if (!data.participants.includes(req.user._id)) {
+      if (
+        !data.participants.includes(req.user._id) ||
+        !data.sender == req.user._id
+      ) {
         return next(
           new error("You are not allowed to update this document", 401)
         );

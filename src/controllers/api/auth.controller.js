@@ -80,7 +80,6 @@ exports.authMiddleware = catchAsync(async (req, res, next) => {
   }
 
   // 2) Verification token
-  //const decoded = await promisify(jwt.verify)(token, process.env.JWT_KEY);
   const decoded = jwt.verify(token, process.env.JWT_KEY);
 
   // 3) Check user

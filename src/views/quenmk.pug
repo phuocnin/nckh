@@ -1,15 +1,14 @@
-extends index
+.card
+  .card-body.login-card-body
+    form.form--login
+      .input-group.mb-3
+        input#id.form-control(type="id", name="email", required, placeholder="id")
+        .input-group-append
+          .input-group-text
+            span.fas.fa-envelope
+      .row
+        .col-8
+          button.btn(type="button", id=`quenmk-to-login`) Đăng nhập
+        .col-4
+          button.btn.btn-primary.btn-block(style="font-size: 16px; width:110px", type="submit") Xác nhận
 
-block content
-  .container.mt-5
-    .row.justify-content-center
-      .col-md-6
-        .card
-          .card-header
-            h4 Quên Mật Khẩu
-          .card-body
-            form(action="/forgot-password", method="post")
-              .form-group
-                label(for="email") Email
-                input#email.form-control(type="email", name="email", required)
-              button.btn.btn-primary(type="submit") Gửi Yêu Cầu
