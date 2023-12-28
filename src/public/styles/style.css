@@ -1,3 +1,4 @@
+HEAD
 .chat-page,
 .chat-page * {
   box-sizing: border-box;
@@ -715,5 +716,90 @@
   width: 24px;
   height: 24px;
   position: relative;
-  overflow: visible;
+  overflow: visible;}
+.chatbox {
+  font-family: 'Arial', sans-serif;
+  background-color: #f2f2f2;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+/* Style cho tiêu đề người dùng */
+.username {
+  color: #333;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.message-input {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 8px;
+  margin-top: 10px;
+  width: calc(100% - 20px); /* Trừ đi padding */
+}
+
+.send-button {
+  background-color: #007bff;
+  color: white;
+  padding: 8px 16px;
+  text-align: center;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+}
+
+.avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.message-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.user-Phuoc {
+  color: #1a1a1a;
+}
+
+.user-Thanh {
+  color: #2a2a2a;
+}
+
+.user-Phuong {
+  color: #3a3a3a;
+}
+
+.input-group .form-control {
+  border: 2px solid #ced4da;
+  border-right: none; /* Loại bỏ border bên phải để nút tìm kiếm nằm sát */
+}
+
+.input-group .btn-outline-secondary {
+  border: 2px solid #ced4da;
+  border-left: none; /* Loại bỏ border bên trái của nút để nằm sát với input */
+}
+
+.input-group .fa-search {
+  font-size: 1rem;
+}
+
+/* Style khi focus vào input */
+.input-group .form-control:focus {
+  box-shadow: none;
+  border-color: #80bdff;
+}
+
+/* Style khi hover vào nút tìm kiếm */
+.input-group .btn-outline-secondary:hover {
+  background-color: #e9ecef;
 }

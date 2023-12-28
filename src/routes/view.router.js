@@ -82,4 +82,7 @@ Router.get("/fixuser/:id", async (req, res) => {
 Router.get("/changepass", authMiddleware, async (req, res) => {
   res.status(200).render("changepass");
 });
+Router.get("/meeting", authMiddleware, async (req, res) => {
+  res.status(200).render("meeting");
+});
 module.exports = Router;
