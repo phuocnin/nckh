@@ -11,10 +11,8 @@ exports.addUserIdToQuery = catchAsync(async (req, res, next) => {
 
 exports.conversationExists = catchAsync(async (req, res, next) => {
   if (req.body.isGroup === true) {
-    console.log(req.body);
     req.body.admin = req.user._id;
     req.body.participants = req.body.participants.concat(req.user._id);
-    console.log(req.body);
     return next();
   }
   const data = await conversationModel.findOne({

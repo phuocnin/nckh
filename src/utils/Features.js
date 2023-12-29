@@ -18,7 +18,6 @@ class Features {
         }
       }
     }
-    console.log(query);
     this.query = this.query.find(query);
     return this;
   }

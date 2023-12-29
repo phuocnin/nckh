@@ -19,7 +19,6 @@ export const changePass = async (password, newPassword) => {
       }, 1500);
     }
   } catch (err) {
-    console.log(err.response.data.data);
     showAlert("error", err.response.data.error);
   }
 };
