@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
 const { ObjectId } = mongoose.Schema.Types;
 const userSchema = new mongoose.Schema(
   {
@@ -81,5 +82,17 @@ userSchema.methods.checkjwtExpires = function (jwtIat) {
 userSchema.methods.checkPassword = async function (inputPassword) {
   return await bcrypt.compare(inputPassword, this.password);
 };
+
+userSchema.methods.createPasswordResetToken = function () {
+  const resetToken = crypto.randomBytes(32).toString("hex");
+  this.resetToken = crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
+
+  this.resetTokenExpires = Date.now() + 10 * 60 * 1000;
+  return resetToken;
+};
+
 const UserModels = mongoose.model("User", userSchema);
 module.exports = UserModels;

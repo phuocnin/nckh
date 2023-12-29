@@ -2,7 +2,7 @@ const userModels = require("../../models/user.model.js");
 const catchAsync = require("../../utils/catchAsync.js");
 const jwt = require("jsonwebtoken");
 const error = require("../../utils/error.js");
-//const sendEmail = require("../utils/email.js");
+const sendEmail = require("../../utils/email.js");
 const crypto = require("crypto");
 
 const createSendToken = (user, statusCode, req, res) => {
@@ -123,5 +123,68 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   user.password = newPassword;
   await user.save();
   //gửi res, token cho user
+  createSendToken(user, 200, req, res);
+});
+
+exports.forgotPassword = catchAsync(async (req, res, next) => {
+  const { id } = req.body;
+  const user = await userModels.findOne({ id });
+  if (!user) return next(new error("Không tìm thấy tài khoản", 201));
+
+  const resetToken = user.createPasswordResetToken();
+  await user.save({ validateBeforeSave: false });
+
+  const resetURL = `${req.protocol}://${req.get(
+    "host"
+  )}/api/v1/users/resetPassword/${resetToken}`;
+  const message = `Đặt lại mật khẩu của bạn bằng cách nhấp vào đường link này: ${resetURL}\nLink có hiệu lực trong 10 phút.\nNếu bạn không yêu cầu đặt lại mật khẩu, vui lòng bỏ qua email này.`;
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "Đặt lại mật khẩu",
+      message,
+    });
+
+    res.status(200).json({
+      status: "success",
+      message: "Kiểm tra email để đổi mật khẩu",
+    });
+  } catch (err) {
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+    console.log(err);
+    return next(
+      new error(
+        "Không thành công, nếu bạn chưa cập nhật email vui lòng liên hệ Admin để xử lí",
+        500
+      )
+    );
+  }
+});
+
+exports.resetPassword = catchAsync(async (req, res, next) => {
+  // 1) Get user based on the token
+  const hashedToken = crypto
+    .createHash("sha256")
+    .update(req.params.token)
+    .digest("hex");
+
+  const user = await userModels.findOne({
+    resetToken: hashedToken,
+    resetTokenExpires: { $gt: Date.now() },
+  });
+
+  // 2) If token has not expired, and there is user, set the new password
+  if (!user) {
+    return next(new error("Token is invalid or has expired", 400));
+  }
+  user.password = req.body.password;
+  user.passwordResetToken = undefined;
+  user.passwordResetExpires = undefined;
+  await user.save();
+
+  // 3) Update changedPasswordAt property for the user
+  // 4) Log the user in, send JWT
   createSendToken(user, 200, req, res);
 });

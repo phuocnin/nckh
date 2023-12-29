@@ -5,9 +5,6 @@ function deleteNotify(notifyId) {
     axios
       .delete(`/api/v1/notifys/${notifyId}`)
       .then((response) => {
-        // Xử lý kết quả sau khi xóa thành công
-        console.log("Notify deleted successfully", response.data);
-        // Đoạn mã tương ứng với cập nhật UI hoặc tải lại dữ liệu
         location.reload();
       })
       .catch((error) => {
