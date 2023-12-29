@@ -12,20 +12,20 @@ block content
             .card-footer
                 .container-fluid
                     dl
-                    dt Role
-                    dd= data.role
+                        dt Role
+                        dd= data.role
                     dl
-                    dt Mail
-                    dd= data.email
+                        dt Mail
+                        dd= data.email
                     dl 
-                    dt Số điện thoại
-                    dd= data.sdt
+                        dt Số điện thoại
+                        dd= data.sdt
                     dl 
-                    dt Giới tính
-                    if data.gioi_tinh
-                        dd Nam
-                    else
-                        dd Nữ
+                        dt Giới tính
+                        if data.gioitinh
+                            dd Nam
+                        else
+                            dd Nữ
                     if data.role=="sinh_vien" & data.DeTai.length>0 
                         dl
                         dt Tổng đề tài
