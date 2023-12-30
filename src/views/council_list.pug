@@ -18,9 +18,10 @@ block content
               th Chủ tich
               th Hoạt động
           tbody
+            -var count = 1;
             each council in councils
               tr
-                th.text-center
+                th.text-center #{count++}
                 td
                   b= council.TenHoiDong 
                 td
