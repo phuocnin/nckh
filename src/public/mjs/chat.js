@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (message) {
         sendMessage(formData);
         addMessageToChatWindow("Bạn", message || "File đã gửi", true);
+        this.reset();
       }
     });
   }
@@ -64,18 +65,17 @@ function addMessageToChatWindow(username, message, isSender, fileUrl) {
   const messageElement = document.createElement("div");
   messageElement.classList.add("message", isSender ? "sender" : "receiver");
 
-  let messageContent = `<strong>${username}:</strong> `;
+  let messageContent = "";
+
+  // Chỉ hiển thị tên nếu người gửi không phải là "Bạn"
+  if (username !== "Bạn") {
+    messageContent += `<strong>${username}:</strong> `;
+  }
 
   if (fileUrl) {
-    if (fileUrl.match(/\.(jpeg|jpg|gif|png)$/i)) {
-      // If the file is an image, display it as an image tag
-      messageContent += `<img src="${fileUrl}" alt="Sent Image" style="max-width:200px;">`;
-    } else {
-      // If the file is not an image, provide a download link
-      messageContent += `<a href="${fileUrl}" target="_blank" download>Download File</a>`;
-    }
+    // Đoạn code xử lý fileUrl ở đây
   } else {
-    // If there is no file, display the text message
+    // Hiển thị tin nhắn văn bản
     messageContent += message;
   }
 
