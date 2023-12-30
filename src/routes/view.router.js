@@ -55,6 +55,8 @@ Router.get("/councillist", async (req, res) => {
   const councils = await councilModel.find().populate("ChuTich");
   res.status(200).render("council_list", { councils });
 });
+// Router.get("/council/:id", viewController.viewCouncil);
+
 Router.get("/notify/:id", viewController.viewNotify);
 Router.get("/notify", async (req, res) => {
   res.status(200).render("notify");

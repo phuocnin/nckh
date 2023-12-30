@@ -2,6 +2,7 @@ const catchAsync = require("../utils/catchAsync");
 const error = require("../utils/error");
 const topicModel = require("../models/topic.model");
 const notifyModel = require("../models/notify.model");
+const councilModel = require("../models/council.model");
 const factory = require("./factory");
 const filterObj = require("../utils/filterObj");
 const UserModels = require("../models/user.model");
@@ -11,6 +12,7 @@ exports.getTopics = factory.getAll(topicModel, "project_list");
 // exports.postTopic = factory.createOne(topicModel);
 // exports.updateTopic = factory.updateOne(topicModel);
 exports.viewNotify = factory.getOne(notifyModel, "view_notify");
+exports.viewCouncil = factory.getOne(councilModel, "view_council");
 // exports.editNotify = factory.getOne(notifyModel, "notify");
 exports.filterByRole = catchAsync(async (req, res, next) => {
   if (req.user.role == "admin") {
@@ -67,10 +69,15 @@ exports.getRating = catchAsync(async (req, res, next) => {
   const ongoingTopics =
     totalTopics - completedTopics - cancelledTopics - overdueTopics;
   const topTopics = await topicModel.find().sort({ Diem: -1 }).limit(10);
-  const completedPercentage = (completedTopics / totalTopics) * 100;
-  const cancelledPercentage = (cancelledTopics / totalTopics) * 100;
-  const ongoingPercentage = (ongoingTopics / totalTopics) * 100;
-  const overduePercentage = (overdueTopics / totalTopics) * 100;
+  const completedPercentage = ((completedTopics / totalTopics) * 100).toFixed(
+    2
+  );
+  const cancelledPercentage = ((cancelledTopics / totalTopics) * 100).toFixed(
+    2
+  );
+  const ongoingPercentage = ((ongoingTopics / totalTopics) * 100).toFixed(2);
+  const overduePercentage = ((overdueTopics / totalTopics) * 100).toFixed(2);
+
   res.status(200).render("rating", {
     totalTopics,
     completedTopics,
