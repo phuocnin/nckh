@@ -318,3 +318,26 @@ button {
         padding: 1.5vw;
     }
 }
+.join-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.join-group input {
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.join-group button {
+    padding: 8px;
+    background-color: #2D8CFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
