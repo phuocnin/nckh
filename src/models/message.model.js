@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema.Types;
+
 const messageSchema = new mongoose.Schema(
   {
     message: {
@@ -9,12 +10,12 @@ const messageSchema = new mongoose.Schema(
     sender: {
       type: ObjectId,
       required: true,
-      ref: "User",
+      ref: 'User',
     },
     conversation: {
       type: ObjectId,
       required: true,
-      ref: "Conversation",
+      ref: 'Conversation',
     },
     videoCall: {
       hasCall: {
@@ -34,10 +35,10 @@ const messageSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: "Message",
+    collection: 'Message',
   }
 );
 
-const Message = mongoose.model("Message", messageSchema);
+const Message = mongoose.model('Message', messageSchema);
 
 module.exports = Message;
