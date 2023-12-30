@@ -817,3 +817,29 @@ HEAD
   background-color: #e2eafc;
   align-self: flex-start;
 }
+
+.message:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.message {
+  border-radius: 8px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  padding: 10px;
+  margin: 5px;
+}
+#localVideoContainer {
+  width: 50%;
+  float: left;
+}
+
+#remoteVideoContainer {
+  width: 50%;
+  float: left;
+}
+
+#controls {
+  clear: both;
+  padding: 20px;
+}

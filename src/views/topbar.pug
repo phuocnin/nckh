@@ -24,13 +24,13 @@ nav.main-header.navbar.navbar-expand.navbar-primary.navbar-dark
       .dropdown-menu(aria-labelledby='account_settings', style='left: -2.5em;')
         a.dropdown-item#manage_account(href='/me', style='position: relative;')
           i.fa.fa-cog
-          span.pl-2.manage-account-text| Quản lý tài khoản
+          span.pl-3.manage-account-text| Quản lý tài khoản
         a.dropdown-item(onclick='window.location.href="/changepass"')
           i.fa.fa-key
-          span.pl-2| Đổi mật khẩu
+          span.pl-3| Đổi mật khẩu
         a.dropdown-item(onclick='logout()')
           i.fa.fa-power-off
-          span.pl-2| Đăng xuất
+          span.pl-3| Đăng xuất
 
 script.
       function logout() {
