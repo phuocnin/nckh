@@ -22,6 +22,8 @@ const projectform = document.querySelector(".newtopic");
 const changepass = document.querySelector(".change_pass");
 const new_notifyform = document.querySelector(".notify");
 const delete_notify = document.querySelector(".delete_notify");
+const get_conversation = document.querySelector("#get_conversation");
+
 if (delete_notify) {
   new_notifyform.addEventListener("submit", (e) => {
     e.preventDefault();

@@ -2,6 +2,7 @@ const express = require("express");
 const userModel = require("../models/user.model");
 const councilModel = require("../models/council.model");
 const viewController = require("../controllers/view.controller");
+const { addUserIdToQuery } = require("../middleware/addUserIdToQuery");
 const {
   authMiddleware,
   forgotPassword,
@@ -55,7 +56,6 @@ Router.get("/councillist", async (req, res) => {
   res.status(200).render("council_list", { councils });
 });
 Router.get("/notify/:id", viewController.viewNotify);
-Router.get("/editnotify/:id", viewController.editNotify);
 Router.get("/notify", async (req, res) => {
   res.status(200).render("notify");
 });
@@ -72,9 +72,7 @@ Router.get("/managetask", async (req, res) => {
   res.status(200).render("managetask");
 });
 
-Router.get("/chat", async (req, res) => {
-  res.status(200).render("chat");
-});
+Router.get("/chat", addUserIdToQuery, viewController.getConversations);
 Router.get("/chatbox", async (req, res) => {
   res.status(200).render("MessagesPanel");
 });
