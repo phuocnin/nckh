@@ -838,3 +838,12 @@ HEAD
   clear: both;
   padding: 20px;
 }
+.message.sender {
+  background-color: #d1e7dd;
+  align-self: flex-end;
+  color: #333;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  text-align: right;
+}
