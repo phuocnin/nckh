@@ -5,6 +5,7 @@ const Features = require("../../utils/Features");
 exports.createOne = (model) => {
   return catchAsync(async (req, res, next) => {
     const data = await model.create(req.body);
+
     if (!data) return next(new error("No document found with that ID", 404));
     res.status(200).json({
       status: "success",
