@@ -59,7 +59,7 @@ function sendMessage(formData) {
     });
 }
 
-// Function to add a message to the chat window
+
 function addMessageToChatWindow(username, message, isSender, fileUrl) {
   const chatWindow = document.getElementById("chatWindow");
   const messageElement = document.createElement("div");
@@ -67,15 +67,15 @@ function addMessageToChatWindow(username, message, isSender, fileUrl) {
 
   let messageContent = "";
 
-  // Chỉ hiển thị tên nếu người gửi không phải là "Bạn"
+ 
   if (username !== "Bạn") {
     messageContent += `<strong>${username}:</strong> `;
   }
 
   if (fileUrl) {
-    // Đoạn code xử lý fileUrl ở đây
+    
   } else {
-    // Hiển thị tin nhắn văn bản
+   
     messageContent += message;
   }
 
