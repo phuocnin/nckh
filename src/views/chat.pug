@@ -14,17 +14,20 @@ block content
             button.btn.btn-outline-secondary(type='button')
               i.fas.fa-search
         .list-group#userList
-          - var userList = [{name: 'Phước', id: 1}, {name: 'Thanh', id: 2}, {name: 'Phuong', id: 3}]
-          each user in userList
-            a.list-group-item.list-group-item-action(href=`#chat-${user.id}`)= user.name
-
+          each conversation in data
+            -if(conversation.isGroup)
+              button.list-group-item.list-group-item-action( onclick=`loadConversation('${conversation._id}',3)`)= conversation.name
+            -else if(conversation.participants[0]._id != user._id)
+              button.list-group-item.list-group-item-action( onclick=`loadConversation('${conversation._id}',1)`)= conversation.participants[1].name
+            -else
+              button.list-group-item.list-group-item-action( onclick=`loadConversation('${conversation._id}',0)`)= conversation.participants[0].name
       .col-md-8
         .card
           .card-header
             .user-info.d-flex.align-items-center.justify-content-between
               .d-flex.align-items-center
-                img(src='path_to_avatar.jpg', alt='Avatar').mr-3
-                span Tên Người Dùng
+                img(src='/img/path_to_avatar.jpg', alt='Avatar').mr-3
+                span(id='chatName')
               .attachment-icons
                 i.fas.fa-phone(alt='Gọi điện', title='Gọi điện')
 
@@ -41,4 +44,4 @@ block content
                 i.fas.fa-paperclip
               button.btn.btn-primary(type='submit') Gửi
 
-  script(src='/public/mjs/chat.js')
+  script(src='/mjs/chat.js')

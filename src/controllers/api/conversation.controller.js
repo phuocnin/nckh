@@ -4,15 +4,11 @@ const conversationModel = require("../../models/conversation.model");
 const messageModel = require("../../models/message.model");
 const factory = require("./factory");
 
-exports.addUserIdToQuery = catchAsync(async (req, res, next) => {
-  req.query.participants = req.user._id.toString();
-  next();
-});
-
 exports.conversationExists = catchAsync(async (req, res, next) => {
   if (req.body.isGroup === true) {
     req.body.admin = req.user._id;
     req.body.participants = req.body.participants.concat(req.user._id);
+
     return next();
   }
   const data = await conversationModel.findOne({
@@ -20,9 +16,12 @@ exports.conversationExists = catchAsync(async (req, res, next) => {
     participants: { $all: [req.user._id, req.body.recipient] },
   });
   if (!data) {
+    console.log(req.body);
+
     req.body.name = "conversation name";
     req.body.participants = [req.user._id, req.body.recipient];
     req.body.isGroup = false;
+    console.log(req.body);
     return next();
   }
   res.status(200).json({
