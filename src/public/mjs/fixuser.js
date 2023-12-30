@@ -1,11 +1,11 @@
 import axios from "axios";
 import { showAlert } from "./alerts.js";
 
-export const changePass = async (name, email,gioitinh,sdt,khoa) => {
+export const changePass = async (name, email, gioitinh, sdt, khoa) => {
   try {
     const res = await axios({
       method: "PATCH",
-      url:  "api/v1/users/me",
+      url: "api/v1/users/me",
       data: {
         name,
         email,
@@ -22,7 +22,6 @@ export const changePass = async (name, email,gioitinh,sdt,khoa) => {
       }, 1500);
     }
   } catch (err) {
-    console.log(err.response.data.data);
     showAlert("error", err.response.data.error);
   }
 };

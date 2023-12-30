@@ -7,20 +7,25 @@ import { newtopic } from "./project.js";
 import { changePass } from "./changePass.js";
 import { new_notify } from "./new_notify.js";
 import { fixuser } from "./fixuser.js";
-
+import { forgotPass } from "./forgotPass.js";
+import { resetPass } from "./resetPass.js";
 // DOM ELEMENTS
 const loginForm = document.querySelector(".form--login");
-const logOutBtn = document.querySelector(".nav__el--logout");
-const userDataForm = document.querySelector(".form-user-data");
-const userPasswordForm = document.querySelector(".form-user-password");
+const logOutBtn = document.querySelector(".logout");
+const forgot = document.querySelector(".form--forgot");
+const reset = document.querySelector(".form--reset");
+
+// const userDataForm = document.querySelector(".form-user-data");
+// const userPasswordForm = document.querySelector(".form-user-password");
 const userfrom = document.querySelector(".new-user");
 const projectform = document.querySelector(".newtopic");
 const changepass = document.querySelector(".change_pass");
 const new_notifyform = document.querySelector(".notify");
 const delete_notify = document.querySelector(".delete_notify");
+const get_conversation = document.querySelector("#get_conversation");
+
 if (delete_notify) {
   new_notifyform.addEventListener("submit", (e) => {
-    console.log("a");
     e.preventDefault();
     const ThongBao = document.getElementById("data-id").value;
 
@@ -46,7 +51,6 @@ if (userfrom) {
   });
 }
 if (changepass) {
-  console.log("a");
   changepass.addEventListener("submit", (e) => {
     e.preventDefault();
     const password = document.getElementById("oldpassword").value;
@@ -55,7 +59,6 @@ if (changepass) {
   });
 }
 if (fixuser) {
-  console.log("a");
   fixuser.addEventListener("submit", (e) => {
     e.preventDefault();
     const name = document.getElementById("ten").value;
@@ -138,6 +141,19 @@ if (userPasswordForm)
     document.getElementById("password").value = "";
     document.getElementById("password-confirm").value = "";
   });
-
+if (forgot) {
+  forgot.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const id = document.getElementById("id-forgot").value;
+    forgotPass(id);
+  });
+}
+if (reset) {
+  reset.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const password = document.getElementById("new-password").value;
+    resetPass(password);
+  });
+}
 const alertMessage = document.querySelector("body").dataset.alert;
 if (alertMessage) showAlert("success", alertMessage, 20);

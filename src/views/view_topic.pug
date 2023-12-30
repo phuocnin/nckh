@@ -219,7 +219,6 @@ block content
             },
             })
             .then((response) => {
-                console.log("topic updated successfully", response.data);
                 alert("Thành công")
                 window.location.href = `/topic/${topic}`;
             })
@@ -247,7 +246,6 @@ block content
                     axios
                         .patch(`/api/v1/topics/${topic}`, editedData)
                         .then((response) => {
-                        console.log("Notify updated successfully", response.data);
                         alert("Phân công thành công")
                         window.location.href = "/topics";
                         })
@@ -262,7 +260,6 @@ block content
                     axios
                         .patch(`/api/v1/topics/${topic}`, editedData)
                         .then((response) => {
-                        console.log("Notify updated successfully", response.data);
                         alert("Thành công")
                         window.location.href = "/topics";
                         })
