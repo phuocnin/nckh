@@ -5,11 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
   if (messageForm) {
     messageForm.addEventListener("submit", function (e) {
       e.preventDefault();
-
+      const chatName = document.getElementById("chatName");
       const formData = new FormData(this);
       const message = formData.get("message").trim();
-
-      if (message || formData.get("file")) {
+      formData.append("conversation", chatName.dataset.conversationId);
+      if (message) {
         sendMessage(formData);
         addMessageToChatWindow("Bạn", message || "File đã gửi", true);
       }
@@ -41,14 +41,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Function to send a message using axios
 function sendMessage(formData) {
+  const formDataObj = Object.fromEntries(formData.entries());
+
   axios
-    .post("/api/v1/messages", formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    })
+    .post("/api/v1/messages", formDataObj)
     .then(function (response) {
       console.log("Tin nhắn đã được gửi");
+      addMessageToChatWindow(
+        response.data.sender.name,
+        formDataObj.message || "File đã gửi",
+        true
+      );
     })
     .catch(function (error) {
       console.error("Lỗi khi gửi tin nhắn:", error);
@@ -95,7 +98,7 @@ function loadConversation(conversationId, index, userId) {
       } else {
         chatName.textContent = data.data.participants[index].name;
       }
-
+      chatName.dataset.conversationId = conversationId;
       chatWindow.innerHTML = "";
       console.log(data.data);
       const messages = data.data.messages;
