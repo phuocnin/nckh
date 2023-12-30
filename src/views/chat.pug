@@ -2,8 +2,8 @@ extends index
 
 block content
   head
-    <link rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
-    <link rel='stylesheet', href='styles/style.css'>
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css')
+    link(rel='stylesheet', href='styles/style.css')
 
   .container.mt-5
     .row
@@ -15,36 +15,33 @@ block content
               i.fas.fa-search
         .list-group#userList
           each conversation in data
-            -if(conversation.isGroup)
-              button.list-group-item.list-group-item-action( onclick=`loadConversation('${conversation._id}',3)`)= conversation.name
-            -else if(conversation.participants[0]._id != user._id)
-              button.list-group-item.list-group-item-action( onclick=`loadConversation('${conversation._id}',1)`)= conversation.participants[1].name
-            -else
-              button.list-group-item.list-group-item-action( onclick=`loadConversation('${conversation._id}',0)`)= conversation.participants[0].name
+            if conversation.isGroup
+              button.list-group-item.list-group-item-action(onclick=`loadConversation('${conversation._id}',3)`) #{conversation.name}
+            else if conversation.participants[0]._id != user._id
+              button.list-group-item.list-group-item-action(onclick=`loadConversation('${conversation._id}',1)`) #{conversation.participants[1].name}
+            else
+              button.list-group-item.list-group-item-action(onclick=`loadConversation('${conversation._id}',0)`) #{conversation.participants[0].name}
       .col-md-8
         .card
           .card-header
             .user-info.d-flex.align-items-center.justify-content-between
               .d-flex.align-items-center
                 img(src='/img/path_to_avatar.jpg', alt='Avatar').mr-3
-                span(id='chatName')
+                span#chatName
               .attachment-icons
-                i.fas.fa-phone(alt='Gọi điện', title='Gọi điện')
-
+                
+                button.btn.btn-outline-secondary(onclick=`startCall('${user._id}')`)
+                i.fas.fa-phone-alt(alt='Gọi điện', title='Bắt đầu cuộc gọi')
           .card-body#chatWindow
             .chat-messages
               
-              
           .card-footer
-            form#messageForm.d-flex
-              input.form-control(type='text', placeholder='Type a message...', name='message')
-              button.btn.btn-outline-secondary(type='button') 
+            form#messageForm.d-flex(method='post' enctype='multipart/form-data')
+              input.form-control(type='text', placeholder='Nhập tin nhắn...', name='message')
+              label.btn.btn-outline-secondary(for=`photo-${user._id}`)
                 i.fas.fa-image
-              button.btn.btn-outline-secondary(type='button')
-                i.fas.fa-paperclip
+              input.custom-file-input(type="file" id=`photo-${user._id}` name='file' style='display: none;')
+             
               button.btn.btn-primary(type='submit') Gửi
 
-
   script(src='/mjs/chat.js')
-
-
