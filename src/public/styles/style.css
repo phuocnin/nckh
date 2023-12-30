@@ -803,3 +803,12 @@ HEAD
 .input-group .btn-outline-secondary:hover {
   background-color: #e9ecef;
 }
+.message.sender {
+  background-color: #d1e7dd;
+  align-self: flex-end;
+}
+
+.message.receiver {
+  background-color: #e2eafc;
+  align-self: flex-start;
+}

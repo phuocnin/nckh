@@ -37,10 +37,7 @@ const conversationSchema = new mongoose.Schema(
   }
 );
 conversationSchema.pre(/^find/, function (next) {
-  this.populate("participants", "_id name avatar").populate(
-    "messages",
-    "message"
-  ); // Populate participants field with only _id
+  this.populate("participants", "_id name avatar").populate("messages"); // Populate participants field with only _id
   //this.find({ participants: this._conditions.user._id }); // Filter conversations by user ID
   next();
 });
