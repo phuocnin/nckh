@@ -5,12 +5,13 @@ const notifyModel = require("../models/notify.model");
 const factory = require("./factory");
 const filterObj = require("../utils/filterObj");
 const UserModels = require("../models/user.model");
+const conversationModel = require("../models/conversation.model");
 exports.home = factory.getAll(notifyModel, "home");
 exports.getTopics = factory.getAll(topicModel, "project_list");
-exports.postTopic = factory.createOne(topicModel);
-exports.updateTopic = factory.updateOne(topicModel);
+// exports.postTopic = factory.createOne(topicModel);
+// exports.updateTopic = factory.updateOne(topicModel);
 exports.viewNotify = factory.getOne(notifyModel, "view_notify");
-exports.editNotify = factory.getOne(notifyModel, "notify");
+// exports.editNotify = factory.getOne(notifyModel, "notify");
 exports.filterByRole = catchAsync(async (req, res, next) => {
   if (req.user.role == "admin") {
     req.body = filterObj(req.body, "GiangVien", "HoiDong");
@@ -52,7 +53,7 @@ exports.getTopic = catchAsync(async (req, res, next) => {
   res.status(200).render("view_topic", { data, user: req.user });
 });
 exports.getTopics = factory.getAll(topicModel, "topic_list");
-exports.deleteTopic = factory.deleteOne(topicModel);
+// exports.deleteTopic = factory.deleteOne(topicModel);
 exports.getRating = catchAsync(async (req, res, next) => {
   const totalTopics = await topicModel.countDocuments();
   const completedTopics = await topicModel.countDocuments({
@@ -83,3 +84,4 @@ exports.getRating = catchAsync(async (req, res, next) => {
     overduePercentage,
   });
 });
+exports.getConversations = factory.getAll(conversationModel, "chat");

@@ -1,11 +1,12 @@
 div(id=`council-${council._id}`).modal
     div.modal-dialog
+
         div.modal-content
             span.close(onclick="closeEditcouncil()") &times;
-            h2 Chỉnh sửa
+            h3 Chỉnh sửa
             form(class=`edit-form-${council._id}`)
                 label Tên hội đồng
-                input(type="text" name="editName" class="form-control" id=`editName-${council._id}`  required)
+                input(type="text" name="editName" class="form-control" id=`editName-${council._id}` required)
                 label.control-label Chủ tịch
                 select.form-control.form-control-sm.select2(id=`userDropdown-editChuTich-${council._id}`)
                     option(value="" disabled selected)
@@ -22,19 +23,19 @@ div(id=`council-${council._id}`).modal
                     button.btn.btn-primary(type="button" onclick=`saveEditcouncil('${council._id}')`) Lưu
                     button.btn.btn-secondary(type="button" onclick=`closeEditcouncil('${council._id}')`) Hủy
 
-    style.
-        .box-council {
-           margin-top: 100px;
-           margin-right: 250px;
-           margin-left: 250px;
-        }
-        .card-footer {
-           margin-top: 50px;
+    //- style.
+    //-     .box-council {
+    //-        margin-top: 100px;
+    //-        margin-right: 250px;
+    //-        margin-left: 250px;
+    //-     }
+    //-     .card-footer {
+    //-        margin-top: 50px;
 
-        }
-        .form-group-1 {
-            display: none;
-        }
+    //-     }
+    //-     .form-group-1 {
+    //-         display: none;
+    //-     }
         
     script.
             
@@ -47,13 +48,12 @@ div(id=`council-${council._id}`).modal
                 // Đổ dữ liệu vào thanh chọn
                 const userDropdowns = document.querySelectorAll('select[id^="userDropdown"]');
                 users.forEach(function(user) {
-                
-                const option = document.createElement('option');
-                option.value = user._id;
-                option.text = `${user.name} \n\nid:${user.id}`;
-                userDropdowns.forEach(function(userDropdown) {
-                    userDropdown.appendChild(option.cloneNode(true));
-                });
+                    const option = document.createElement('option');
+                    option.value = user._id;
+                    option.text = `${user.name} \n\nid:${user.id}`;
+                    userDropdowns.forEach(function(userDropdown) {
+                        userDropdown.appendChild(option.cloneNode(true));
+                    });
                 });
             })
             .catch(function(error) {

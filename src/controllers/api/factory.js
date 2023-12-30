@@ -33,11 +33,13 @@ exports.updateOne = (model, checkUser) => {
     if (!data) return next(new error("No document found with that ID", 404));
     if (checkUser) {
       if (
-        !data.participants.includes(req.user._id) ||
-        !data.sender == req.user._id
+        !data.participants
+          .map((participant) => participant._id.toString())
+          .includes(req.user._id.toString()) ||
+        data.sender.toString() !== req.user._id.toString()
       ) {
         return next(
-          new error("You are not allowed to update this document", 401)
+          new Error("You are not allowed to update this document", 401)
         );
       }
     }
@@ -53,7 +55,11 @@ exports.getOne = (model, checkUser) => {
     const data = await model.findById(req.params.id);
     if (!data) return next(new error("No document found with that ID", 404));
     if (checkUser) {
-      if (!data.participants.includes(req.user._id)) {
+      if (
+        !data.participants
+          .map((participant) => participant._id.toString())
+          .includes(req.user._id.toString())
+      ) {
         return next(
           new error("You are not allowed to view this document", 401)
         );

@@ -12607,6 +12607,7 @@ var projectform = document.querySelector(".newtopic");
 var changepass = document.querySelector(".change_pass");
 var new_notifyform = document.querySelector(".notify");
 var delete_notify = document.querySelector(".delete_notify");
+var get_conversation = document.querySelector("#get_conversation");
 if (delete_notify) {
   new_notifyform.addEventListener("submit", function (e) {
     e.preventDefault();

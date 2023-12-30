@@ -153,7 +153,6 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false });
-    console.log(err);
     return next(
       new error(
         "Không thành công, nếu bạn chưa cập nhật email vui lòng liên hệ Admin để xử lí",
