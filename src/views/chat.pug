@@ -17,7 +17,7 @@ block content
           each conversation in data
             if conversation.isGroup
               button.list-group-item.list-group-item-action(onclick=`loadConversation('${conversation._id}',2,'${user._id}')`) #{conversation.name}
-            else if conversation.participants[0]._id != user._id
+            else if conversation.participants[0]._id == user._id
               button.list-group-item.list-group-item-action(onclick=`loadConversation('${conversation._id}',1,'${user._id}')`) #{conversation.participants[1].name}
             else
               button.list-group-item.list-group-item-action(onclick=`loadConversation('${conversation._id}',0,'${user._id}')`) #{conversation.participants[0].name}
@@ -27,20 +27,21 @@ block content
             .user-info.d-flex.align-items-center.justify-content-between
               .d-flex.align-items-center
                 img(src='/img/path_to_avatar.jpg', alt='Avatar').mr-3
-                span#chatName
+                span#chatName(style='font-size: 1.2rem; font-weight: 500;' data-conversation-id)
+                  
               .attachment-icons
                 
                 button.btn.btn-outline-secondary(onclick=`startCall('${user._id}')`)
-                i.fas.fa-phone-alt(alt='Gọi điện', title='Bắt đầu cuộc gọi')
-          .card-body#chatWindow
+                  i.fas.fa-phone-alt(alt='Gọi điện', title='Bắt đầu cuộc gọi')
+          .card-body#chatWindow(style='height: 400px; overflow-y: scroll;')
             .chat-messages
               
           .card-footer
-            form#messageForm.d-flex(method='post' enctype='multipart/form-data')
+            form#messageForm.d-flex
               input.form-control(type='text', placeholder='Nhập tin nhắn...', name='message')
-              label.btn.btn-outline-secondary(for=`photo-${user._id}`)
-                i.fas.fa-image
-              input.custom-file-input(type="file" id=`photo-${user._id}` name='file' style='display: none;')
+              //- label.btn.btn-outline-secondary(for=`photo-${user._id}`)
+              //-   i.fas.fa-image
+              //- input.custom-file-input(type="file" id=`photo-${user._id}` name='file' style='display: none;')
              
               button.btn.btn-primary(type='submit') Gửi
 
