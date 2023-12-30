@@ -66,7 +66,6 @@ function saveEditFormUser(userId) {
       },
     })
     .then((response) => {
-      console.log("user updated successfully", response.data);
       closeEditModalUser(userId);
     })
     .catch((error) => {
