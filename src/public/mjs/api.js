@@ -36,23 +36,23 @@ class API {
     console.log({ rooms });
     return rooms;
   }
-
+  
   async deleteRoom(roomId) {
     const response = await axios.put(`${BASE_URL}/delete`, {
       roomId
     }, {
       headers: this._authHeader()
     })
-
-    console.log({ response })
-
+    
+    console.log({response})
+    
     return response.data;
   }
-
+  
   async clearAllRooms() {
     const rooms = await this.listRoom()
     const response = await Promise.all(rooms.map(room => this.deleteRoom(room.roomId)))
-
+    
     return response;
   }
 
@@ -72,24 +72,6 @@ class API {
   async getRoomToken(roomId) {
     const tokens = await this._getToken({ roomId });
     return tokens.room_token;
-  }
-
-  async endMeeting() {
-    try {
-      // Step 1: Create a room
-      const createdRoom = await this.createRoom();
-      console.log("Created room:", createdRoom);
-
-      // Step 2: Simulate other actions in the meeting...
-
-      // Step 3: End the meeting by deleting the room
-      const roomIdToDelete = createdRoom.roomId;
-      const deletedRoom = await this.deleteRoom(roomIdToDelete);
-      console.log("Deleted room:", deletedRoom);
-
-    } catch (error) {
-      console.error("Error during the meeting:", error.message);
-    }
   }
 
   async _getToken({ userId, roomId, rest }) {
