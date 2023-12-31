@@ -7,11 +7,9 @@ html(lang="en")
     title Meeting room
     link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css")
     link(rel='stylesheet', href='styles/stylemeet.css')
-    // Import the webpage's JavaScript files
     script(src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js")
     script(src="https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js")
     script(src="https://cdn.stringee.com/sdk/web/2.2.1/stringee-web-sdk.min.js")
-    // Import your custom JavaScript file
   body
     .container.has-text-centered#app(v-cloak)
       .container1
@@ -46,53 +44,17 @@ html(lang="en")
               button.participants.button.share-button#click-chat(onclick="toggleChatBox()")
                 img.icon(src="https://cdn-icons-png.flaticon.com/512/14/14558.png")
                 label Chat 
-              //- button.audio-control.button.share-button Mute
-              //- button.video-control.button.share-button Stop Video
-              //- button.share-screen.button.share-button Share Screen
-              //- button.participants.button.share-button Participants
       .container2#openChat.hidden
         h1.title Chat
         div.chatBox
           div.contentChat
-            ul
-              li test1 
-              li test2
-              li test3
-              li test1 
-              li test2
-              li test3
-              li test1 
-              li test2
-              li test3
-              li test1 
-              li test2
-              li test3
-              li test1 
-              li test2
-              li test3
-              li test1 
-              li test2
-              li test3
-              li test2
-              li test3
-              li test1 
-              li test2
-              li test3
-              li test1 
-              li test2
-              li test3
+            
+              
           div.chat-section
             ul.chat-messages
             form.chat-form
               input(type="text", placeholder="Type message here...")
               button.send-message.button.is-info(type="submit") Send
-          //- footer.zoom-footer
-          //-   button.audio-control Mute
-          //-   button.video-control Stop Video
-          //-   button.share-screen Share Screen
-          //-   button.participants Participants
-
-    // Trong file JavaScript
     script.
       function toggleChatBox() {
         const chatBox = document.getElementById('openChat');
@@ -103,7 +65,58 @@ html(lang="en")
           chatBox.classList.add('hidden');
         }
       }
+      document.addEventListener('DOMContentLoaded', function() {
+        const endMeetingButton = document.querySelector('.end-meeting');
+        if (endMeetingButton) {
+          endMeetingButton.addEventListener('click', function() {
+            alert('Cuộc họp đã kết thúc');
+          });
+        }
+
+                document.querySelector('.audio-control').addEventListener('click', function() {
+                    alert('Âm thanh đã được tắt/mở');
+                });
+
+                document.querySelector('.video-control').addEventListener('click', function() {
+                    alert('Video đã được tắt/mở');
+                });
+
+                navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+                    .then(stream => {
+                        const videoElement = document.querySelector('.video-placeholder');
+                        videoElement.srcObject = stream;
+                    })
+                    .catch(err => {
+                        console.error('Lỗi khi truy cập camera và microphone:', err);
+                    });
+
+                document.querySelector('.chat-form').addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    let message = document.querySelector('.chat-form input').value;
+                    document.querySelector('.chat-messages').innerHTML += `<li>${message}</li>`;
+                    document.querySelector('.chat-form input').value = '';
+                });
+
+                document.querySelector('.share-screen').addEventListener('click', function() {
+                    navigator.mediaDevices.getDisplayMedia({ video: true })
+                        .then(stream => {
+                            // Thêm logic xử lý stream chia sẻ màn hình
+                        })
+                        .catch(err => {
+                            console.error('Lỗi khi chia sẻ màn hình:', err);
+                        });
+                });
+
+                document.querySelector('.record').addEventListener('click', function() {
+                    alert('Ghi âm bắt đầu/dừng');
+                    // Thêm logic ghi âm tại đây
+                });
+
+                document.querySelector('.create-group').addEventListener('click', function() {
+                    const groupCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+                    alert(`Mã nhóm của bạn là: ${groupCode}`);
+                    // Thêm logic xử lý mã nhóm
+                });
+            });
     script(src='/mjs/api.js')
     script(src="/mjs/script.js")
-
-    
