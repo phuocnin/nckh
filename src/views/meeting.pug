@@ -11,9 +11,7 @@ html(lang="en")
     script(src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js")
     script(src="https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js")
     script(src="https://cdn.stringee.com/sdk/web/2.2.1/stringee-web-sdk.min.js")
-
     // Import your custom JavaScript file
-
   body
     .container.has-text-centered#app(v-cloak)
       .container1
@@ -23,8 +21,6 @@ html(lang="en")
           button.button.is-info(v-if="!room", @click="joinWithId") Join Meeting
           button.button.is-info(v-if="room", @click="publish(true)") Share Desktop
           button.button.is-danger(v-if="room", @click="endMeeting") End Meeting
-
-
           .info(v-if="roomId")
             p Bạn đang ở trong room 
               strong {{roomId}}.
@@ -32,8 +28,6 @@ html(lang="en")
               a(v-bind:href="roomUrl", target="_blank") {{roomUrl}}.
             p Hoặc bạn cũng có thể copy 
               code {{roomId}} vào room
-          
-
         .sub-container
           #videos
           footer.zoom-footer
