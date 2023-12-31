@@ -55,6 +55,15 @@ Router.get("/councillist", async (req, res) => {
   const councils = await councilModel.find().populate("ChuTich");
   res.status(200).render("council_list", { councils });
 });
+Router.get("/council/:id", async (req, res) => {
+  const council = await councilModel
+    .findById(req.params.id)
+    .populate("ChuTich")
+    .populate("Thuky")
+    .populate("UyVien1")
+    .populate("UyVien2");
+  res.status(200).render("view_council", { council });
+});
 // Router.get("/council/:id", viewController.viewCouncil);
 
 Router.get("/notify/:id", viewController.viewNotify);
