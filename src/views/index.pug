@@ -44,9 +44,11 @@ html(lang='en')
     script(src='/mjs/new_council.js')
     //  summernote 
     link(rel='stylesheet', href='/assets/plugins/summernote/summernote-bs4.min.css')
-    <!--Start of Fchat.vn-->
-    <script type="text/javascript" src="https://cdn.fchat.vn/assets/embed/webchat.js?id=6581a0ac9467ff188950ff33" async="async"></script>
-    <!--End of Fchat.vn-->
+    script(src="/socket.io/socket.io.js")
+    script.
+      const socket = io();
+      
+  
   body.hold-transition.sidebar-mini.layout-fixed.layout-navbar-fixed.layout-footer-fixed
 
     if !user 
