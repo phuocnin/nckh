@@ -23,12 +23,37 @@ body {
   font-family: 'Arial', sans-serif;
   line-height: 1.6;
   color: #333;
+  background-image: url("https://i.pinimg.com/originals/1c/20/00/1c2000c112644699ce732ed4fc2b36dc.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 .container {
-  max-width: 960px;
   margin: 0 auto;
-  padding-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  height: 100vh;
+  align-items: center;
+}
+.container1{
+  border: 2px solid blue;
+  border-radius: 10px;
+  background-color: #eee; /* Màu nền */
+  padding: 10px;
+  margin-right: 5px;
+  max-height: 100vh;
+  overflow-y: auto;
+}
+.container2{
+  border: 2px solid blue;
+  border-radius: 10px;
+  background-color: #eee; /* Màu nền */
+  padding: 10px;
+  margin-left: 5px;
+}
+.hidden {
+  display: none;
 }
 
 .has-text-centered {
@@ -54,7 +79,17 @@ body {
   background-color: #ff3860;
   color: #fff;
 }
-
+.share-button {
+  background-color: #808080;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  /* display: none; */
+}
+.share-button:hover{
+  background-color: red;
+  color: #fff;
+}
 /* Styling for the chat section */
 .chat-section {
   width: 300px;
@@ -81,12 +116,24 @@ body {
   padding: 5px;
 }
 
+.boxChat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.contentChat {
+  height: 50vh;
+  overflow-y: auto;
+}
+
 /* Styling for the footer controls */
 .zoom-footer {
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
+  justify-content: space-evenly;
+  justify-items: center;
 }
 
 .audio-control,
@@ -100,7 +147,6 @@ body {
   flex-wrap: wrap;
   margin-top: 20px;
 }
-
 #videos video {
   flex: 1 1 50%;
   padding: 0;
@@ -114,3 +160,11 @@ body {
 .info {
   padding: 1.5rem;
 }
+.icon {
+  width: 100%; /* Chiều rộng ảnh là 100% của phần tử chứa */
+  max-width: 400px; /* Tối đa chiều rộng của ảnh là 400px */
+  height: auto; /* Tự động tính toán chiều cao để duy trì tỉ lệ khung hình */
+  display: block; /* Để loại bỏ khoảng trắng dư thừa dưới ảnh */
+  margin: 0 auto;
+  border-radius: 2px;
+  }
