@@ -67,7 +67,7 @@ const vm = new Vue({
 
       if (!this.room) {
         this.room = room;
-        this.room.clearAllEventListeners(); // Corrected method name
+        room.clearAllOnMethos();
         room.on("addtrack", e => {
           const track = e.info.track;
 
@@ -122,45 +122,17 @@ const vm = new Vue({
       }
     },
     subscribe: async function(trackInfo) {
-      const track = await this.room.subscribe(trackInfo.serverId);
-      track.on("ready", () => {
-        console.log("Track is ready:", track);
-        const videoElement = track.attach();
-        this.addVideo(videoElement);
-      });
-    },
-    addVideo: function(video) {
-      video.setAttribute("controls", "true");
-      video.setAttribute("playsinline", "true");
-      document.getElementById("videos").appendChild(video);
-    },
-    endMeeting: function() {
-      if (this.room) {
-        // Disconnect from the room
-        this.room.disconnect();
-    
-        // Clear all local tracks
-        const localTracks = this.room.getLocalTracks();
-        localTracks.forEach(track => {
-          const mediaElements = track.detach();
-          mediaElements.forEach(element => element.remove());
+        const track = await this.room.subscribe(trackInfo.serverId);
+        track.on("ready", () => {
+          console.log("Track is ready:", track);
+          const videoElement = track.attach();
+          this.addVideo(videoElement);
         });
-    
-        // Clear the video container
-        videoContainer.innerHTML = '';
-    
-        // Optionally, disconnect the StringeeClient
-        if (this.callClient) {
-          this.callClient.disconnect();
-        }
-    
-        // Reset data and variables
-        this.room = undefined;
-        this.callClient = undefined;
-        this.userToken = "";
-        this.roomId = "";
-        this.roomToken = "";
+      },
+    addVideo: function(video) {
+        video.setAttribute("controls", "true");
+        video.setAttribute("playsinline", "true");
+        document.getElementById("videos").appendChild(video);
       }
-    }
   }
 });
