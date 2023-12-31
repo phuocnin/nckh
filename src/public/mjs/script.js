@@ -124,7 +124,7 @@ const vm = new Vue({
     subscribe: async function(trackInfo) {
         const track = await this.room.subscribe(trackInfo.serverId);
         track.on("ready", () => {
-          console.log("Track is ready:", track);
+          
           const videoElement = track.attach();
           this.addVideo(videoElement);
         });
