@@ -48,18 +48,15 @@ function sendMessage(formData) {
     .post("/api/v1/messages", formDataObj)
     .then(function (response) {
       console.log("Tin nhắn đã được gửi");
-      addMessageToChatWindow(
-        response.data.sender.name,
-        formDataObj.message || "File đã gửi",
-        true
-      );
+      socket.emit("chat message", formDataObj);
     })
     .catch(function (error) {
       console.error("Lỗi khi gửi tin nhắn:", error);
     });
 }
-
-
+socket.on("chat message", (msg) => {
+  addMessageToChatWindow("", msg, true);
+});
 function addMessageToChatWindow(username, message, isSender, fileUrl) {
   const chatWindow = document.getElementById("chatWindow");
   const messageElement = document.createElement("div");
@@ -67,15 +64,12 @@ function addMessageToChatWindow(username, message, isSender, fileUrl) {
 
   let messageContent = "";
 
- 
-  if (username !== "Bạn") {
+  if (!isSender) {
     messageContent += `<strong>${username}:</strong> `;
   }
 
   if (fileUrl) {
-    
   } else {
-   
     messageContent += message;
   }
 
