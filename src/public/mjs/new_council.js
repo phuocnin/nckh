@@ -1,4 +1,3 @@
-// Khi người dùng chọn chỉnh sửa thông báo
 function new_council() {
   // Hiển thị modal chỉnh sửa
   const editcouncil = document.getElementById(`newcouncil`);
@@ -23,7 +22,6 @@ function saveNewcouncil() {
     TenHoiDong: TenHoiDong.value,
     ChuTich: ChuTich.value,
     Thuky: ThuKy.value,
-    UyVien1: UyVien1.value,
   };
   if (UyVien2.value) {
     Data.UyVien2 = UyVien2.value;
