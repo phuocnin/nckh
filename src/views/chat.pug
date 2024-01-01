@@ -4,7 +4,7 @@ block content
   head
     link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css')
     link(rel='stylesheet', href='styles/style.css')
-
+  include createGroupChat
   .container.mt-5
     .row
       .col-md-4
@@ -13,6 +13,8 @@ block content
           .input-group-append
             button.btn.btn-outline-secondary(type='button')
               i.fas.fa-search
+            button.btn.btn-outline-secondary(type='button', onclick=`createGroupChat()`)
+              i.fas.fa-plus
         .list-group#userList
           
           each conversation in data
@@ -27,7 +29,6 @@ block content
           .card-header
             .user-info.d-flex.align-items-center.justify-content-between
               .d-flex.align-items-center
-                img(src='/img/path_to_avatar.jpg', alt='Avatar').mr-3
                 span#chatName(style='font-size: 1.2rem; font-weight: 500;' data-conversation-id)
                   
               .attachment-icons
@@ -45,5 +46,16 @@ block content
               //- input.custom-file-input(type="file" id=`photo-${user._id}` name='file' style='display: none;')
              
               button.btn.btn-primary(type='submit') Gửi
-
+      
   script(src='/mjs/chat.js')
+  script.
+    function createGroupChat() {
+      var form = document.getElementById('createGroupChat');
+      if (form.style.display === "none") {
+        form.style.display = "block";
+      } else {
+        form.style.display = "none";
+      }
+    }
+    
+     
