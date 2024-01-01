@@ -145,7 +145,6 @@ if (forgot) {
   forgot.addEventListener("submit", (e) => {
     e.preventDefault();
     const id = document.getElementById("id-forgot").value;
-    alert(id);
     forgotPass(id);
   });
 }
