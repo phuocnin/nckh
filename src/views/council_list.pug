@@ -10,7 +10,7 @@ block content
             | Thêm hội đồng
       include newcouncil
       .card-body
-        table.table.tabe-hover.table-bordered#list
+        table.table.table-hover.table-bordered#list
           thead
             tr
               th.text-center #
@@ -32,17 +32,15 @@ block content
                   .dropdown-menu
                     a.dropdown-item(href=`/council/${council._id}`) Xem
                     .dropdown-divider
-                    button.dropdown-item(type="button", onclick=`council('${council._id}')`) Chỉnh sửa
+                    button.dropdown-item(type="button", onclick=`editCouncil('${council._id}')`) Chỉnh sửa
+                    //- button.dropdown-item(type="button", onclick=`new_council()`) Chỉnh sửa
                     .dropdown-divider
-                    button.dropdown-item(type="button", onclick=`deleteNotify('${council._id}')`) Xóa
+                    button.dropdown-item(type="button", onclick=`deleteCouncil('${council._id}')`) Xóa
               include edit_council  
                             
-  //- script.
-  //-   $(document).ready(function(){
-  //-     $('#list').dataTable()
-  //-     $('.view_user').click(function(){
-  //-       uni_modal("<i class='fa fa-id-card'></i> User Details","view_user.php?id="+$(this).attr('data-id'))
-  //-     })
-  //-   })
+  script.
+    $(document).ready(function(){
+      $('#list').dataTable()
+    })
 
 
