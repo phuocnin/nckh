@@ -12714,7 +12714,6 @@ if (forgot) {
   forgot.addEventListener("submit", function (e) {
     e.preventDefault();
     var id = document.getElementById("id-forgot").value;
-    alert(id);
     (0, _forgotPass.forgotPass)(id);
   });
 }
