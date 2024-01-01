@@ -44,14 +44,14 @@ function showEditForm(councilData) {
 }
 
 // Hàm đóng modal chỉnh sửa
-function closeEditcouncil(councilId) {
+function closeEditCouncil(councilId) {
   const editNotify = document.getElementById(`council-${councilId}`);
   editNotify.style.display = "none";
   location.reload();
 }
 
 // Hàm lưu thông báo chỉnh sửa
-function saveEditcouncil(councilId) {
+function saveEditCouncil(councilId) {
   const TenHoiDong = document.getElementById(`editName-${councilId}`);
   const ChuTich = document.getElementById(
     `userDropdown-editChuTich-${councilId}`
@@ -75,7 +75,7 @@ function saveEditcouncil(councilId) {
   axios
     .patch(`/api/v1/councils/${councilId}`, editedData)
     .then((response) => {
-      closeEditcouncil(councilId);
+      closeEditCouncil(councilId);
     })
     .catch((error) => {
       console.error("Error updating council:", error);

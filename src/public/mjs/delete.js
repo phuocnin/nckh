@@ -28,3 +28,19 @@ function deleteTopic(topicId) {
       });
   }
 }
+
+function deleteCouncil(councilId) {
+  const confirmation = confirm("Bạn có chắc chắn muốn xóa hội đồng này?");
+  if (confirmation) {
+    // Sử dụng Axios để thực hiện yêu cầu DELETE
+    axios
+      .delete(`/api/v1/councils/${councilId}`)
+      .then((response) => {
+        location.reload();
+      })
+      .catch((error) => {
+        console.error("Error deleting council:", error);
+        // Xử lý lỗi nếu có
+      });
+  }
+}

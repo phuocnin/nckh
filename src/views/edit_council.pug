@@ -1,8 +1,7 @@
 div(id=`council-${council._id}`).modal
     div.modal-dialog
-
         div.modal-content
-            span.close(onclick="closeEditcouncil()") &times;
+            span.close(onclick=`closeEditCouncil('${council._id}')`) &times;
             h3 Chỉnh sửa
             form(class=`edit-form-${council._id}`)
                 label Tên hội đồng
@@ -20,8 +19,8 @@ div(id=`council-${council._id}`).modal
                 select.form-control.form-control-sm.select2(id=`userDropdown-editUyVien2-${council._id}`)
                     option(value="" disabled selected)
                 .col-lg-12.text-right.justify-content-center.d-flex
-                    button.btn.btn-primary(type="button" onclick=`saveEditcouncil('${council._id}')`) Lưu
-                    button.btn.btn-secondary(type="button" onclick=`closeEditcouncil('${council._id}')`) Hủy
+                    button.btn.btn-primary(type="button" onclick=`saveEditCouncil('${council._id}')`) Lưu
+                    button.btn.btn-secondary(type="button" onclick=`closeEditCouncil('${council._id}')`) Hủy
 
     //- style.
     //-     .box-council {
@@ -38,7 +37,6 @@ div(id=`council-${council._id}`).modal
     //-     }
         
     script.
-            
         document.addEventListener('DOMContentLoaded', function() {
             // Gọi API để lấy danh sách người dùng bằng Axios
             axios.get('/api/v1/users')
