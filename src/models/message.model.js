@@ -40,10 +40,13 @@ const messageSchema = new mongoose.Schema(
 );
 
 messageSchema.pre("find", function (next) {
-  this.populate("sender");
+  this.populate("sender", "name");
   next();
 });
-
+messageSchema.pre("save", function (next) {
+  this.populate("sender", "name");
+  next();
+});
 const Message = mongoose.model("Message", messageSchema);
 
 module.exports = Message;
