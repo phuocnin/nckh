@@ -14,10 +14,11 @@ block content
             button.btn.btn-outline-secondary(type='button')
               i.fas.fa-search
         .list-group#userList
+          
           each conversation in data
             if conversation.isGroup
               button.list-group-item.list-group-item-action(onclick=`loadConversation('${conversation._id}',2,'${user._id}')`) #{conversation.name}
-            else if conversation.participants[0]._id == user._id
+            else if conversation.participants[0]._id.toString() == user._id
               button.list-group-item.list-group-item-action(onclick=`loadConversation('${conversation._id}',1,'${user._id}')`) #{conversation.participants[1].name}
             else
               button.list-group-item.list-group-item-action(onclick=`loadConversation('${conversation._id}',0,'${user._id}')`) #{conversation.participants[0].name}
