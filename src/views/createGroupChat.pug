@@ -1,0 +1,37 @@
+div(id=`createGroupChat`).modal
+    div.modal-dialog
+        div.modal-content
+            span.close(onclick="closeEditTopic()") &times;
+            h2 Tạo nhóm chat
+            form(method="POST" action="/api/v1/conversations", class=`edit-form`)
+                label Tên nhóm
+                input(type="text" name="name" class="form-control" id=`name` required)
+                label Thành viên
+                select#thanhvien.form-control.form-control-sm.select2.multiple(name='members[]', multiple='', style='width: 100%;')
+                
+                .col-lg-12.text-right.justify-content-center.d-flex
+                    button.btn.btn-primary(type="submit") Lưu
+                    button.btn.btn-secondary(type="button" onclick=`closeEditTopic('')`) Hủy           
+
+    script.
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gọi API để lấy danh sách người dùng bằng Axios
+            axios.get('/api/v1/users')
+                .then(function(response) {
+                    // Lấy dữ liệu người dùng từ phản hồi
+                    const users = response.data.data;
+                    // Đổ dữ liệu vào thanh chọn
+                    const userDropdown = document.getElementById('thanhvien');
+                    users.forEach(function(user) {
+                        const option = document.createElement('option');
+                        option.value = user._id;
+                        option.text = `${user.name} id:${user.id}`;
+                        userDropdown.appendChild(option);
+
+                        
+                    });
+                })
+                .catch(function(error) {
+                    console.error('Error fetching user data:', error);
+                });
+        });
