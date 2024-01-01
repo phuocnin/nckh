@@ -1,4 +1,4 @@
-// Khi người dùng chọn chỉnh sửa thông báo
+// Khi người dùng chọn thêm council
 function new_council() {
   // Hiển thị modal chỉnh sửa
   const editcouncil = document.getElementById(`newcouncil`);
