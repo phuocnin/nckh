@@ -47,16 +47,14 @@ function sendMessage(formData) {
   axios
     .post("/api/v1/messages", formDataObj)
     .then(function (response) {
-      console.log("Tin nhắn đã được gửi");
-      socket.emit("chat message", formDataObj);
+      console.log(response.data);
+      socket.emit("send message", response.data.data);
     })
     .catch(function (error) {
       console.error("Lỗi khi gửi tin nhắn:", error);
     });
 }
-socket.on("chat message", (msg) => {
-  addMessageToChatWindow("", msg, true);
-});
+
 function addMessageToChatWindow(username, message, isSender, fileUrl) {
   const chatWindow = document.getElementById("chatWindow");
   const messageElement = document.createElement("div");
@@ -86,7 +84,6 @@ function loadConversation(conversationId, index, userId) {
       const { data } = response;
       const chatName = document.getElementById("chatName");
       const chatWindow = document.getElementById("chatWindow");
-
       if (index == 2) {
         chatName.textContent = data.data.name;
       } else {
@@ -103,8 +100,20 @@ function loadConversation(conversationId, index, userId) {
         }
         addMessageToChatWindow(message.sender.name, message.message, isSender);
       });
+      socket.emit("join conversation", conversationId);
     })
     .catch(function (error) {
       console.error("Lỗi khi tải cuộc hội thoại:", error);
     });
 }
+
+socket.on("receive message", (data) => {
+  const { conversation, message, sender } = data;
+
+  const chatName = document.getElementById("chatName");
+  const conversationId = chatName.dataset.conversationId;
+
+  if (conversationId == conversation) {
+    addMessageToChatWindow(sender.name, message, false);
+  }
+});

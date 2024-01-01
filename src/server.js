@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const http = require("http");
 const mongoose = require("mongoose");
 const { Server } = require("socket.io");
+const socketServer = require("./socketServer.js");
 //config dotenv
 dotenv.config();
 const port = process.env.PORT || 8080;
@@ -20,15 +21,7 @@ mongoose
 //socket
 const io = new Server(httpServer);
 io.on("connection", (socket) => {
-  console.log("a user connected");
-  io.on("connection", (socket) => {
-    socket.on("chat message", (msg) => {
-      io.emit("chat message", msg.message);
-    });
-  });
-  socket.on("disconnect", () => {
-    console.log("user disconnected");
-  });
+  socketServer(socket, io);
 });
 httpServer.listen(port, () => {
   console.log(`http://localhost:${port}/`);
