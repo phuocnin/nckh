@@ -18,10 +18,19 @@ export const login = async (id, password) => {
       window.setTimeout(() => {
         location.assign("/");
       }, 1000);
+    } else {
+      showAlert("error", "Login failed. Please check your credentials.");
+      window.setTimeout(() => {
+        location.assign("/");
+      }, 1000);
     }
   } catch (err) {
-    console.log(err.response.data.data);
-    showAlert("error", err.response.data.data.message);
+    // Handle network errors or unexpected server responses
+    showAlert("error", "An error occurred during the login process.");
+    console.error(err);
+    window.setTimeout(() => {
+      location.assign("/");
+    }, 1000);
   }
 };
 
