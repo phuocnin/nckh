@@ -4,6 +4,7 @@ const catchAsync = require("../../utils/catchAsync.js");
 const filterObj = require("../../utils/filterObj.js");
 const Features = require("../../utils/Features.js");
 const multer = require("multer");
+const factory = require("./factory");
 
 const multerStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -63,3 +64,4 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 exports.getUsers = getAll(UserModels);
 exports.getUser = getOne(UserModels);
 exports.updateUser = updateOne(UserModels);
+exports.deleteUser = factory.deleteOne(UserModels);

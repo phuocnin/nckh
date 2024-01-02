@@ -1,6 +1,10 @@
 const express = require("express");
 const usercontroller = require("../controllers/api/user.controller.js");
 const authcontroller = require("../controllers/api/auth.controller.js");
+const {
+  authMiddleware,
+  restrictTo,
+} = require("../controllers/auth.controller.js");
 const Router = express.Router();
 
 Router.route("/login").post(authcontroller.login);
@@ -19,10 +23,12 @@ Router.route("/me")
     usercontroller.updateUser
   )
   .delete(usercontroller.deleteMe);
-
+// Router.route("/users/:id")
+//   .get(usercontroller.getUser)
+//   .delete(authMiddleware, restrictTo("admin"), usercontroller.deleteUser);
 Router.route("/").get(usercontroller.getUsers);
 Router.route("/:id")
   .get(usercontroller.getUser)
-  .patch(usercontroller.uploadUserPhoto, usercontroller.updateUser);
-
+  .patch(usercontroller.uploadUserPhoto, usercontroller.updateUser)
+  .delete(authMiddleware, restrictTo("admin"), usercontroller.deleteUser);
 module.exports = Router;
