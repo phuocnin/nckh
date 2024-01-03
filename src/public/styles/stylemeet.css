@@ -23,9 +23,7 @@ body {
   font-family: 'Arial', sans-serif;
   line-height: 1.6;
   color: #333;
-  background-image: url("https://i.pinimg.com/originals/1c/20/00/1c2000c112644699ce732ed4fc2b36dc.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+  background-color: black;
 }
 
 .container {
