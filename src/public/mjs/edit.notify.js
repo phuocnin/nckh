@@ -6,7 +6,7 @@ function editNotify(notifyId) {
     .then((response) => {
       const notifyData = response.data.data;
       // Hiển thị modal chỉnh sửa và điền dữ liệu vào biểu mẫu
-      showEditForm(notifyData);
+      showEditNotify(notifyData);
     })
     .catch((error) => {
       console.error("Error fetching notify data:", error);
@@ -14,7 +14,7 @@ function editNotify(notifyId) {
 }
 
 // Hàm hiển thị modal chỉnh sửa và điền dữ liệu vào biểu mẫu
-function showEditForm(notifyData) {
+function showEditNotify(notifyData) {
   const editThongbaoInput = document.getElementById(
     `editThongbao-${notifyData._id}`
   );
