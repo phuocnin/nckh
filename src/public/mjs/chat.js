@@ -107,6 +107,49 @@ function loadConversation(conversationId, index, userId) {
     });
 }
 
+function saveCreateChat() {
+  const recipientElement = document.getElementById("nguoi-dung");
+  const recipient = recipientElement.value;
+  axios
+    .post(`/api/v1/conversations`, { recipient })
+    .then((response) => {
+      console.log("create conversation successfully", response.data);
+      closeCreateChat();
+    })
+    .catch((error) => {
+      console.error("Error create conversation:", error);
+    });
+}
+document
+  .getElementById("openCreateGroupChat")
+  .addEventListener("click", function () {
+    document.getElementById("createUserChat").style.display = "none";
+    document.getElementById("createGroupChat").style.display = "block";
+  });
+function saveGroupChat() {
+  const formData = new FormData();
+  formData.append("name", document.getElementById("ten-nhom").value);
+  formData.append("isGroup", true);
+  const ThanhvienElement = document.getElementById("thanhvien");
+  const Thanhvien = Array.from(ThanhvienElement.selectedOptions).map(
+    (option) => option.value
+  );
+  Thanhvien.forEach((item) => {
+    formData.append("participants", item);
+  });
+  console.log(...formData);
+  axios
+    .post(`/api/v1/conversations`, ...formData)
+    .then((response) => {
+      console.log("create conversation successfully", response.data);
+      closeCreateChat();
+    })
+    .catch((error) => {
+      alert(error);
+      console.error("Error create conversation:", error);
+    });
+}
+
 socket.on("receive message", (data) => {
   const { conversation, message, sender } = data;
 
