@@ -11,9 +11,9 @@ block content
         .input-group.mb-3
           input.form-control(type='text', placeholder='Tìm kiếm người dùng...')
           .input-group-append
-            button.btn.btn-outline-secondary(type='button')
+            button.btn.btn-outline-secondary(type='button', title="search")
               i.fas.fa-search
-            button.btn.btn-outline-secondary(type='button', onclick=`createGroupChat()`)
+            button.btn.btn-outline-secondary(type='button', title="creatNewChat",onclick=`createChat()`)
               i.fas.fa-plus
         .list-group#userList
           
@@ -41,21 +41,21 @@ block content
           .card-footer
             form#messageForm.d-flex
               input.form-control(type='text', placeholder='Nhập tin nhắn...', name='message')
-              //- label.btn.btn-outline-secondary(for=`photo-${user._id}`)
-              //-   i.fas.fa-image
-              //- input.custom-file-input(type="file" id=`photo-${user._id}` name='file' style='display: none;')
-             
+              
               button.btn.btn-primary(type='submit') Gửi
       
   script(src='/mjs/chat.js')
   script.
-    function createGroupChat() {
-      var form = document.getElementById('createGroupChat');
-      if (form.style.display === "none") {
-        form.style.display = "block";
-      } else {
+        function createChat() {
+      var form = document.getElementById("createChat");
+      if (form.style.display === "block") {
         form.style.display = "none";
+      } else {
+        form.style.display = "block";
       }
     }
-    
-     
+
+    function closeCreateChat() {
+      var form = document.getElementById("createChat");
+      form.style.display = "none";
+    }

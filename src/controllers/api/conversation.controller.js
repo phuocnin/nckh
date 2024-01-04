@@ -5,6 +5,7 @@ const messageModel = require("../../models/message.model");
 const factory = require("./factory");
 
 exports.conversationExists = catchAsync(async (req, res, next) => {
+  console.log(req.body);
   if (req.body.isGroup === true) {
     req.body.admin = req.user._id;
     req.body.participants = req.body.participants.concat(req.user._id);
@@ -16,8 +17,6 @@ exports.conversationExists = catchAsync(async (req, res, next) => {
     participants: { $all: [req.user._id, req.body.recipient] },
   });
   if (!data) {
-    console.log(req.body);
-
     req.body.name = "conversation name";
     req.body.participants = [req.user._id, req.body.recipient];
     req.body.isGroup = false;

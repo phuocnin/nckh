@@ -11990,6 +11990,7 @@ var showAlert = function showAlert(type, msg) {
 };
 exports.showAlert = showAlert;
 },{}],"login.js":[function(require,module,exports) {
+var define;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12027,15 +12028,24 @@ var login = function login(_x, _x2) {
             window.setTimeout(function () {
               location.assign("/");
             }, 1000);
+          } else {
+            (0, _alerts.showAlert)("error", "Login failed. Please check your credentials.");
+            window.setTimeout(function () {
+              location.assign("/");
+            }, 1000);
           }
-          _context.next = 11;
+          _context.next = 12;
           break;
         case 7:
           _context.prev = 7;
           _context.t0 = _context["catch"](0);
-          console.log(_context.t0.response.data.data);
-          (0, _alerts.showAlert)("error", _context.t0.response.data.data.message);
-        case 11:
+          // Handle network errors or unexpected server responses
+          (0, _alerts.showAlert)("error", "An error occurred during the login process.");
+          console.error(_context.t0);
+          window.setTimeout(function () {
+            location.assign("/");
+          }, 1000);
+        case 12:
         case "end":
           return _context.stop();
       }
@@ -12680,36 +12690,6 @@ if (loginForm) loginForm.addEventListener("submit", function (e) {
   (0, _login.login)(id, password);
 });
 if (logOutBtn) logOutBtn.addEventListener("click", _login.logout);
-
-// if (userDataForm)
-//   userDataForm.addEventListener("submit", (e) => {
-//     e.preventDefault();
-//     const form = new FormData();
-//     form.append("name", document.getElementById("name").value);
-//     form.append("email", document.getElementById("email").value);
-//     form.append("photo", document.getElementById("photo").files[0]);
-
-//     updateSettings(form, "data");
-//   });
-
-// if (userPasswordForm)
-//   userPasswordForm.addEventListener("submit", async (e) => {
-//     e.preventDefault();
-//     document.querySelector(".btn--save-password").textContent = "Updating...";
-
-//     const passwordCurrent = document.getElementById("password-current").value;
-//     const password = document.getElementById("password").value;
-//     const passwordConfirm = document.getElementById("password-confirm").value;
-//     await updateSettings(
-//       { passwordCurrent, password, passwordConfirm },
-//       "password"
-//     );
-
-//     document.querySelector(".btn--save-password").textContent = "Save password";
-//     document.getElementById("password-current").value = "";
-//     document.getElementById("password").value = "";
-//     document.getElementById("password-confirm").value = "";
-//   });
 if (forgot) {
   forgot.addEventListener("submit", function (e) {
     e.preventDefault();
@@ -12751,7 +12731,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57939" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63306" + '/');
   ws.onmessage = function (event) {
     checkedAssets = {};
     assetsToAccept = [];
