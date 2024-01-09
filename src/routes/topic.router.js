@@ -12,7 +12,7 @@ Router.route("/")
   .post(authMiddleware, topicController.uploadFiles, topicController.postTopic);
 
 Router.route("/:id")
-  .get(authMiddleware)
+  .get(authMiddleware, topicController.getTopic)
   .patch(
     authMiddleware,
     topicController.filterByRole,

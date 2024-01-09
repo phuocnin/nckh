@@ -6,7 +6,10 @@ const {
   restrictTo,
 } = require("../controllers/auth.controller.js");
 const Router = express.Router();
-
+Router.get("/mee", (req, res) => {
+  console.log("f");
+  res.status(200).json("Hello from the server");
+});
 Router.route("/login").post(authcontroller.login);
 Router.route("/signup").post(authcontroller.createUser);
 Router.route("/forgotPassword").post(authcontroller.forgotPassword);
@@ -29,6 +32,10 @@ Router.route("/me")
 Router.route("/").get(usercontroller.getUsers);
 Router.route("/:id")
   .get(usercontroller.getUser)
-  .patch(usercontroller.uploadUserPhoto, usercontroller.updateUser)
+  .patch(
+    restrictTo("admin"),
+    usercontroller.uploadUserPhoto,
+    usercontroller.updateUser
+  )
   .delete(authMiddleware, restrictTo("admin"), usercontroller.deleteUser);
 module.exports = Router;

@@ -147,17 +147,14 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
 
     res.status(200).json({
       status: "success",
-      message: "Kiểm tra email để đổi mật khẩu",
+      message: "check email for reset password",
     });
   } catch (err) {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save({ validateBeforeSave: false });
     return next(
-      new error(
-        "Không thành công, nếu bạn chưa cập nhật email vui lòng liên hệ Admin để xử lí",
-        500
-      )
+      new error("There was an error sending the email. Try again later!", 500)
     );
   }
 });
