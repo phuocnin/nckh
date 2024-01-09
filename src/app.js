@@ -29,7 +29,11 @@ app.use(cookieParser());
 // doc swagger
 const file = fs.readFileSync("./document.yaml", "utf8");
 const swaggerDocument = YAML.parse(file);
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use(
+  "/api-git push origin --force --all",
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerDocument)
+);
 
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/topics", topicRouter);
